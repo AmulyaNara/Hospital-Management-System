@@ -1,5 +1,8 @@
 from app.database.connection import get_connection
 
+# This file contains functions to perform CRUD operations on the diagnosis table in the database.
+
+#create 
 def create_diagnosis(visit_id, disease, symptoms):
     conn = get_connection()
     cur = conn.cursor()
@@ -18,6 +21,8 @@ def create_diagnosis(visit_id, disease, symptoms):
 
     return "Diagnosis created successfully!"
 
+
+#read
 def get_all_diagnosis():
     conn = get_connection()
     cur = conn.cursor()
@@ -31,6 +36,8 @@ def get_all_diagnosis():
 
     return diagnosis
 
+
+#update
 def update_diagnosis(diagnosis_id, disease):
     conn = get_connection()
     cur = conn.cursor()
@@ -49,6 +56,8 @@ def update_diagnosis(diagnosis_id, disease):
 
     return "Diagnosis updated successfully!"
 
+
+#delete
 def delete_diagnosis(diagnosis_id):
     conn = get_connection()
     cur = conn.cursor()

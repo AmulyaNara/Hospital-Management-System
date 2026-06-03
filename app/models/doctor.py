@@ -1,5 +1,6 @@
 from app.database.connection import get_connection
 
+#read
 def get_all_doctors():
     conn = get_connection()
     cur = conn.cursor()
@@ -12,8 +13,8 @@ def get_all_doctors():
     conn.close()
 
     return doctors
-from app.database.connection import get_connection
 
+#create
 def create_doctor(name, specialization, phone, email, password, experience):
     conn = get_connection()
     cur = conn.cursor()
@@ -32,7 +33,7 @@ def create_doctor(name, specialization, phone, email, password, experience):
 
     return "Doctor created successfully!"
 
-
+#update
 def update_doctor(doctor_id, specialization):
     conn = get_connection()
     cur = conn.cursor()
@@ -51,6 +52,7 @@ def update_doctor(doctor_id, specialization):
 
     return "Doctor updated successfully!"
 
+#delete
 def delete_doctor(doctor_id):
     conn = get_connection()
     cur = conn.cursor()

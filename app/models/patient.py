@@ -1,5 +1,6 @@
 from app.database.connection import get_connection
 
+#read
 def get_all_patients():
     conn = get_connection()
     cur = conn.cursor()
@@ -13,7 +14,7 @@ def get_all_patients():
 
     return patients
 
-
+#create
 def create_patient(name, age, gender, phone, address):
     conn = get_connection()
     cur = conn.cursor()
@@ -32,6 +33,7 @@ def create_patient(name, age, gender, phone, address):
 
     return "Patient created successfully!"
 
+#update
 def update_patient(patient_id, phone):
     conn = get_connection()
     cur = conn.cursor()
@@ -50,6 +52,7 @@ def update_patient(patient_id, phone):
 
     return "Patient updated successfully!"
 
+#delete
 def delete_patient(patient_id):
     conn = get_connection()
     cur = conn.cursor()

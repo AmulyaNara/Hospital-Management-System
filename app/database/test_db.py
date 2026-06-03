@@ -1,5 +1,8 @@
-'''
+## This file is for testing database operations. 
+# this is a temporary file and will be removed after testing is done. (it checks the validation)
+# connection works , execute sql queries and fetch data from the database.
 
+'''
 from app.models.visit import get_all_visits
 
 visits = get_all_visits()

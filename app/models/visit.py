@@ -1,5 +1,6 @@
 from app.database.connection import get_connection
 
+#create
 def create_visit(patient_id, doctor_id, visit_date, chief_complaint, visit_number):
     conn = get_connection()
     cur = conn.cursor()
@@ -18,6 +19,7 @@ def create_visit(patient_id, doctor_id, visit_date, chief_complaint, visit_numbe
 
     return "Visit created successfully!"
 
+#read
 def get_all_visits():
     conn = get_connection()
     cur = conn.cursor()
@@ -31,6 +33,7 @@ def get_all_visits():
 
     return visits
 
+#update 
 def update_visit(visit_id, chief_complaint):
     conn = get_connection()
     cur = conn.cursor()
@@ -49,6 +52,7 @@ def update_visit(visit_id, chief_complaint):
 
     return "Visit updated successfully!"
 
+#delete
 def delete_visit(visit_id):
     conn = get_connection()
     cur = conn.cursor()
