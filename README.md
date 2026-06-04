@@ -47,7 +47,7 @@ Patients can access their own medical records through a login portal.
 
 
 # Technologies used 
-pyton 
+python 
 FastAPI
 PostgreSQL
 HTML 
