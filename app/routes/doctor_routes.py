@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.models.doctor import get_all_doctors, create_doctor
+from app.models.doctor_orm import get_all_doctors,create_doctor,update_doctor,delete_doctor
 from app.schemas.doctor_schema import DoctorCreate
 
 router = APIRouter()

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.models.prescription import (
+from app.models.prescription_orm import (
     create_prescription,
     get_all_prescriptions,
     update_prescription,

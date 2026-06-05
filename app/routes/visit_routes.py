@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.models.visit import (
+from app.models.visit_orm import (
     get_all_visits,
     create_visit,
     update_visit,

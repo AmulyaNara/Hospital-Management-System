@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.models.diagnosis import (
+from app.models.diagnosis_orm import (
     create_diagnosis,
     get_all_diagnosis,
     update_diagnosis,
@@ -25,7 +25,8 @@ def add_diagnosis(diagnosis: DiagnosisCreate):
     return create_diagnosis(
         diagnosis.visit_id,
         diagnosis.disease,
-        diagnosis.symptoms
+        diagnosis.symptoms,
+        diagnosis.doctor_notes
     )
 
 

@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.models.patient import (
+from app.models.patient_orm import (
     get_all_patients,
     create_patient,
     update_patient,
