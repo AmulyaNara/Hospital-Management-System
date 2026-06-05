@@ -18,6 +18,7 @@ def get_patients():
 
 
 # POST
+'''
 @router.post("/patients")
 def add_patient(patient: PatientCreate):
 
@@ -28,8 +29,21 @@ def add_patient(patient: PatientCreate):
         patient.phone,
         patient.address
     )
+'''
 
-
+@router.post("/patients")
+def add_patient(patient: PatientCreate):
+    return create_patient(
+        patient.patient_name,
+        patient.age,
+        patient.gender,
+        patient.phone,
+        patient.address,
+        patient.blood_group,
+        patient.email,
+        patient.password
+    )
+    
 # PUT
 @router.put("/patients/{patient_id}")
 def edit_patient(

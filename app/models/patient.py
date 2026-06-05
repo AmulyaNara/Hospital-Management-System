@@ -1,71 +1,125 @@
 from app.database.connection import get_connection
+from app.security.hash import hash_password
 
-#read
+
+# READ
 def get_all_patients():
-    conn = get_connection()
-    cur = conn.cursor()
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
 
-    cur.execute("SELECT * FROM patients")
+        cur.execute("SELECT * FROM patients")
 
-    patients = cur.fetchall()
+        patients = cur.fetchall()
 
-    cur.close()
-    conn.close()
+        cur.close()
+        conn.close()
 
-    return patients
+        return patients
 
-#create
-def create_patient(name, age, gender, phone, address):
-    conn = get_connection()
-    cur = conn.cursor()
+    except Exception as e:
+        return {"error": str(e)}
 
-    cur.execute("""
-        INSERT INTO patients
-        (patient_name, age, gender, phone, address)
-        VALUES (%s, %s, %s, %s, %s)
-    """,
-    (name, age, gender, phone, address))
 
-    conn.commit()
+# CREATE
+def create_patient(
+    name,
+    age,
+    gender,
+    phone,
+    address,
+    blood_group,
+    email,
+    password
+):
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
 
-    cur.close()
-    conn.close()
+        hashed_password = hash_password(password)
 
-    return "Patient created successfully!"
+        cur.execute("""
+            INSERT INTO patients
+            (
+                patient_name,
+                age,
+                gender,
+                phone,
+                address,
+                blood_group,
+                email,
+                password
+            )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """,
+        (
+            name,
+            age,
+            gender,
+            phone,
+            address,
+            blood_group,
+            email,
+            hashed_password
+        ))
 
-#update
+        conn.commit()
+
+        cur.close()
+        conn.close()
+
+        return {"message": "Patient created successfully!"}
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+# UPDATE
 def update_patient(patient_id, phone):
-    conn = get_connection()
-    cur = conn.cursor()
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
 
-    cur.execute("""
-        UPDATE patients
-        SET phone = %s
-        WHERE patient_id = %s
-    """,
-    (phone, patient_id))
+        cur.execute("""
+            UPDATE patients
+            SET phone = %s
+            WHERE patient_id = %s
+        """,
+        (
+            phone,
+            patient_id
+        ))
 
-    conn.commit()
+        conn.commit()
 
-    cur.close()
-    conn.close()
+        cur.close()
+        conn.close()
 
-    return "Patient updated successfully!"
+        return {"message": "Patient updated successfully!"}
 
-#delete
+    except Exception as e:
+        return {"error": str(e)}
+
+
+# DELETE
 def delete_patient(patient_id):
-    conn = get_connection()
-    cur = conn.cursor()
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
 
-    cur.execute("""
-        DELETE FROM patients
-        WHERE patient_id = %s
-    """,
-    (patient_id,))
+        cur.execute("""
+            DELETE FROM patients
+            WHERE patient_id = %s
+        """,
+        (patient_id,)
+        )
 
-    conn.commit()
+        conn.commit()
 
-    cur.close()
-    conn.close()
+        cur.close()
+        conn.close()
 
-    return "Patient deleted successfully!"
+        return {"message": "Patient deleted successfully!"}
+
+    except Exception as e:
+        return {"error": str(e)}
