@@ -1,31 +1,34 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
+from fastapi.security import OAuth2PasswordRequestForm
 
-from app.schemas.login_schema import LoginRequest
 from app.security.hash import verify_password
 from app.security.token import create_access_token
 
 from app.database.session import SessionLocal
-from app.models.doctor_orm import Doctor
+from app.models.user_orm import User
+
 
 router = APIRouter()
 
 
 @router.post("/login")
-def login(user: LoginRequest):
+def login(
+    user: OAuth2PasswordRequestForm = Depends()
+):
 
     db = SessionLocal()
 
     try:
 
-        doctor = (
-            db.query(Doctor)
+        db_user = (
+            db.query(User)
             .filter(
-                Doctor.email == user.email
+                User.email == user.username
             )
             .first()
         )
 
-        if not doctor:
+        if not db_user:
             raise HTTPException(
                 status_code=401,
                 detail="Invalid Email"
@@ -33,7 +36,7 @@ def login(user: LoginRequest):
 
         if not verify_password(
             user.password,
-            doctor.password
+            db_user.password
         ):
             raise HTTPException(
                 status_code=401,
@@ -42,15 +45,14 @@ def login(user: LoginRequest):
 
         access_token = create_access_token(
             data={
-                "sub": doctor.email,
-                "role": "doctor"
+                "sub": db_user.email,
+                "role": db_user.role
             }
         )
 
         return {
             "access_token": access_token,
-            "token_type": "bearer",
-            "role": "doctor"
+            "token_type": "bearer"
         }
 
     finally:

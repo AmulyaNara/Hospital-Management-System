@@ -53,3 +53,18 @@ PostgreSQL
 HTML 
 CSS 
 JavaScript 
+
+## Backend Completed
+
+Features:
+- FastAPI REST APIs
+- PostgreSQL Database
+- JWT Authentication
+- Role Based Access Control (RBAC)
+- CRUD Operations for Doctors, Patients, Visits, Diagnosis and Prescriptions
+- Secure Password Hashing
+- OAuth2 Password Flow
+
+## Frontend:
+- Login Page Completed
+- Dashboard In Progress

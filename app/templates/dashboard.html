@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Dashboard</title>
+
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+
+            <h2>HMS</h2>
+
+            <ul>
+                <li>Dashboard</li>
+                <li onclick="window.location.href='/doctors-page'">
+    Doctors
+</li>
+                <li>Patients</li>
+                <li>Visits</li>
+                <li>Diagnosis</li>
+                <li>Prescriptions</li>
+                <li onclick="logout()">Logout</li>
+            </ul>
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+
+            <h1>Welcome Admin</h1>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>Total Doctors</h3>
+                    <p>10</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Patients</h3>
+                    <p>150</p>
+                </div>
+
+                <div class="card">
+                    <h3>Today's Visits</h3>
+                    <p>25</p>
+                </div>
+
+                <div class="card">
+                    <h3>Prescriptions</h3>
+                    <p>40</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+function logout(){
+
+    localStorage.removeItem(
+        "access_token"
+    );
+
+    window.location.href = "/";
+}
+</script>
+</body>
+</html>
