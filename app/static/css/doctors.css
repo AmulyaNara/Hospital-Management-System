@@ -46,17 +46,3 @@ th,td{
     text-align:left;
 }
 
-.sidebar{
-    position:fixed;
-    left:0;
-    top:0;
-    width:250px;
-    height:100vh;
-    background:#2c3e50;
-    transition:0.3s;
-    overflow:hidden;
-}
-
-.sidebar.collapsed{
-    width:70px;
-}

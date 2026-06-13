@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediFlow Pro - General Hospital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+     <link rel="stylesheet"
+          href="{{ url_for('static', path='css/doctor_dashboard.css') }}">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>MediFlow Pro</h2>
+                <span>General Hospital</span>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="#" class="menu-item active">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="material-symbols-outlined">group</span>
+                    Patients
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="material-symbols-outlined">medical_services</span>
+                    Doctors
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="material-symbols-outlined">history</span>
+                    Visits
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    Appointments
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-emergency">
+                    <span class="material-symbols-outlined">emergency</span>
+                    Emergency Alert
+                </button>
+                <a href="#" class="menu-item logout-item">
+                    <span class="material-symbols-outlined">logout</span>
+                    Logout
+                </a>
+            </div>
+        </aside>
+
+        <div class="main-layout">
+            <header class="top-header">
+                <div class="search-box">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <input type="text" placeholder="Search patient records, labs, or clinical notes...">
+                </div>
+                
+                <div class="header-actions">
+                    <button class="icon-notification-btn">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="notification-indicator"></span>
+                    </button>
+                    <button class="icon-notification-btn">
+                        <span class="material-symbols-outlined">help</span>
+                    </button>
+                    <div class="user-profile">
+                        <div class="profile-meta">
+                            <span class="user-name">Dr. Alexander Smith</span>
+                            <span class="user-role">Senior Cardiologist</span>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=100&q=80" alt="Doctor Profile" class="avatar-img">
+                    </div>
+                </div>
+            </header>
+
+            <main class="content-viewport">
+                <section class="metrics-grid">
+                    <div class="metric-card metric-visits">
+                        <div class="metric-header">
+                            <h3>TODAY'S VISITS</h3>
+                            <span class="material-symbols-outlined icon-box">calendar_today</span>
+                        </div>
+                        <div class="metric-body">
+                            <h2>12</h2>
+                            <p class="trend-up"><span class="material-symbols-outlined">arrow_upward</span> 2 remaining for today</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-card metric-pending">
+                        <div class="metric-header">
+                            <h3>PENDING RX</h3>
+                            <span class="material-symbols-outlined icon-box">description</span>
+                        </div>
+                        <div class="metric-body">
+                            <h2>05</h2>
+                            <p class="alert-text">Requires immediate review</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-card metric-labs">
+                        <div class="metric-header">
+                            <h3>NEW LAB RESULTS</h3>
+                            <span class="material-symbols-outlined icon-box">biotech</span>
+                        </div>
+                        <div class="metric-body">
+                            <h2>08</h2>
+                            <p class="danger-text"><span class="material-symbols-outlined">warning</span> 2 Critical Alerts</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-card metric-patients">
+                        <div class="metric-header">
+                            <h3>TOTAL PATIENTS</h3>
+                            <span class="material-symbols-outlined icon-box">groups</span>
+                        </div>
+                        <div class="metric-body">
+                            <h2>1,248</h2>
+                            <p class="sub-text">+14 New this month</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bento-row">
+                    <div class="card bento-table-card">
+                        <div class="card-title-header">
+                            <h2>Upcoming Patient Visits</h2>
+                            <a href="#" class="action-link">View Schedule <span class="material-symbols-outlined">arrow_forward</span></a>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>TIME</th>
+                                        <th>PATIENT NAME</th>
+                                        <th>REASON</th>
+                                        <th>STATUS</th>
+                                        <th>ACTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="time-col">09:30 AM</td>
+                                        <td>
+                                            <div class="patient-profile-tag">
+                                                <div class="initials-avatar cy">JW</div>
+                                                <span>Jane Williams</span>
+                                            </div>
+                                        </td>
+                                        <td>Post-Op Follow-up</td>
+                                        <td><span class="status-tag consulting">In-Consultation</span></td>
+                                        <td><button class="table-action-btn"><span class="material-symbols-outlined">more_vert</span></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="time-col">10:15 AM</td>
+                                        <td>
+                                            <div class="patient-profile-tag">
+                                                <div class="initials-avatar bl">RT</div>
+                                                <span>Robert Thompson</span>
+                                            </div>
+                                        </td>
+                                        <td>Hypertension Check</td>
+                                        <td><span class="status-tag arrived">Arrived</span></td>
+                                        <td><button class="table-action-btn"><span class="material-symbols-outlined">more_vert</span></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="time-col">11:00 AM</td>
+                                        <td>
+                                            <div class="patient-profile-tag">
+                                                <div class="initials-avatar pur">EM</div>
+                                                <span>Elena Martinez</span>
+                                            </div>
+                                        </td>
+                                        <td>New Patient Intake</td>
+                                        <td><span class="status-tag waiting">Waiting</span></td>
+                                        <td><button class="table-action-btn"><span class="material-symbols-outlined">more_vert</span></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bento-stack">
+                        <div class="card action-panel">
+                            <h3>QUICK CLINICAL ACTIONS</h3>
+                            <div class="action-buttons-list">
+                                <button class="btn-action-primary">
+                                    <span class="material-symbols-outlined">add_box</span>
+                                    <div class="btn-text">
+                                        <span class="btn-title">New Diagnosis</span>
+                                        <span class="btn-desc">Start clinical documentation</span>
+                                    </div>
+                                </button>
+                                <button class="btn-action-secondary">
+                                    <span class="material-symbols-outlined">pill</span>
+                                    <div class="btn-text">
+                                        <span class="btn-title">Issue Prescription</span>
+                                        <span class="btn-desc">Digital prescription portal</span>
+                                    </div>
+                                </button>
+                                <button class="btn-action-tertiary">
+                                    <span class="material-symbols-outlined">science</span>
+                                    <div class="btn-text">
+                                        <span class="btn-title">Order Lab Tests</span>
+                                        <span class="btn-desc">Internal & External referrals</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card analytics-panel">
+                            <h3>CLINICAL EFFICIENCY</h3>
+                            <div class="progress-group">
+                                <div class="progress-label">
+                                    <span>Daily Patient Load</span>
+                                    <strong>75%</strong>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-bar bar-teal" style="width: 75%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress-group">
+                                <div class="progress-label">
+                                    <span>Paperwork Completed</span>
+                                    <strong>40%</strong>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-bar bar-gray" style="width: 40%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="split-row">
+                    <div class="card list-panel">
+                        <div class="panel-header">
+                            <h2>Recent Diagnoses</h2>
+                            <span class="material-symbols-outlined text-muted">assignment</span>
+                        </div>
+                        <div class="list-wrapper">
+                            <div class="list-item">
+                                <div class="item-icon-indicator text-teal">
+                                    <span class="material-symbols-outlined">health_and_safety</span>
+                                </div>
+                                <div class="item-details">
+                                    <div class="item-row">
+                                        <h4>Atrial Fibrillation (I48.91)</h4>
+                                        <span class="timestamp-badge">2 HOURS AGO</span>
+                                    </div>
+                                    <p class="patient-line">Patient: Samuel L. Jackson</p>
+                                    <p class="doctor-line">Confirmed by: Dr. Alexander Smith</p>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="item-icon-indicator text-teal">
+                                    <span class="material-symbols-outlined">health_and_safety</span>
+                                </div>
+                                <div class="item-details">
+                                    <div class="item-row">
+                                        <h4>Type 2 Diabetes Mellitus (E11.9)</h4>
+                                        <span class="timestamp-badge">YESTERDAY</span>
+                                    </div>
+                                    <p class="patient-line">Patient: Sarah Jenkins</p>
+                                    <p class="doctor-line">Confirmed by: Dr. Alexander Smith</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card list-panel">
+                        <div class="panel-header">
+                            <h2>Prescription Queue</h2>
+                            <div class="live-status">
+                                <span class="blink-dot"></span>
+                                <span class="live-text">LIVE UPDATES</span>
+                            </div>
+                        </div>
+                        <div class="list-wrapper">
+                            <div class="list-item row-align">
+                                <div>
+                                    <h4>Metoprolol Succinate (25mg ER)</h4>
+                                    <p class="patient-line">Patient: George Miller</p>
+                                </div>
+                                <div class="badge-stack">
+                                    <span class="status-tag arrived">In-Transit</span>
+                                    <span class="sub-info">Refills: 3</span>
+                                </div>
+                            </div>
+                            <div class="list-item row-align">
+                                <div>
+                                    <h4>Atorvastatin Calcium (40mg)</h4>
+                                    <p class="patient-line">Patient: Emily Blunt</p>
+                                </div>
+                                <div class="badge-stack">
+                                    <span class="status-tag review-pending">Pending Review</span>
+                                    <span class="sub-info urgent">Urgent</span>
+                                </div>
+                            </div>
+                            <div class="list-item row-align">
+                                <div>
+                                    <h4>Lisinopril (10mg)</h4>
+                                    <p class="patient-line">Patient: Thomas Shelby</p>
+                                </div>
+                                <div class="badge-stack">
+                                    <span class="status-tag fulfilled">Fulfilled</span>
+                                    <span class="sub-info">Oct 24, 2:30 PM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', path='js/doctor.js') }}"></script>
+</body>
+</html>

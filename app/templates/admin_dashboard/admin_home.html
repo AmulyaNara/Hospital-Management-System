@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>MedCore Admin Dashboard</title>
+    <!-- Google Fonts Ecosystem -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+    <!-- Iconographies Symbol Set -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='css/admin_home.css') }}">
+</head>
+<body>
+
+    <!-- Sidebar Navigation Controls -->
+    <aside class="sidebar-wrapper">
+        <div class="brand-identity">
+            <div class="brand-icon-box">
+                <span class="material-symbols-outlined">health_metrics</span>
+            </div>
+            <div>
+                <h2>MediAdmin</h2>
+                <p>Clinical Systems</p>
+            </div>
+        </div>
+
+        <nav class="sidebar-navigation">
+            <!-- Newly Added Integrated Dashboard Core Tab Feature Selection -->
+            <a class="nav-anchor active" href="/admin-home">
+    <span class="material-symbols-outlined">dashboard</span>
+    <span>Dashboard</span>
+</a>
+
+<a class="nav-anchor" href="/admin-doctors">
+    <span class="material-symbols-outlined">medical_services</span>
+    <span>Doctors</span>
+</a>
+            <a class="nav-anchor" href="#" data-tab="patients">
+                <span class="material-symbols-outlined">person</span>
+                <span>Patients</span>
+            </a>
+            <a class="nav-anchor" href="#" data-tab="receptionists">
+                <span class="material-symbols-outlined">badge</span>
+                <span>Receptionists</span>
+            </a>
+            <a class="nav-anchor" href="#" data-tab="logs">
+                <span class="material-symbols-outlined">history</span>
+                <span>System Logs</span>
+            </a>
+            <a class="nav-anchor" href="#" data-tab="settings">
+                <span class="material-symbols-outlined">settings</span>
+                <span>Settings</span>
+            </a>
+            <a href="/admin-home" class="menu-item">
+    <span class="material-symbols-outlined">dashboard</span>
+    <span>Dashboard</span>
+</a>
+
+<a href="/admin-doctors" class="menu-item active">
+    <span class="material-symbols-outlined">medical_services</span>
+    <span>Doctors</span>
+</a>
+        </nav>
+
+        <div class="admin-profile-footer">
+            <div class="profile-meta-block">
+                <img alt="Dr. Aris Thorne Avatar" class="profile-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7FMDkBKJ4wqfWvGXWsWqU4bz0YCWdmZRpT28wdSh8fHqSvaMN_MoSYa8pMPwS5aihzGsbWs9nkyHbnB4xPI56VYPfTuicGBsVMiE4uhGQgzS8fwgTpg3ZRZOKmi8qR0Y-roW0PeJGuEaMiINptOthSSRirE1VitAYn6SCwvZRb_SrwDzEbPn5gvM7k5tEgDJdl9prguYM0zdwycq1gTodQ3VFFih1RJLzQzT9g_9-C72r-h6pwU-v7OrH1p0m-pU9qKE2JD5ZE8m1"/>
+                <div class="profile-info-text">
+                    <p class="profile-title">Dr. Aris Thorne</p>
+                    <p class="profile-subtitle">Chief Administrator</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- App Right Area Header Canvas Matrix -->
+    <div class="workspace-viewport">
+        
+        <!-- Application Global Header -->
+        <header class="app-topbar">
+            <div class="search-container-box">
+                <span class="material-symbols-outlined search-indicator">search</span>
+                <input class="search-input-field" placeholder="Search patients, staff, or records..." type="text"/>
+            </div>
+            
+            <div class="topbar-actions-panel">
+                <div class="badge-icons-row">
+                    <button class="icon-utility-btn">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="badge-dot-indicator"></span>
+                    </button>
+                    <button class="icon-utility-btn">
+                        <span class="material-symbols-outlined">account_circle</span>
+                    </button>
+                </div>
+                <div class="panel-separator"></div>
+                <div class="system-meta-display">
+                    <p class="system-title-text">Hospital Management System</p>
+                    <p class="system-version-tag">v2.4.1 Active</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace Document Screen Content Grid Frame -->
+        <main class="main-content-canvas">
+            <div class="view-bounds-container">
+                
+                <!-- View Header Banner Section Components Layout Area -->
+                <section class="view-header-row">
+                    <div>
+                        <h3 class="dashboard-display-heading">MedCore Dashboard</h3>
+                        <p class="dashboard-subtitle-text">Real-time facility oversight and administrative controls.</p>
+                    </div>
+                    <div class="header-action-button-group">
+                        <button class="action-btn btn-secondary-gray">
+                            <span class="material-symbols-outlined">file_download</span>
+                            <span>Export Report</span>
+                        </button>
+                        <button class="action-btn btn-primary-dark">
+                            <span class="material-symbols-outlined">add</span>
+                            <span>New Admission</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Facility Quick Insights Cards Grid Deck Block -->
+                <section class="metrics-deck-grid">
+                    
+                    <!-- Insight Box Component Card -->
+                    <div class="metric-card-box border-accent-teal">
+                        <div class="card-header-meta">
+                            <div class="icon-frame accent-bg-teal">
+                                <span class="material-symbols-outlined color-teal">medical_services</span>
+                            </div>
+                            <span class="delta-tag color-teal">+3 this week</span>
+                        </div>
+                        <p class="metric-label-title">Total Doctors</p>
+                        <h4 class="metric-numerical-display">142</h4>
+                    </div>
+
+                    <!-- Insight Box Component Card -->
+                    <div class="metric-card-box border-accent-teal">
+                        <div class="card-header-meta">
+                            <div class="icon-frame accent-bg-teal">
+                                <span class="material-symbols-outlined color-teal">person</span>
+                            </div>
+                            <span class="delta-tag color-teal">Active Now</span>
+                        </div>
+                        <p class="metric-label-title">Total Patients</p>
+                        <h4 class="metric-numerical-display">1,284</h4>
+                    </div>
+
+                    <!-- Insight Box Component Card -->
+                    <div class="metric-card-box border-accent-teal">
+                        <div class="card-header-meta">
+                            <div class="icon-frame accent-bg-teal">
+                                <span class="material-symbols-outlined color-teal">groups</span>
+                            </div>
+                            <span class="delta-tag color-muted">On Shift</span>
+                        </div>
+                        <p class="metric-label-title">Active Staff</p>
+                        <h4 class="metric-numerical-display">312</h4>
+                    </div>
+
+                    <!-- Insight Box Component Card -->
+                    <div class="metric-card-box border-accent-error">
+                        <div class="card-header-meta">
+                            <div class="icon-frame accent-bg-error">
+                                <span class="material-symbols-outlined color-error">bed</span>
+                            </div>
+                            <span class="delta-tag color-error font-bold-tag">92% Capacity</span>
+                        </div>
+                        <p class="metric-label-title">Bed Occupancy</p>
+                        <h4 class="metric-numerical-display">442<span class="fractional-denominator">/480</span></h4>
+                    </div>
+
+                </section>
+
+                <!-- Core Bento Grid Structured Analytics Workspace Matrix Row -->
+                <div class="bento-layout-matrix">
+                    
+                    <!-- Chart Analytic Box Interface Panel Grid Element Column -->
+                    <div class="bento-block-item item-col-span-8">
+                        <div class="panel-header-action-row">
+                            <div>
+                                <h5 class="panel-section-title">Emergency Capacity</h5>
+                                <p class="panel-section-subtitle">Real-time admission trends vs. available ER beds</p>
+                            </div>
+                            <div class="panel-context-actions">
+                                <span class="badge-filter-pill">Last 24h</span>
+                                <button class="more-options-btn"><span class="material-symbols-outlined">more_vert</span></button>
+                            </div>
+                        </div>
+
+                        <!-- Data Chart Visualization Canvas Graph Block Container Layout -->
+                        <div class="chart-viewport-wrapper">
+                            <div class="bars-flex-grid">
+                                <div class="chart-bar-column h-percentage-40"></div>
+                                <div class="chart-bar-column h-percentage-55"></div>
+                                <div class="chart-bar-column h-percentage-70"></div>
+                                <div class="chart-bar-column h-percentage-95 alert-peak-bar">
+                                    <div class="chart-tooltip-bubble">Peak: 95%</div>
+                                </div>
+                                <div class="chart-bar-column h-percentage-80"></div>
+                                <div class="chart-bar-column h-percentage-60"></div>
+                                <div class="chart-bar-column h-percentage-45"></div>
+                                <div class="chart-bar-column h-percentage-30"></div>
+                                <div class="chart-bar-column h-percentage-50"></div>
+                                <div class="chart-bar-column h-percentage-65"></div>
+                                <div class="chart-bar-column h-percentage-40"></div>
+                                <div class="chart-bar-column h-percentage-35"></div>
+                            </div>
+                            <div class="chart-base-baseline"></div>
+                        </div>
+
+                        <!-- Graph Footnote Statistical Analytics Block Array Layout -->
+                        <div class="chart-breakdown-row-grid">
+                            <div class="breakdown-stat-cell">
+                                <p class="breakdown-label">Average Wait Time</p>
+                                <p class="breakdown-value">14 <span class="breakdown-unit-tag">mins</span></p>
+                            </div>
+                            <div class="breakdown-stat-cell">
+                                <p class="breakdown-label">ER Triage Count</p>
+                                <p class="breakdown-value">28 <span class="breakdown-unit-tag">pending</span></p>
+                            </div>
+                            <div class="breakdown-stat-cell">
+                                <p class="breakdown-label">Staff on Duty</p>
+                                <p class="breakdown-value">12 <span class="breakdown-unit-tag">doctors</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column Operational Stream Realtime Log Feed Interface -->
+                    <div class="bento-block-item item-col-span-4 flex-column-layout">
+                        <div class="panel-header-action-row margin-bottom-lg">
+                            <h5 class="panel-section-title">Recent Activity</h5>
+                            <button class="inline-navigation-link">View All</button>
+                        </div>
+
+                        <!-- Activity Vertical Pipeline Items Layout -->
+                        <div class="activity-scroll-viewport custom-scrollbar">
+                            
+                            <!-- Log Element Block 1 -->
+                            <div class="activity-timeline-item">
+                                <div class="timeline-nodes-indicator-rail">
+                                    <div class="node-icon-avatar bg-node-error color-error">
+                                        <span class="material-symbols-outlined size-sm-icon">emergency</span>
+                                    </div>
+                                    <div class="rail-line-connector"></div>
+                                </div>
+                                <div class="activity-content-block">
+                                    <div class="activity-title-timestamp-row">
+                                        <h6>ER Alert: High Traffic</h6>
+                                        <span class="activity-timestamp">2m ago</span>
+                                    </div>
+                                    <p class="activity-description-para">Level 3 triage surge detected in East Wing Emergency Reception.</p>
+                                    <button class="alert-cta-action-link color-error">
+                                        <span>Acknowledge</span>
+                                        <span class="material-symbols-outlined size-xs-icon">chevron_right</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Log Element Block 2 -->
+                            <div class="activity-timeline-item">
+                                <div class="timeline-nodes-indicator-rail">
+                                    <div class="node-icon-avatar bg-node-teal color-teal">
+                                        <span class="material-symbols-outlined size-sm-icon">person_add</span>
+                                    </div>
+                                    <div class="rail-line-connector"></div>
+                                </div>
+                                <div class="activity-content-block">
+                                    <div class="activity-title-timestamp-row">
+                                        <h6>Patient Admission</h6>
+                                        <span class="activity-timestamp">15m ago</span>
+                                    </div>
+                                    <p class="activity-description-para">Johnathan Miller (ID: #8821) admitted to Ward 4-B, Bed 12.</p>
+                                </div>
+                            </div>
+
+                            <!-- Log Element Block 3 -->
+                            <div class="activity-timeline-item">
+                                <div class="timeline-nodes-indicator-rail">
+                                    <div class="node-icon-avatar bg-node-gray color-muted">
+                                        <span class="material-symbols-outlined size-sm-icon">update</span>
+                                    </div>
+                                    <div class="rail-line-connector"></div>
+                                </div>
+                                <div class="activity-content-block">
+                                    <div class="activity-title-timestamp-row">
+                                        <h6>Staff Shift Update</h6>
+                                        <span class="activity-timestamp">45m ago</span>
+                                    </div>
+                                    <p class="activity-description-para">Night shift hand-over complete for Surgical Department.</p>
+                                </div>
+                            </div>
+
+                            <!-- Log Element Block 4 -->
+                            <div class="activity-timeline-item">
+                                <div class="timeline-nodes-indicator-rail">
+                                    <div class="node-icon-avatar bg-node-teal color-teal">
+                                        <span class="material-symbols-outlined size-sm-icon">lab_research</span>
+                                    </div>
+                                </div>
+                                <div class="activity-content-block">
+                                    <div class="activity-title-timestamp-row">
+                                        <h6>Lab Results Released</h6>
+                                        <span class="activity-timestamp">1h ago</span>
+                                    </div>
+                                    <p class="activity-description-para">Pathology report finalized for Patient Sarah Connor.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Floor Space Allocation Visual Layout Block Section -->
+                    <div class="bento-block-item item-col-span-12">
+                        <div class="panel-header-action-row border-bottom-faint padding-bottom-md">
+                            <h5 class="panel-section-title">Facility Resource Mapping</h5>
+                            <div class="legend-indicators-row">
+                                <div class="legend-item">
+                                    <span class="legend-dot bg-teal"></span>
+                                    <span class="legend-text">Available</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot bg-error"></span>
+                                    <span class="legend-text">Occupied</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot bg-gray"></span>
+                                    <span class="legend-text">Maintenance</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floor Ward Allocation Dynamic Representation Units Grid Row -->
+                        <div class="floor-plan-asymmetric-grid">
+                            
+                            <!-- Unit Card -->
+                            <div class="ward-space-allocation-card">
+                                <span class="ward-card-label">Ward 1-A</span>
+                                <div class="bed-dots-matrix">
+                                    <div class="bed-block bg-error"></div>
+                                    <div class="bed-block bg-error"></div>
+                                    <div class="bed-block bg-error"></div>
+                                    <div class="bed-block bg-teal"></div>
+                                </div>
+                            </div>
+
+                            <!-- Unit Card -->
+                            <div class="ward-space-allocation-card">
+                                <span class="ward-card-label">Ward 1-B</span>
+                                <div class="bed-dots-matrix">
+                                    <div class="bed-block bg-error"></div>
+                                    <div class="bed-block bg-teal"></div>
+                                    <div class="bed-block bg-teal"></div>
+                                    <div class="bed-block bg-teal"></div>
+                                </div>
+                            </div>
+
+                            <!-- Unit Card -->
+                            <div class="ward-space-allocation-card">
+                                <span class="ward-card-label">ICU North</span>
+                                <div class="bed-dots-matrix">
+                                    <div class="bed-block bg-error"></div>
+                                    <div class="bed-block bg-error"></div>
+                                    <div class="bed-block bg-gray"></div>
+                                    <div class="bed-block bg-error"></div>
+                                </div>
+                            </div>
+
+                            <!-- Unit Card -->
+                            <div class="ward-space-allocation-card">
+                                <span class="ward-card-label">ICU South</span>
+                                <div class="bed-dots-matrix">
+                                    <div class="bed-block bg-error"></div>
+                                    <div class="bed-block bg-error"></div>
+                                    <div class="bed-block bg-teal"></div>
+                                    <div class="bed-block bg-teal"></div>
+                                </div>
+                            </div>
+
+                            <!-- Unit Card -->
+                            <div class="ward-space-allocation-card">
+                                <span class="ward-card-label">Maternity</span>
+                                <div class="bed-dots-matrix">
+                                    <div class="bed-block bg-teal"></div>
+                                    <div class="bed-block bg-teal"></div>
+                                    <div class="bed-block bg-teal"></div>
+                                    <div class="bed-block bg-teal"></div>
+                                </div>
+                            </div>
+
+                            <!-- Unit Card -->
+                            <div class="ward-space-allocation-card">
+                                <span class="ward-card-label">Surgical</span>
+                                <div class="bed-dots-matrix">
+                                    <div class="bed-block bg-error"></div>
+                                    <div class="bed-block bg-error"></div>
+                                    <div class="bed-block bg-error"></div>
+                                    <div class="bed-block bg-error"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', path='js/admin_home.js') }}"></script>
+
+</body>
+</html>

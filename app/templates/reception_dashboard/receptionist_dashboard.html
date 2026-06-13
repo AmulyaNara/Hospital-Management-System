@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>MedCore Receptionist Dashboard | St. Jude Medical Center</title>
+    
+    <!-- Google Fonts: Manrope & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+    
+    <!-- Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet"
+      href="{{ url_for('static', path='css/receptionist_dashboard.css') }}">
+</head>
+<body class="dashboard-body">
+
+    <!-- SIDEBAR NAVIGATION CONTAINER -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1>SJ Medical</h1>
+            <p>Central Management</p>
+        </div>
+        
+        <nav class="sidebar-menu">
+            <!-- Dashboard Tab (Active) -->
+            <a class="menu-item active" href="#">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span>Dashboard</span>
+            </a>
+            <a class="menu-item" href="#">
+                <span class="material-symbols-outlined">calendar_month</span>
+                <span>Appointments</span>
+            </a>
+            <a class="menu-item" href="#">
+                <span class="material-symbols-outlined">group</span>
+                <span>Patients</span>
+            </a>
+            <a class="menu-item" href="#">
+                <span class="material-symbols-outlined">medical_services</span>
+                <span>Doctors</span>
+            </a>
+            <a class="menu-item" href="#">
+                <span class="material-symbols-outlined">description</span>
+                <span>Records</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button class="btn-new-appointment">
+                New Appointment
+            </button>
+            <a class="menu-item footer-item" href="#">
+                <span class="material-symbols-outlined">settings</span>
+                <span>Settings</span>
+            </a>
+            <a class="menu-item footer-item" href="#">
+                <span class="material-symbols-outlined">logout</span>
+                <span>Log Out</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN APP WRAPPER -->
+    <div class="main-layout">
+        <!-- TOP NAVIGATION BAR -->
+        <header class="top-navbar">
+            <div class="header-container">
+                <div class="search-box-wrapper">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <input class="search-input" placeholder="Search patients, doctors or IDs..." type="text"/>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="icon-buttons-group">
+                        <button class="icon-btn">
+                            <span class="material-symbols-outlined">notifications</span>
+                        </button>
+                        <button class="icon-btn">
+                            <span class="material-symbols-outlined">help_outline</span>
+                        </button>
+                    </div>
+                    <div class="divider-line"></div>
+                    <div class="profile-group">
+                        <div class="profile-text">
+                            <p class="profile-name">Sarah Jenkins</p>
+                            <p class="profile-role">Senior Receptionist</p>
+                        </div>
+                        <img alt="Receptionist Profile Avatar" class="profile-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDLsBiHTc8BYE2mZqmk5v1sNVHwGbU2nJTyAJ4QMH4S_XYa-G_Y-hTJ6jd3S9NhTr1FacFMkCetwwww7lFuQMqQO0CxwsN7JdKaL57pox0VSBF_GTNBANg51Qzq9SUgep9EY7YShgaDhIK-FzYgclbn_zj_z_ilI80vViVxrWkI4gjKFeNJOMWhz2AhsBbIPCSL7fIY1RLKyOjtf3uDNP4Ll2InC5j5re0N0OcR79DcAOupf28KciROVGTmZyWo-EOkOg7o9WWJF5i"/>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- VIEWPORT RUNTIME MAIN CONTENT -->
+        <main class="content-viewport">
+            <div class="content-container">
+                
+                <!-- HERO STATS SECTION -->
+                <section class="stats-grid">
+                    <div class="stat-card border-accent">
+                        <p class="stat-label">Today's Appointments</p>
+                        <h2 class="stat-value">42</h2>
+                        <div class="trend-indicator trend-up">
+                            <span class="material-symbols-outlined">trending_up</span>
+                            <span>8% vs yesterday</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <p class="stat-label">Available Doctors</p>
+                        <h2 class="stat-value">12/15</h2>
+                        <div class="trend-indicator text-muted">
+                            <span class="material-symbols-outlined">group</span>
+                            <span>3 Currently Busy</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <p class="stat-label">Pending Lab Results</p>
+                        <h2 class="stat-value">18</h2>
+                        <div class="trend-indicator trend-danger">
+                            <span class="material-symbols-outlined">priority_high</span>
+                            <span>5 Urgent action</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <p class="stat-label">Average Wait Time</p>
+                        <h2 class="stat-value">14m</h2>
+                        <div class="trend-indicator trend-up">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Optimal flow</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BENTO SECTION LAYOUT GRID -->
+                <div class="bento-layout">
+                    <!-- LEFT PANEL: PATIENT RECORDS TABLE -->
+                    <section class="bento-main-panel">
+                        <div class="panel-header border-bottom">
+                            <div class="header-title-stack">
+                                <h3>Patient Records</h3>
+                                <p>Manage and review latest patient registrations</p>
+                            </div>
+                            <div class="header-actions-group">
+                                <button class="btn-secondary">
+                                    <span class="material-symbols-outlined">filter_list</span>
+                                    <span>Filter</span>
+                                </button>
+                                <button class="btn-primary">
+                                    <span class="material-symbols-outlined">person_add</span>
+                                    <span>New Patient</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="table-container custom-scrollbar">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Patient Name</th>
+                                        <th>ID Number</th>
+                                        <th>Last Visit</th>
+                                        <th>Status</th>
+                                        <th class="text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-row-group">
+                                        <td>
+                                            <div class="patient-cell">
+                                                <div class="avatar-initials bg-primary-fixed text-on-primary-fixed">AJ</div>
+                                                <div>
+                                                    <p class="patient-name">Arthur Jenkins</p>
+                                                    <p class="patient-sub">arthur.j@email.com</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-muted">#PT-44210</td>
+                                        <td>Oct 12, 2023</td>
+                                        <td>
+                                            <span class="status-badge bg-stable">Stable</span>
+                                        </td>
+                                        <td class="text-right">
+                                            <div class="row-actions">
+                                                <button class="action-icon-btn text-muted hover-secondary"><span class="material-symbols-outlined">visibility</span></button>
+                                                <button class="action-icon-btn text-muted hover-primary"><span class="material-symbols-outlined">edit</span></button>
+                                                <button class="action-icon-btn text-muted hover-danger"><span class="material-symbols-outlined">delete</span></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-row-group">
+                                        <td>
+                                            <div class="patient-cell">
+                                                <div class="avatar-initials bg-tertiary-fixed text-on-tertiary-fixed">LS</div>
+                                                <div>
+                                                    <p class="patient-name">Linda Sterling</p>
+                                                    <p class="patient-sub">l.sterling@outlook.com</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-muted">#PT-44215</td>
+                                        <td>Today</td>
+                                        <td>
+                                            <span class="status-badge bg-critical">Critical</span>
+                                        </td>
+                                        <td class="text-right">
+                                            <div class="row-actions">
+                                                <button class="action-icon-btn text-muted hover-secondary"><span class="material-symbols-outlined">visibility</span></button>
+                                                <button class="action-icon-btn text-muted hover-primary"><span class="material-symbols-outlined">edit</span></button>
+                                                <button class="action-icon-btn text-muted hover-danger"><span class="material-symbols-outlined">delete</span></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-row-group">
+                                        <td>
+                                            <div class="patient-cell">
+                                                <div class="avatar-initials bg-variant text-muted">MB</div>
+                                                <div>
+                                                    <p class="patient-name">Mark Benson</p>
+                                                    <p class="patient-sub">m.benson@gmail.com</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-muted">#PT-44222</td>
+                                        <td>Yesterday</td>
+                                        <td>
+                                            <span class="status-badge bg-recovery">Recovery</span>
+                                        </td>
+                                        <td class="text-right">
+                                            <div class="row-actions">
+                                                <button class="action-icon-btn text-muted hover-secondary"><span class="material-symbols-outlined">visibility</span></button>
+                                                <button class="action-icon-btn text-muted hover-primary"><span class="material-symbols-outlined">edit</span></button>
+                                                <button class="action-icon-btn text-muted hover-danger"><span class="material-symbols-outlined">delete</span></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="table-footer">
+                            <span class="text-muted">Showing 3 of 1,248 patients</span>
+                            <div class="pagination-controls">
+                                <button class="pagination-btn" disabled>
+                                    <span class="material-symbols-outlined">chevron_left</span>
+                                </button>
+                                <button class="pagination-btn">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- RIGHT PANEL: DOCTORS DIRECTORY & BOOKING -->
+                    <section class="bento-side-panel">
+                        <!-- Doctors Directory Module -->
+                        <div class="doctors-card border-accent">
+                            <div class="panel-header">
+                                <h3>Doctors</h3>
+                                <button class="btn-link">View All</button>
+                            </div>
+                            <div class="doctors-list custom-scrollbar">
+                                <!-- Doctor Card 1 -->
+                                <div class="doctor-item-row">
+                                    <img alt="Doctor Avatar" class="doctor-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6vm3W3gJTHZokUPYIn9cvcQuYJu4lD8D_LSDzn95lU4JNxO1TlKMthQCmxYTXfnySjV1Wx5chFYZxcObMWKr03qczpg-S17JxF1nPflXr160wkfvIDZmq1KPP0gmPEhriECuf3UpKHzyCsJmAjKVXQHpxtLdKvOfpfzgu2uKfhczN1BaDSrlpP9RwP-63XFTcn0qUpwRbuFk2eXr7B2WyZ3RSZY-7B-qkm1sqOfokEUXMdrZmHrRprXrWMKpjn5zmdWGEDpTzq2Qn"/>
+                                    <div class="doctor-meta">
+                                        <p class="doc-name">Dr. Julian Vance</p>
+                                        <p class="doc-spec text-muted">Cardiology • RM 402</p>
+                                    </div>
+                                    <div class="doctor-status-stack">
+                                        <span class="live-indicator-tag text-teal">
+                                            <span class="pulse-dot dot-teal"></span>
+                                            <span>Available</span>
+                                        </span>
+                                        <button class="btn-select-tag">Select</button>
+                                    </div>
+                                </div>
+                                <!-- Doctor Card 2 -->
+                                <div class="doctor-item-row">
+                                    <img alt="Doctor Avatar" class="doctor-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpYk5mQMSl-Nzg-gKDE-Bw_hmotvCRzEEYiGenNdqOPCXyd3_4dbCPJnj_5mk00R5EFDGJInwjCn3ppaBDUfI7wDPJkSfSyQFIpf_WM7nMrxBmzI8GQg5c31D3uuFYcULmVwKYf1BKggW75rWpS_7jMkobuQAM3eyKO85e7bRx326ch_xg4QTbzWmzJ-Z8P4wq_z9MaxgDf1BBDw5ktjv4HA13UjRp3vitF6cG7JvLoZt0mJ3903epWHM3hsfg3GRqlxU5Iw3K5p0a"/>
+                                    <div class="doctor-meta">
+                                        <p class="doc-name">Dr. Elena Rodriguez</p>
+                                        <p class="doc-spec text-muted">Neurology • RM 210</p>
+                                    </div>
+                                    <div class="doctor-status-stack">
+                                        <span class="live-indicator-tag text-danger">
+                                            <span class="pulse-dot dot-danger alert-pulse"></span>
+                                            <span>In Surgery</span>
+                                        </span>
+                                        <span class="time-sub text-muted">Free at 14:30</span>
+                                    </div>
+                                </div>
+                                <!-- Doctor Card 3 -->
+                                <div class="doctor-item-row">
+                                    <img alt="Doctor Avatar" class="doctor-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnRYDBn9oNYEQ_PglMpY3gNCLs6Caq4Z8arodFgSqUnZgK4MISDTMTxVxK_l2n7XfGiXFXeMvMeMkozOa-FooAWfixhffq3CLQewuw6Y_7dV3-eMIDCw9BnFe7BOx_mSsmRBxxym2A-5rIs3mYMXWC34oa09S0zvkm2qkBT3STFKov_oaMQBwPK7X-qNz4jBERvcdXv6QG78DDRcd5eykhf8cipt3OT2yoFHrcS2vsaLA61ecydMfubZF8yYeXzYfZdjOjnobs8iDm"/>
+                                    <div class="doctor-meta">
+                                        <p class="doc-name">Dr. Samuel Wright</p>
+                                        <p class="doc-spec text-muted">Pediatrics • RM 105</p>
+                                    </div>
+                                    <div class="doctor-status-stack">
+                                        <span class="live-indicator-tag text-teal">
+                                            <span class="pulse-dot dot-teal"></span>
+                                            <span>Available</span>
+                                        </span>
+                                        <button class="btn-select-tag">Select</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Schedule Booking Module Card -->
+                        <div class="booking-dark-card">
+                            <div class="booking-card-header">
+                                <span class="material-symbols-outlined header-icon">event_available</span>
+                                <h3>Schedule Visit</h3>
+                            </div>
+                            <div class="booking-form-body">
+                                <div class="form-input-group">
+                                    <label class="form-label">Patient ID / Name</label>
+                                    <input class="form-field" type="text" value="Arthur Jenkins"/>
+                                </div>
+                                <div class="form-split-row">
+                                    <div class="form-input-group">
+                                        <label class="form-label">Doctor</label>
+                                        <div class="select-wrapper">
+                                            <select class="form-field select-field">
+                                                <option>Dr. Julian Vance</option>
+                                                <option>Dr. Elena Rodriguez</option>
+                                                <option>Dr. Samuel Wright</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-input-group">
+                                        <label class="form-label">Visit Type</label>
+                                        <div class="select-wrapper">
+                                            <select class="form-field select-field">
+                                                <option>Consultation</option>
+                                                <option>Follow-up</option>
+                                                <option>Lab Work</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-split-row">
+                                    <div class="form-input-group">
+                                        <label class="form-label">Date</label>
+                                        <input class="form-field" type="date" value="2023-10-25"/>
+                                    </div>
+                                    <div class="form-input-group">
+                                        <label class="form-label">Time Slot</label>
+                                        <div class="select-wrapper">
+                                            <select class="form-field select-field">
+                                                <option>09:00 AM</option>
+                                                <option>10:30 AM</option>
+                                                <option>01:15 PM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn-confirm-booking">
+                                    <span class="material-symbols-outlined">add_circle</span>
+                                    <span>Confirm Booking</span>
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- SYSTEM ACTIVITY LOG SECTION -->
+                <section class="system-log-section">
+                    <h3 class="section-title text-primary">System Log</h3>
+                    <div class="log-card">
+                        <div class="timeline-stack">
+                            <!-- Timeline Entry 1 -->
+                            <div class="timeline-item">
+                                <div class="timeline-left-axis">
+                                    <div class="icon-node bg-teal-soft text-teal">
+                                        <span class="material-symbols-outlined">check</span>
+                                    </div>
+                                    <div class="axis-connector-line"></div>
+                                </div>
+                                <div class="timeline-content-body">
+                                    <p class="timeline-title">Appointment Confirmed</p>
+                                    <p class="timeline-desc text-muted">Arthur Jenkins with Dr. Julian Vance at 10:30 AM</p>
+                                    <span class="timeline-timestamp text-muted">Just now</span>
+                                </div>
+                            </div>
+                            <!-- Timeline Entry 2 -->
+                            <div class="timeline-item">
+                                <div class="timeline-left-axis">
+                                    <div class="icon-node bg-dark-soft text-dark">
+                                        <span class="material-symbols-outlined">person</span>
+                                    </div>
+                                    <div class="axis-connector-line"></div>
+                                </div>
+                                <div class="timeline-content-body">
+                                    <p class="timeline-title">New Patient Registered</p>
+                                    <p class="timeline-desc text-muted">Mark Benson (#PT-44222) added to the directory</p>
+                                    <span class="timeline-timestamp text-muted">2 hours ago</span>
+                                </div>
+                            </div>
+                            <!-- Timeline Entry 3 -->
+                            <div class="timeline-item">
+                                <div class="timeline-left-axis">
+                                    <div class="icon-node bg-danger-soft text-danger">
+                                        <span class="material-symbols-outlined">warning</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-content-body">
+                                    <p class="timeline-title">Urgent Lab Alert</p>
+                                    <p class="timeline-desc text-muted">Incomplete details for Linda Sterling’s blood panel</p>
+                                    <span class="timeline-timestamp text-muted">5 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+            </div>
+        </main>
+    </div>
+
+    <!-- Script Resource File -->
+    <script src="{{ url_for('static', path='js/reception.js') }}"></script>
+</body>
+</html>

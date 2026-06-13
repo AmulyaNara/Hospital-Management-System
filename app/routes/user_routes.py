@@ -17,3 +17,33 @@ def add_user(
         user.role,
         user.phone
     )
+    
+from app.models.user_orm import (
+    create_user,
+    get_all_users,
+    update_user,
+    delete_user
+)
+@router.get("/users")
+def get_users():
+
+    return get_all_users()
+
+@router.put("/users/{user_id}")
+def edit_user(
+    user_id: int,
+    role: str
+):
+
+    return update_user(
+        user_id,
+        role
+    )
+@router.delete("/users/{user_id}")
+def remove_user(
+    user_id: int
+):
+
+    return delete_user(
+        user_id
+    )

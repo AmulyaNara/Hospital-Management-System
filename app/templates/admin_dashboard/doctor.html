@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediAdmin - Hospital Management System</title>
+    <!-- External Fonts & Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='css/dashboard.css') }}">
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+            </div>
+            <div>
+                <h1>MediAdmin</h1>
+                <p>Clinical Systems</p>
+            </div>
+        </div>
+        
+        <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+            </div>
+            <div>
+                <h1>MediAdmin</h1>
+                <p>Clinical Systems</p>
+            </div>
+        </div>
+        
+        <nav class="sidebar-menu">
+            <a href="/admin-home" class="menu-item">
+    <span class="material-symbols-outlined">dashboard</span>
+    <span>Dashboard</span>
+</a>
+
+<a href="/admin-doctors" class="menu-item active">
+    <span class="material-symbols-outlined">medical_services</span>
+    <span>Doctors</span>
+</a>
+            <a href="#" class="menu-item">
+                <span class="material-symbols-outlined">person</span>
+                <span>Patients</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-symbols-outlined">analytics</span>
+                <span>Diagnosis</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-symbols-outlined">description</span>
+                <span>Prescriptions</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-symbols-outlined">badge</span>
+                <span>Receptionists</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-symbols-outlined">history</span>
+                <span>System Logs</span>
+            </a>
+            <div class="menu-divider"></div>
+            <a href="#" class="menu-item">
+                <span class="material-symbols-outlined">settings</span>
+                <span>Settings</span>
+            </a>
+              
+        </nav>
+
+        <div class="sidebar-profile">
+            <div class="profile-avatar">JW</div>
+            <div class="profile-info">
+                <p class="profile-name">Dr. James Wilson</p>
+                <p class="profile-role">Chief Administrator</p>
+            </div>
+        </div>
+    </aside>
+
+        <div class="sidebar-profile">
+            <div class="profile-avatar">JW</div>
+            <div class="profile-info">
+                <p class="profile-name">Dr. James Wilson</p>
+                <p class="profile-role">Chief Administrator</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Workspace Container -->
+    <main class="main-content">
+        <!-- Top Navigation Header -->
+        <header class="top-bar">
+            <div class="search-wrapper">
+                <span class="material-symbols-outlined">search</span>
+                <input type="text" placeholder="Search patients, doctors, or records...">
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span class="badge-dot"></span>
+                </button>
+                <div class="divider"></div>
+                <div class="admin-badge">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Admin Portal</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Canvas Body Content -->
+        <div class="canvas-container">
+            
+            <!-- Statistics Row Overview -->
+            <section class="metrics-grid">
+                <div class="metric-card border-teal">
+                    <div class="metric-header">
+                        <span class="material-symbols-outlined icon-box">stethoscope</span>
+                        <span class="pill pill-green">+12%</span>
+                    </div>
+                    <p class="metric-label">Total Doctors</p>
+                    <h3 class="metric-value">142</h3>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="material-symbols-outlined icon-box">groups</span>
+                        <span class="pill pill-green">+5.2%</span>
+                    </div>
+                    <p class="metric-label">Total Patients</p>
+                    <h3 class="metric-value">1,284</h3>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="material-symbols-outlined icon-box">medical_information</span>
+                        <span class="pill pill-gray">Stable</span>
+                    </div>
+                    <p class="metric-label">Active Staff</p>
+                    <h3 class="metric-value">312</h3>
+                </div>
+
+                <div class="metric-card border-red">
+                    <div class="metric-header">
+                        <span class="material-symbols-outlined icon-box-red">bed</span>
+                        <span class="pill pill-red">92%</span>
+                    </div>
+                    <p class="metric-label">Bed Occupancy</p>
+                    <h3 class="metric-value">442 / 480</h3>
+                </div>
+            </section>
+
+            <!-- Doctors Registry Section -->
+            <section class="registry-card">
+                <div class="registry-header">
+                    <div>
+                        <h2>Doctors Registry</h2>
+                        <p class="registry-subtitle">Manage hospital medical staff and credentials.</p>
+                    </div>
+                    <div class="registry-actions">
+                        <button class="btn btn-secondary-action">
+                            <span class="material-symbols-outlined">filter_list</span>
+                            <span>Filter</span>
+                        </button>
+                        <button class="btn btn-primary-action">
+                            <span class="material-symbols-outlined">add</span>
+                            <span>Add New Doctor</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Doctors Table Data View -->
+                <div class="table-responsive">
+                    <table class="doctors-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Specialty</th>
+                                <th>Status</th>
+                                <th>Contact</th>
+                                <th class="text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Row 1 -->
+                            <tr>
+                                <td>
+                                    <div class="user-profile-cell">
+                                        <div class="avatar bg-teal-light">SC</div>
+                                        <div>
+                                            <p class="user-name">Dr. Sarah Chen</p>
+                                            <p class="user-id">ID: DOC-9284</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="text-body-sm">Cardiology</span></td>
+                                <td><span class="status-badge badge-active">Active</span></td>
+                                <td><p class="text-body-sm">s.chen@hospital.com</p></td>
+                                <td class="text-right">
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="action-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="action-btn text-danger" title="Delete"><span class="material-symbols-outlined">delete</span></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 2 -->
+                            <tr>
+                                <td>
+                                    <div class="user-profile-cell">
+                                        <div class="avatar bg-blue-light">MR</div>
+                                        <div>
+                                            <p class="user-name">Dr. Michael Ross</p>
+                                            <p class="user-id">ID: DOC-4102</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="text-body-sm">Neurology</span></td>
+                                <td><span class="status-badge badge-leave">On Leave</span></td>
+                                <td><p class="text-body-sm">m.ross@hospital.com</p></td>
+                                <td class="text-right">
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="action-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="action-btn text-danger" title="Delete"><span class="material-symbols-outlined">delete</span></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 3 -->
+                            <tr>
+                                <td>
+                                    <div class="user-profile-cell">
+                                        <div class="avatar bg-purple-light">ER</div>
+                                        <div>
+                                            <p class="user-name">Dr. Elena Rodriguez</p>
+                                            <p class="user-id">ID: DOC-7721</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="text-body-sm">Pediatrics</span></td>
+                                <td><span class="status-badge badge-active">Active</span></td>
+                                <td><p class="text-body-sm">e.rodriguez@hospital.com</p></td>
+                                <td class="text-right">
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="action-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="action-btn text-danger" title="Delete"><span class="material-symbols-outlined">delete</span></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 4 -->
+                            <tr>
+                                <td>
+                                    <div class="user-profile-cell">
+                                        <div class="avatar bg-gray-light">AW</div>
+                                        <div>
+                                            <p class="user-name">Dr. Alan Wright</p>
+                                            <p class="user-id">ID: DOC-3315</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="text-body-sm">General Surgery</span></td>
+                                <td><span class="status-badge badge-active">Active</span></td>
+                                <td><p class="text-body-sm">a.wright@hospital.com</p></td>
+                                <td class="text-right">
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="action-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="action-btn text-danger" title="Delete"><span class="material-symbols-outlined">delete</span></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Table Pagination Footer -->
+                <div class="pagination-footer">
+                    <p class="pagination-info">Showing 1-4 of 142 Doctors</p>
+                    <div class="pagination-controls">
+                        <button class="pager-btn"><span class="material-symbols-outlined">chevron_left</span></button>
+                        <button class="pager-btn active">1</button>
+                        <button class="pager-btn">2</button>
+                        <button class="pager-btn">3</button>
+                        <span class="pager-ellipsis">...</span>
+                        <button class="pager-btn">36</button>
+                        <button class="pager-btn"><span class="material-symbols-outlined">chevron_right</span></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Analytics & Alerts Grid Row -->
+            <section class="dashboard-row">
+                
+                <!-- Weekly Appointment Flow Card Components -->
+                <div class="bento-card chart-span">
+                    <div class="bento-card-header">
+                        <h3 class="bento-card-title">Weekly Appointment Flow</h3>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="dot dot-completed"></span> Completed
+                            </div>
+                            <div class="legend-item">
+                                <span class="dot dot-scheduled"></span> Scheduled
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Clean Pure CSS/HTML Flexbox Chart Columns -->
+                    <div class="chart-container" id="weeklyChartContainer">
+                        <div class="chart-bar-group" data-day="Mon">
+                            <div class="bar-track">
+                                <div class="bar-fill fill-scheduled"></div>
+                                <div class="bar-fill fill-completed"></div>
+                            </div>
+                            <span class="day-label">Mon</span>
+                        </div>
+
+                        <div class="chart-bar-group" data-day="Tue">
+                            <div class="bar-track">
+                                <div class="bar-fill fill-scheduled"></div>
+                                <div class="bar-fill fill-completed"></div>
+                            </div>
+                            <span class="day-label">Tue</span>
+                        </div>
+
+                        <div class="chart-bar-group" data-day="Wed">
+                            <div class="bar-track">
+                                <div class="bar-fill fill-scheduled"></div>
+                                <div class="bar-fill fill-completed"></div>
+                            </div>
+                            <span class="day-label">Wed</span>
+                        </div>
+
+                        <div class="chart-bar-group" data-day="Thu">
+                            <div class="bar-track">
+                                <div class="bar-fill fill-scheduled"></div>
+                                <div class="bar-fill fill-completed"></div>
+                            </div>
+                            <span class="day-label">Thu</span>
+                        </div>
+
+                        <div class="chart-bar-group" data-day="Fri">
+                            <div class="bar-track">
+                                <div class="bar-fill fill-scheduled"></div>
+                                <div class="bar-fill fill-completed"></div>
+                            </div>
+                            <span class="day-label">Fri</span>
+                        </div>
+
+                        <div class="chart-bar-group" data-day="Sat">
+                            <div class="bar-track">
+                                <div class="bar-fill fill-scheduled"></div>
+                                <div class="bar-fill fill-completed"></div>
+                            </div>
+                            <span class="day-label">Sat</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Alerts Panel -->
+                <div class="bento-card">
+                    <h3 class="bento-card-title mb-md">System Alerts</h3>
+                    <div class="alert-list">
+                        <div class="alert-item alert-error">
+                            <span class="material-symbols-outlined">warning</span>
+                            <div>
+                                <p class="alert-heading">ICU Power Backup Test</p>
+                                <p class="alert-subtext">Scheduled for 02:00 AM tonight.</p>
+                            </div>
+                        </div>
+                        <div class="alert-item alert-success">
+                            <span class="material-symbols-outlined">verified</span>
+                            <div>
+                                <p class="alert-heading">Pharmacy Restock</p>
+                                <p class="alert-subtext">Inventory levels normalized.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Floating Emergency Fab Action Trigger -->
+    <button class="fab-button" title="Emergency Action">
+        <span class="material-symbols-outlined">emergency</span>
+    </button>
+
+    <script src="{{ url_for('static', path='js/doctor.js') }}"></script>
+</body>
+</html>

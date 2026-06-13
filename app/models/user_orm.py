@@ -42,3 +42,90 @@ def create_user(
 
     finally:
         db.close()
+        
+def get_all_users():
+
+    db = SessionLocal()
+
+    try:
+
+        users = db.query(User).all()
+
+        return users
+
+    finally:
+
+        db.close()
+        
+def update_user(
+    user_id,
+    role
+):
+
+    db = SessionLocal()
+
+    try:
+
+        user = (
+            db.query(User)
+            .filter(
+                User.user_id == user_id
+            )
+            .first()
+        )
+
+        if not user:
+
+            return {
+                "message":
+                "User not found"
+            }
+
+        user.role = role
+
+        db.commit()
+
+        return {
+            "message":
+            "User updated successfully"
+        }
+
+    finally:
+
+        db.close()
+        
+def delete_user(
+    user_id
+):
+
+    db = SessionLocal()
+
+    try:
+
+        user = (
+            db.query(User)
+            .filter(
+                User.user_id == user_id
+            )
+            .first()
+        )
+
+        if not user:
+
+            return {
+                "message":
+                "User not found"
+            }
+
+        db.delete(user)
+
+        db.commit()
+
+        return {
+            "message":
+            "User deleted successfully"
+        }
+
+    finally:
+
+        db.close()
