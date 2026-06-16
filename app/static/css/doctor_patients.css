@@ -1,0 +1,429 @@
+
+
+/* Statistical Cards Grid Context */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+@media (max-width: 1024px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+    .stats-grid { grid-template-columns: 1fr; }
+}
+
+.stat-card {
+    background-color: var(--bg-surface);
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(226, 232, 240, 0.7);
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02);
+}
+
+/* Top Accent Card Highlight Borders */
+.border-stable { border-top: 4px solid var(--brand-teal); }
+.border-critical { border-top: 4px solid var(--critical-red); }
+.border-followup { border-top: 4px solid var(--followup-blue); }
+.border-neutral { border-top: 4px solid var(--text-light); }
+
+.stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.stat-value-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.stat-number {
+    font-family: 'Manrope', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.stat-unit {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-left: 2px;
+}
+
+.trend-indicator {
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.trend-indicator.up { color: var(--brand-teal); }
+.trend-indicator.neutral { color: var(--text-muted); }
+
+.badge-priority {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+.badge-priority.alert { background-color: var(--critical-red-light); color: #B91C1C; }
+.badge-priority.timeline { background-color: var(--followup-blue-light); color: #0369A1; }
+
+/* ==========================================================================
+   Patient Records Master Datatable Layout Component
+   ========================================================================== */
+.table-card {
+    background-color: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+    overflow: hidden;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.clinical-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 850px;
+}
+
+.clinical-table th {
+    background-color: #F8FAFC;
+    padding: 16px 24px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.clinical-table td {
+    padding: 16px 24px;
+    border-bottom: 1px solid #F1F5F9;
+    vertical-align: middle;
+}
+
+/* Explicit Table Interactive Row Animations */
+.clinical-table-row {
+    transition: background-color 0.15s ease;
+}
+
+.clinical-table-row:hover {
+    background-color: #FAFCFE;
+}
+
+/* Cell Elements Styling */
+.patient-identity-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.patient-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+}
+
+.p-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.p-condition {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.stack-cell p {
+    font-size: 13px;
+}
+
+.p-id { font-weight: 600; color: #475569; }
+.p-age, .p-time { font-size: 12px !important; color: var(--text-light); margin-top: 2px; }
+.p-date { font-weight: 500; color: #475569; }
+
+/* Encapsulated Status Badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.status-badge.stable {
+    background-color: rgba(16, 185, 129, 0.12);
+    color: #065F46;
+}
+.status-badge.stable .status-dot { background-color: #10B981; }
+
+.status-badge.critical {
+    background-color: var(--critical-red-light);
+    color: #991B1B;
+}
+.status-badge.critical .status-dot { background-color: var(--critical-red); }
+
+.status-badge.followup {
+    background-color: var(--followup-blue-light);
+    color: #075985;
+}
+.status-badge.followup .status-dot { background-color: var(--followup-blue); }
+
+/* Animation configuration for pulsing critical states */
+.animated-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .4; }
+}
+
+/* Context Action Button Groups Layout Structure */
+.row-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    opacity: 0;
+    transform: translateX(4px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Show actions row cleanly on parent hover layout context */
+.clinical-table-row:hover .row-actions {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.btn-view {
+    background: none;
+    border: 1px solid rgba(0, 106, 97, 0.25);
+    color: var(--brand-teal);
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-view:hover {
+    background-color: var(--brand-teal-light);
+}
+
+.btn-edit {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.15s ease;
+}
+
+.btn-edit:hover {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+}
+
+.btn-edit .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.btn-alert {
+    background-color: var(--critical-red);
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: all 0.15s ease;
+}
+
+.btn-alert:hover {
+    background-color: #DC2626;
+}
+
+.btn-alert:active {
+    transform: scale(0.97);
+}
+
+/* ==========================================================================
+   Table Pagination Elements Footer Block
+   ========================================================================== */
+.table-footer {
+    padding: 16px 24px;
+    background-color: #F8FAFC;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-count {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.footer-count .highlight {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.pagination-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-nav {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-nav:hover:not(.active) {
+    background-color: var(--bg-main);
+}
+
+.btn-nav.active {
+    background-color: white;
+    border-color: #0F172A;
+    color: var(--bg-surface);
+}
+
+/* ==========================================================================
+   Bottom Lazy Loader Interactive Wrappers
+   ========================================================================== */
+.load-more-wrapper {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-load-more {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+    color: var(--brand-teal);
+    padding: 10px 24px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-load-more:hover {
+    border-color: var(--brand-teal);
+    box-shadow: 0 4px 12px rgba(0, 106, 97, 0.08);
+}
+
+.sync-icon {
+    font-size: 16px;
+    transition: transform 0.5s ease;
+}
+
+.btn-load-more:hover .sync-icon {
+    transform: rotate(180deg);
+}
+
+.main-content {
+    margin-left: 280px;
+    margin-top: 80px;
+    padding: 30px;
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+.container-max {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 280px;
+    right: 0;
+    height: 80px;
+    background: white;
+    z-index: 100;
+}
+.top-header {
+    background-color: var(--card-bg);
+    height: 70px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.avatar-icon{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#e2e8f0;
+    color:#475569;
+}

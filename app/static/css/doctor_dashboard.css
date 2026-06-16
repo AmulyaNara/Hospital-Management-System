@@ -105,8 +105,9 @@ body {
 }
 
 .menu-item.active {
-    color: #00F2DE;
-    background-color: rgba(255, 255, 255, 0.08);
+    background: rgba(14, 165, 233, 0.15);
+    border-left: 4px solid #0ea5e9;
+    color: white;
     font-weight: 600;
 }
 
@@ -624,4 +625,7 @@ body {
 .sub-info.urgent {
     color: var(--alert-danger);
     font-weight: 600;
+}
+#patients-content{
+    display:none;
 }

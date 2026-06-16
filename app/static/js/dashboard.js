@@ -34,15 +34,23 @@ function renderWeeklyChart() {
 document.addEventListener('DOMContentLoaded', () => {
     renderWeeklyChart();
 
-    // Row selection interactive action feedback loop
     const tableRows = document.querySelectorAll('.doctors-table tbody tr');
     tableRows.forEach(row => {
         row.addEventListener('click', (e) => {
-            // Ensure button clicks aren't hijacked
             if (!e.target.closest('button')) {
                 const doctorName = row.querySelector('.user-name').textContent;
                 console.log(`Inspecting data profile for: ${doctorName}`);
             }
         });
     });
+
+    // Prescription Button
+    const issuePrescriptionBtn =
+        document.getElementById("issuePrescriptionBtn");
+
+    if (issuePrescriptionBtn) {
+        issuePrescriptionBtn.addEventListener("click", () => {
+            window.location.href = "/doctor-prescriptions";
+        });
+    }
 });

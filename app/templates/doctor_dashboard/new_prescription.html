@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Prescription</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='css/new_prescription.css') }}">
+</head>
+<body>
+
+<div class="prescription-container">
+
+    <div class="page-header">
+        <h1>Create New Prescription</h1>
+        <p>Add medication details for a patient.</p>
+    </div>
+
+    <form class="prescription-form">
+
+        <div class="form-group">
+            <label>Patient ID</label>
+            <input type="text" placeholder="Enter Patient ID">
+        </div>
+
+        <div class="form-group">
+            <label>Medication Name</label>
+            <input type="text" placeholder="Enter Medication">
+        </div>
+
+        <div class="form-group">
+            <label>Dosage</label>
+            <input type="text" placeholder="e.g. 500mg">
+        </div>
+
+        <div class="form-group">
+            <label>Frequency</label>
+            <input type="text" placeholder="e.g. Twice Daily">
+        </div>
+
+        <div class="form-group">
+            <label>Duration</label>
+            <input type="text" placeholder="e.g. 7 Days">
+        </div>
+
+        <div class="form-group">
+            <label>Doctor Notes</label>
+            <textarea rows="4"
+                placeholder="Additional instructions..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-save">
+            Save Prescription
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

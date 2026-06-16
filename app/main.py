@@ -11,8 +11,15 @@ from app.routes.auth_routes import router as auth_router
 from app.routes.admin_routes import router as admin_router
 from app.routes.user_routes import router as user_router
 
+from starlette.middleware.sessions import SessionMiddleware
+from fastapi.responses import RedirectResponse
+from fastapi.responses import HTMLResponse
 app = FastAPI()
 
+app.add_middleware(
+    SessionMiddleware,
+    secret_key="hospital_secret_key"
+)
 # Templates
 templates = Jinja2Templates(directory="app/templates")
 
@@ -65,7 +72,7 @@ def register_page(request: Request):
 def dashboard(request: Request):
     return templates.TemplateResponse(
         request=request,
-        name="admin_dashboard/dashboard.html"
+        name="admin_dashboard/admin_home.html"
     )
 
 
@@ -107,22 +114,11 @@ def receptionist_dashboard(request: Request):
 # =========================
 @app.get("/doctors-page")
 def doctors_page(request: Request):
-    return templates.TemplateResponse(
+        return templates.TemplateResponse(
         request=request,
         name="doctors.html"
     )
-@app.get("/admin-home")
-def admin_home(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="admin_dashboard/admin_home.html"
-    )
-@app.get("/doctors")
-def doctors_page(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="admin_dashboard/doctors.html"
-    )
+
 @app.get("/admin-home")
 def admin_home(request: Request):
     return templates.TemplateResponse(
@@ -134,4 +130,67 @@ def doctors_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="admin_dashboard/doctor.html"
+    )
+    
+@app.get("/doctor-patients")
+def doctor_patients(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="doctor_dashboard/doctor_patients.html"
+    )
+    
+@app.get("/doctor-doctors")
+def doctor_doctors(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="doctor_dashboard/doctor_doctors.html"
+    )
+@app.get("/doctor-visits")
+def doctor_visits(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="doctor_dashboard/doctor_visits.html"
+    )
+@app.get("/patient-visit/{patient_id}")
+def patient_visit(patient_id: int, request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="doctor_dashboard/patient_visit.html",
+        context={
+            "patient_id": patient_id
+        }
+    )
+
+@app.get("/doctor-prescriptions")
+def doctor_prescriptions(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="doctor_dashboard/doctor_prescriptions.html"
+    )
+    
+@app.get("/logout")
+def logout(request: Request):
+
+    request.session.clear()
+
+    return RedirectResponse("/")
+
+@app.get("/doctor-prescriptions/new")
+def new_prescription(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="doctor_dashboard/new_prescription.html"
+    )
+@app.get("/doctor-diagnosis", response_class=HTMLResponse)
+def doctor_diagnosis(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="doctor_dashboard/doctor_diagnosis.html"
+    )
+
+@app.get("/doctor-diagnosis/new")
+def new_diagnosis(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="doctor_dashboard/new_diagnosis.html"
     )

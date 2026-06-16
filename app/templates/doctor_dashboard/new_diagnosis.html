@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>New Diagnosis</title>
+     <link rel="stylesheet"
+      href="{{ url_for('static', path='css/new_diagnosis.css') }}"> 
+</head>
+
+<body>
+<div class="diagnosis-form-container">
+
+    <div class="page-header">
+        <h1>Create New Diagnosis</h1>
+        <a href="/doctor-diagnosis" class="btn-back">
+            ← Back to Diagnoses
+        </a>
+    </div>
+
+    <form class="diagnosis-form">
+
+        <div class="form-group">
+            <label>Patient ID</label>
+            <input type="text" placeholder="Enter Patient ID">
+        </div>
+
+        <div class="form-group">
+            <label>Patient Name</label>
+            <input type="text" placeholder="Enter Patient Name">
+        </div>
+
+        <div class="form-group">
+            <label>Diagnosis Title</label>
+            <input type="text" placeholder="Diagnosis">
+        </div>
+
+        <div class="form-group">
+            <label>ICD Code</label>
+            <input type="text" placeholder="ICD-10 Code">
+        </div>
+
+        <div class="form-group">
+            <label>Severity</label>
+            <select>
+                <option>Low</option>
+                <option>Moderate</option>
+                <option>High Risk</option>
+                <option>Critical</option>
+            </select>
+        </div>
+
+        <div class="form-group full-width">
+            <label>Symptoms</label>
+            <textarea rows="4"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+            <label>Clinical Notes</label>
+            <textarea rows="6"></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-save">
+                Save Diagnosis
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

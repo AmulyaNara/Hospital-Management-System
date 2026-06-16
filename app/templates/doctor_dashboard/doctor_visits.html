@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>MediFlow Pro - Patient Visits Dashboard</title>
+    
+    <!-- Google Fonts & Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    
+    <!-- External CSS link reference -->
+    <link rel="stylesheet"
+      href="{{ url_for('static', path='css/doctor_dashboard.css') }}">
+      <link rel="stylesheet"
+      href="{{ url_for('static', path='css/doctor_visits.css') }}">
+
+</head>
+<body>
+
+    <!-- SIDE PANEL NAVIGATION BAR -->
+    <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>MediFlow Pro</h2>
+                <span>General Hospital</span>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="/doctor-dashboard"  class="menu-item">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+                <a href="/doctor-patients" class="menu-item">
+    <span class="material-symbols-outlined">groups</span>
+    Patients
+</a>
+                
+                <a href="/doctor-doctors" class="menu-item">
+                    <span class="material-symbols-outlined">medical_services</span>
+                    Doctors
+                </a>
+                <a href="/doctor-visits" class="menu-item active">
+    <span class="material-symbols-outlined">history</span>
+    Visits
+</a>
+
+<a href="/doctor-prescriptions" class="menu-item">
+    <span class="material-symbols-outlined">medical_information</span>
+    Prescriptions
+</a>
+
+<a href="/doctor-diagnosis" id="diagnosis-btn" class="menu-item">
+    <span class="material-symbols-outlined">stethoscope</span>
+    Diagnosis
+</a>
+                <a href="#" class="menu-item">
+                    <span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-emergency">
+                    <span class="material-symbols-outlined">emergency</span>
+                    Emergency Alert
+                </button>
+                <a href="/logout" class="menu-item logout-item">
+                    <span class="material-symbols-outlined">logout</span>
+                    Logout
+                </a>
+            </div>
+        </aside>
+    <!-- HEADER NAVIGATION PANEL -->
+    <header class="top-header">
+        <div class="header-left">
+            <h2>MediFlow Dashboard</h2>
+            <div class="search-container">
+                <span class="material-symbols-outlined search-icon">search</span>
+                <input type="text" placeholder="Search patients or records...">
+            </div>
+        </div>
+        
+        <div class="header-right">
+            
+            <div class="header-user-actions">
+                <button class="btn-notification">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <div class="divider"></div>
+                <div class="profile-pill">
+                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=100&q=80"
+     alt="Doctor Profile"
+     class="avatar-img">
+                    <div class="profile-meta">
+                        <p class="user-name">Dr. Alexander Smith</p>
+                        <p class="user-status">Senior Cardiologist</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN DISPLAY CANVAS -->
+    <main class="dashboard-canvas">
+        <div class="canvas-title-row">
+            <div>
+                <h3>Patient Visits</h3>
+                <p class="subtitle">Manage scheduled appointments and real-time patient flow.</p>
+            </div>
+            <div class="action-buttons-group">
+                <button class="btn-outline">
+                    <span class="material-symbols-outlined">filter_list</span>
+                    Filters
+                </button>
+                <button class="btn-outline">
+                    <span class="material-symbols-outlined">calendar_today</span>
+                    Today
+                </button>
+            </div>
+        </div>
+
+        <!-- DASHBOARD OVERVIEW SCORE CARDS -->
+        <div class="stats-grid">
+            <div class="stat-card primary-accent">
+                <p class="stat-label">TOTAL APPOINTMENTS</p>
+                <p class="stat-value">24</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">WAITING</p>
+                <p class="stat-value">06</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">CONSULTATION</p>
+                <p class="stat-value">02</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">COMPLETED</p>
+                <p class="stat-value">16</p>
+            </div>
+        </div>
+
+        <!-- VISITS ROW LAYOUT REGISTRY -->
+        <div class="table-container">
+            <!-- Table Header Row -->
+            <div class="table-row table-header">
+                <div class="col-time">TIME</div>
+                <div class="col-patient">PATIENT</div>
+                <div class="col-reason">REASON FOR VISIT</div>
+                <div class="col-status">STATUS</div>
+                <div class="col-actions">ACTIONS</div>
+            </div>
+            
+            <!-- Entry Row 1 -->
+            <div class="table-row table-body-row" data-patient-id="45293">
+                <div class="col-time time-text">09:00 AM</div>
+                <div class="col-patient patient-cell">
+                    <div class="avatar-placeholder color-blue">JD</div>
+                    <div>
+                        <p class="patient-name">Johnathan Doe</p>
+                        <p class="patient-id">ID: #45293-M</p>
+                    </div>
+                </div>
+                <div class="col-reason reason-text">Post-Op Follow-up (Cardiac)</div>
+                <div class="col-status status-cell">
+                    <span class="status-pill status-consultation">
+                        <span class="pulse-dot"></span>
+                        In-Consultation
+                    </span>
+                </div>
+                <div class="col-actions actions-cell">
+                    <button class="row-btn" title="Edit Notes"><span class="material-symbols-outlined">edit_note</span></button>
+                    <button class="row-btn" title="More Options"><span class="material-symbols-outlined">more_vert</span></button>
+                </div>
+            </div>
+
+            <!-- Entry Row 2 -->
+            <div class="table-row table-body-row" data-patient-id="12884">
+                <div class="col-time time-text">09:30 AM</div>
+                <div class="col-patient patient-cell">
+                    <div class="avatar-placeholder color-cyan">SA</div>
+                    <div>
+                        <p class="patient-name">Sarah Adams</p>
+                        <p class="patient-id">ID: #12884-F</p>
+                    </div>
+                </div>
+                <div class="col-reason reason-text">Hypertension Check</div>
+                <div class="col-status status-cell">
+                    <span class="status-pill status-arrived">Arrived</span>
+                </div>
+                <div class="col-actions actions-cell">
+                    <button class="row-btn"><span class="material-symbols-outlined">edit_note</span></button>
+                    <button class="row-btn"><span class="material-symbols-outlined">more_vert</span></button>
+                </div>
+            </div>
+
+            <!-- Entry Row 3 -->
+            <div class="table-row table-body-row" data-patient-id="99321">
+                <div class="col-time time-text">10:00 AM</div>
+                <div class="col-patient patient-cell">
+                    <img alt="Maria Lopez" class="patient-avatar-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABRo03XTfvBCwqeXcNzqjzneTZLc12wijpqjAcld6W2q55mxyGxKWIUrS5EPOCS8UtopftBje6WwXrPoCwzw3P6MxlfGePw9-wkUP-xzPNZ_cvMoyd9r5jG9bxnOF2bH1NYKfOo5lPyS3SKXXyRvEDuCgoOJF6EtN1FWGaWOaZusOmGoAxtrGKFUgHDVuBClEqqo-jSCUCRQ0SSCyu8U01eKQwwpIQMPMVwyztGG6w_FjFljcPWNJ1CTG-ndP2AGOLzNGSbC54VNDr">
+                    <div>
+                        <p class="patient-name">Maria Lopez</p>
+                        <p class="patient-id">ID: #99321-F</p>
+                    </div>
+                </div>
+                <div class="col-reason reason-text">Diabetes Consultation</div>
+                <div class="col-status status-cell">
+                    <span class="status-pill status-waiting">Waiting</span>
+                </div>
+                <div class="col-actions actions-cell">
+                    <button class="row-btn"><span class="material-symbols-outlined">edit_note</span></button>
+                    <button class="row-btn"><span class="material-symbols-outlined">more_vert</span></button>
+                </div>
+            </div>
+
+            <!-- Entry Row 4 -->
+            <div class="table-row table-body-row" data-patient-id="88214">
+                <div class="col-time time-text">10:15 AM</div>
+                <div class="col-patient patient-cell">
+                    <div class="avatar-placeholder color-red">RW</div>
+                    <div>
+                        <p class="patient-name">Robert White</p>
+                        <p class="patient-id">ID: #88214-M</p>
+                    </div>
+                </div>
+                <div class="col-reason reason-text">Emergency - Acute Abdominal Pain</div>
+                <div class="col-status status-cell">
+                    <span class="status-pill status-emergency">
+                        <span class="material-symbols-outlined icon-alert">priority_high</span>
+                        Emergency
+                    </span>
+                </div>
+                <div class="col-actions actions-cell">
+                    <button class="row-btn"><span class="material-symbols-outlined">more_vert</span></button>
+                </div>
+            </div>
+
+            <div class="table-footer">
+                <button class="btn-text-link">View All 24 Appointments</button>
+            </div>
+        </div>
+
+        <!-- BENTO CLINIC INSIGHT PANEL BLOCKS -->
+        <div class="insights-grid">
+            <div class="insight-card-performance">
+                <div class="performance-content">
+                    <h4>Clinic Performance</h4>
+                    <p class="performance-desc">Real-time metrics on patient turnover and department efficiency. Use these insights to optimize the patient experience.</p>
+                    <div class="performance-metrics">
+                        <div>
+                            <p class="metric-label">AVG WAIT TIME</p>
+                            <p class="metric-value">12 min</p>
+                        </div>
+                        <div class="vertical-divider"></div>
+                        <div>
+                            <p class="metric-label">PATIENT SATISFACTION</p>
+                            <p class="metric-value">98%</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Radial Ambient Glow Vector Style Graphic -->
+                <div class="ambient-glow"></div>
+            </div>
+
+            <div class="insight-card-staff">
+                <div class="staff-header">
+                    <h4>Active Doctors</h4>
+                    <span class="badge-live">LIVE</span>
+                </div>
+                <div class="staff-list">
+                    <div class="staff-item">
+                        <span class="dot dot-active"></span>
+                        <p class="staff-name">Dr. Sarah Jenkins <span class="dept-text">(ER)</span></p>
+                    </div>
+                    <div class="staff-item">
+                        <span class="dot dot-active"></span>
+                        <p class="staff-name">Dr. Michael Chen <span class="dept-text">(Cardio)</span></p>
+                    </div>
+                    <div class="staff-item">
+                        <span class="dot dot-inactive"></span>
+                        <p class="staff-name opacity-muted">Dr. Elena Rodriguez <span class="dept-text">(Neuro)</span></p>
+                    </div>
+                    <div class="staff-item">
+                        <span class="dot dot-active"></span>
+                        <p class="staff-name">Dr. James Wilson <span class="dept-text">(Pediatrics)</span></p>
+                    </div>
+                </div>
+                <button class="btn-staff-directory">View Full Staff Directory</button>
+            </div>
+        </div>
+
+        <!-- HOSPITAL FOOTER BRANDING TERMINATION METRICS -->
+        <footer class="app-footer">
+            <p>© 2026 MediFlow Pro Healthcare Systems. All patient data encrypted via MedSecure™</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Support</a>
+            </div>
+        </footer>
+    </main>
+
+    <!-- External JavaScript module architecture -->
+    <script src="{{ url_for('static', path='js/doctor_visits.js') }}"></script>
+</body>
+</html>

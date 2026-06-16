@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 
     <link rel="stylesheet"
-      href="{{ url_for('static', path='css/style.css') }}">
+      href="{{ url_for('static', path='css/register.css') }}">
     <style>
         /* Base Resets & Global Typography */
         * {
@@ -396,9 +396,16 @@
                             </div>
                             <div class="form-grid">
                                 <div class="col-span-full field-group">
-                                    <label class="field-label">Full Name</label>
-                                    <input class="form-control" placeholder="Legal full name" type="text"/>
-                                </div>
+                                    <label  for="fullName" class="field-label">Full Name</label>
+                                     <input
+                                    id="fullName"
+                                    class="form-control"
+                                    placeholder="Legal full name"
+                                    type="text"
+                                    required>
+
+                                <div id="fullNameError" class="error-message"></div>
+                            </div>
                                 <div class="field-group">
                                     <label class="field-label">Date of Birth</label>
                                     <input class="form-control" type="date"/>
@@ -424,7 +431,13 @@
                             <div class="form-grid">
                                 <div class="field-group">
                                     <label class="field-label">Email Address</label>
-                                    <input class="form-control" placeholder="example@healthcare.com" type="email"/>
+                                    <input
+                                    id="email"
+                                    class="form-control"
+                                    placeholder="example@healthcare.com"
+                                    type="email"/>  
+
+                                <div id="emailError" class="error-message"></div>
                                 </div>
                                 <div class="field-group">
                                     <label class="field-label">Phone Number</label>
@@ -445,7 +458,14 @@
                             <div class="form-grid">
                                 <div class="field-group">
                                     <label class="field-label">Contact Name</label>
-                                    <input class="form-control" placeholder="Full name" type="text"/>
+                                    <input
+                                    id="contactName"
+                                    class="form-control"
+                                    placeholder="Legal Contact Name"
+                                    type="text"
+                                    required>
+
+                                    <div id="contactNameError" class="error-message"></div>
                                 </div>
                                 <div class="field-group">
                                     <label class="field-label">Contact Phone</label>
@@ -465,11 +485,25 @@
                             <div class="form-grid">
                                 <div class="col-span-full field-group">
                                     <label class="field-label">Create Password</label>
-                                    <input class="form-control" placeholder="••••••••" type="password"/>
+                                    <input
+                                    id="password"
+                                    class="form-control"
+                                    placeholder="••••••••"
+                                    type="password"
+                                    required/>
+
+                            <div id="passwordError" class="error-message"></div>
                                 </div>
                                 <div class="col-span-full field-group">
                                     <label class="field-label">Confirm Password</label>
-                                    <input class="form-control" placeholder="••••••••" type="password"/>
+                                    <input
+                                    id="confirmPassword"
+                                    class="form-control"
+                                    placeholder="••••••••"
+                                    type="password"
+                                    required/>
+
+                                <div id="confirmPasswordError" class="error-message"></div>
                                 </div>
                             </div>
                         </div>
@@ -486,8 +520,7 @@
         </section>
     </main>
 
-    <script>
         <script src="{{ url_for('static', path='js/register.js') }}"></script>
-    </script>
+    
 </body>
 </html>

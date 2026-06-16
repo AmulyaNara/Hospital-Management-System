@@ -21,26 +21,34 @@
             </div>
 
             <nav class="sidebar-menu">
-                <a href="#" class="menu-item active">
+                <a href="/doctor-dashboard"  class="menu-item active">
                     <span class="material-symbols-outlined">dashboard</span>
                     Dashboard
                 </a>
-                <a href="#" class="menu-item">
-                    <span class="material-symbols-outlined">group</span>
-                    Patients
-                </a>
-                <a href="#" class="menu-item">
+                <a href="/doctor-patients" class="menu-item">
+    <span class="material-symbols-outlined">groups</span>
+    Patients
+</a>
+                
+                <a href="/doctor-doctors" class="menu-item">
                     <span class="material-symbols-outlined">medical_services</span>
                     Doctors
                 </a>
-                <a href="#" class="menu-item">
-                    <span class="material-symbols-outlined">history</span>
-                    Visits
-                </a>
-                <a href="#" class="menu-item">
-                    <span class="material-symbols-outlined">calendar_month</span>
-                    Appointments
-                </a>
+                <a href="/doctor-visits" class="menu-item">
+    <span class="material-symbols-outlined">history</span>
+    Visits
+</a>
+
+
+<a href="/doctor-prescriptions" class="menu-item">
+    <span class="material-symbols-outlined">medical_information</span>
+    Prescriptions
+</a>
+
+<a href="/doctor-diagnosis" class="menu-item">
+    <span class="material-symbols-outlined">stethoscope</span>
+    Diagnosis
+</a>
                 <a href="#" class="menu-item">
                     <span class="material-symbols-outlined">settings</span>
                     Settings
@@ -52,7 +60,7 @@
                     <span class="material-symbols-outlined">emergency</span>
                     Emergency Alert
                 </button>
-                <a href="#" class="menu-item logout-item">
+                <a href="/logout" class="menu-item logout-item">
                     <span class="material-symbols-outlined">logout</span>
                     Logout
                 </a>
@@ -84,8 +92,12 @@
                 </div>
             </header>
 
-            <main class="content-viewport">
-                <section class="metrics-grid">
+          <main class="content-viewport">
+
+    <!-- Dashboard Content -->
+    <div id="dashboard-section">
+
+        <section class="metrics-grid">
                     <div class="metric-card metric-visits">
                         <div class="metric-header">
                             <h3>TODAY'S VISITS</h3>
@@ -96,7 +108,7 @@
                             <p class="trend-up"><span class="material-symbols-outlined">arrow_upward</span> 2 remaining for today</p>
                         </div>
                     </div>
-
+                   
                     <div class="metric-card metric-pending">
                         <div class="metric-header">
                             <h3>PENDING RX</h3>
@@ -201,13 +213,20 @@
                                         <span class="btn-desc">Start clinical documentation</span>
                                     </div>
                                 </button>
-                                <button class="btn-action-secondary">
-                                    <span class="material-symbols-outlined">pill</span>
-                                    <div class="btn-text">
-                                        <span class="btn-title">Issue Prescription</span>
-                                        <span class="btn-desc">Digital prescription portal</span>
-                                    </div>
-                                </button>
+                            <button
+    id="issuePrescriptionBtn"
+    class="btn-action-secondary"
+    onclick="window.location.href='/doctor-prescriptions'">
+
+    <span class="material-symbols-outlined">pill</span>
+
+    <div class="btn-text">
+        <span class="btn-title">Issue Prescription</span>
+        <span class="btn-desc">Digital prescription portal</span>
+    </div>
+
+</button>
+    
                                 <button class="btn-action-tertiary">
                                     <span class="material-symbols-outlined">science</span>
                                     <div class="btn-text">
@@ -320,6 +339,7 @@
                         </div>
                     </div>
                 </section>
+                </div> <!-- dashboard-section -->
             </main>
         </div>
     </div>

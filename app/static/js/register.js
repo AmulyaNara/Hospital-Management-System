@@ -1,171 +1,420 @@
- const step1Content = document.getElementById('step-1-content');
-    const step2Content = document.getElementById('step-2-content');
-    const nextBtn = document.getElementById('next-btn');
-    const backBtn = document.getElementById('back-btn');
-    const stepIndicatorText = document.getElementById('step-indicator-text');
-    const stepTitle = document.getElementById('step-title');
+// =============================
+// STEP NAVIGATION
+// =============================
+function goToStep(stepNumber) {
 
-    // Navigation Step Event Listeners
-    nextBtn.addEventListener('click', () => {
-        // Form field constraints checking across current block
-        const step1Inputs = step1Content.querySelectorAll('input, select');
-        let isValid = true;
-        
-        step1Inputs.forEach(input => {
-            if(!input.checkValidity()) {
-                input.reportValidity();
-                isValid = false;
-            }
-        });
+    if (stepNumber === 2) {
 
-        if(isValid) {
-            step1Content.classList.add('step-hidden');
-            step2Content.classList.remove('step-hidden');
-            stepIndicatorText.innerText = 'Step 2 of 2';
-            stepTitle.innerText = 'Security Details';
-            
-            document.getElementById('password-field').required = true;
-            document.getElementById('confirm-password-field').required = true;
+        const fullName = document.getElementById("fullName");
+        const contactName = document.getElementById("contactName");
+        const email = document.getElementById("email");
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    });
+        const emailRegex =
+            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    backBtn.addEventListener('click', () => {
-        step2Content.classList.add('step-hidden');
-        step1Content.classList.remove('step-hidden');
-        stepIndicatorText.innerText = 'Step 1 of 2';
-        stepTitle.innerText = 'Account Information';
-        
-        document.getElementById('password-field').required = false;
-        document.getElementById('confirm-password-field').required = false;
+        // Full Name Required
+        if (fullName.value.trim() === "") {
 
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+            document.getElementById("fullNameError").innerText =
+                "Full Name is required";
 
-    // Form validation event monitor 
-    function handleFormValidation(event) {
-        const password = document.getElementById('password-field').value;
-        const confirmPassword = document.getElementById('confirm-password-field').value;
+            document.getElementById("fullNameError").style.display =
+                "block";
 
-        if (password.length < 8) {
-            alert("Password must contain at least 8 characters.");
-            event.preventDefault();
-            return false;
+            fullName.focus();
+            return;
         }
 
-        if (password !== confirmPassword) {
-            alert("Error: Passwords do not match. Re-check parameters.");
-            event.preventDefault();
-            return false;
+        // Contact Name Required
+        if (contactName.value.trim() === "") {
+
+            document.getElementById("contactNameError").innerText =
+                "Contact Name is required";
+
+            document.getElementById("contactNameError").style.display =
+                "block";
+
+            contactName.focus();
+            return;
         }
 
-        alert("Registration processed securely under clinical guidelines!");
-        return true;
+        // Email Required
+        if (email.value.trim() === "") {
+
+            document.getElementById("emailError").innerText =
+                "Email Address is required";
+
+            document.getElementById("emailError").style.display =
+                "block";
+
+            email.focus();
+            return;
+        }
+
+        // Email Format Validation
+        if (!emailRegex.test(email.value)) {
+
+            document.getElementById("emailError").innerText =
+                "Enter a valid email address";
+
+            document.getElementById("emailError").style.display =
+                "block";
+
+            email.focus();
+            return;
+        }
+
+        // Clear Errors
+        document.getElementById("fullNameError").style.display = "none";
+        document.getElementById("contactNameError").style.display = "none";
+        document.getElementById("emailError").style.display = "none";
     }
 
-    // Dynamic focus color-shifts matching the container panels
-    const inputs = document.querySelectorAll('input, select');
-    inputs.forEach(input => {
-        input.addEventListener('focus', () => {
-            const container = input.closest('.form-card');
-            if(container) {
-                container.style.borderColor = 'rgba(0, 106, 97, 0.6)';
-            }
-        });
-        input.addEventListener('blur', () => {
-            const container = input.closest('.form-card');
-            if(container) {
-                container.style.borderColor = 'rgba(198, 198, 205, 0.3)';
-            }
-        });
-    });
+    const step1 = document.getElementById("step1Container");
+    const step2 = document.getElementById("step2Container");
+    const indicator = document.getElementById("stepIndicator");
+    const titleHeader = document.getElementById("stepHeaderTitle");
+    const backBtn = document.getElementById("backBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const submitBtn = document.getElementById("submitBtn");
 
-function togglePassword(inputId, eyeId){
+    if (stepNumber === 2) {
 
-    const input = document.getElementById(inputId);
-    const eye = document.getElementById(eyeId);
+        step1.classList.add("hidden-step");
+        step2.classList.remove("hidden-step");
 
-    if(input.type === "password"){
-        input.type = "text";
-        eye.textContent = "visibility_off";
-    }else{
-        input.type = "password";
-        eye.textContent = "visibility";
+        indicator.innerText = "Step 2 of 2";
+        titleHeader.innerText = "Security & Verification";
+
+        backBtn.classList.remove("hidden-step");
+        nextBtn.classList.add("hidden-step");
+        submitBtn.classList.remove("hidden-step");
+
+    } else {
+
+        step2.classList.add("hidden-step");
+        step1.classList.remove("hidden-step");
+
+        indicator.innerText = "Step 1 of 2";
+        titleHeader.innerText = "Account Creation";
+
+        backBtn.classList.add("hidden-step");
+        nextBtn.classList.remove("hidden-step");
+        submitBtn.classList.add("hidden-step");
     }
-
 }
 
-document.addEventListener("DOMContentLoaded", function () {
 
-    const nextBtn = document.getElementById("next-btn");
-    const backBtn = document.getElementById("back-btn");
+// =============================
+// FORM SUBMIT VALIDATION
+// =============================
+function handleFormSubmit(event) {
 
-    const step1 = document.getElementById("step-1-content");
-    const step2 = document.getElementById("step-2-content");
+    const password =
+        document.getElementById("password");
 
-    nextBtn.addEventListener("click", () => {
-        step1.classList.add("step-hidden");
-        step2.classList.remove("step-hidden");
-    });
+    const confirmPassword =
+        document.getElementById("confirmPassword");
 
-    backBtn.addEventListener("click", () => {
-        step2.classList.add("step-hidden");
-        step1.classList.remove("step-hidden");
-    });
+    const regex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,8}$/;
 
-});
-function goToStep(stepNumber) {
-            const step1 = document.getElementById('step1Container');
-            const step2 = document.getElementById('step2Container');
-            const indicator = document.getElementById('stepIndicator');
-            const titleHeader = document.getElementById('stepHeaderTitle');
-            const backBtn = document.getElementById('backBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const submitBtn = document.getElementById('submitBtn');
+    if (!regex.test(password.value)) {
 
-            if (stepNumber === 2) {
-                // Shift UI elements smoothly into Step 2 state
-                step1.classList.add('hidden-step');
-                step2.classList.remove('hidden-step');
-                
-                indicator.innerText = "Step 2 of 2";
-                titleHeader.innerText = "Security & Verification";
-                
-                backBtn.classList.remove('hidden-step');
-                nextBtn.classList.add('hidden-step');
-                submitBtn.classList.remove('hidden-step');
-            } else {
-                // Shift back into Step 1 state
-                step2.classList.add('hidden-step');
-                step1.classList.remove('hidden-step');
-                
-                indicator.innerText = "Step 1 of 2";
-                titleHeader.innerText = "Account Creation";
-                
-                backBtn.classList.add('hidden-step');
-                nextBtn.classList.remove('hidden-step');
-                submitBtn.classList.add('hidden-step');
+        alert(
+            "Password must be 6-8 characters with uppercase, lowercase, number and special character."
+        );
+
+        event.preventDefault();
+        return false;
+    }
+
+    if (password.value !== confirmPassword.value) {
+
+        alert("Passwords do not match!");
+
+        event.preventDefault();
+        return false;
+    }
+
+    alert("Registration Successful!");
+    return true;
+}
+
+
+// =============================
+// INPUT FOCUS STYLING
+// =============================
+document.addEventListener("DOMContentLoaded", () => {
+
+    const inputs =
+        document.querySelectorAll(".form-control");
+
+    inputs.forEach(input => {
+
+        input.addEventListener("focus", () => {
+
+            const card =
+                input.closest(".form-card");
+
+            if (card) {
+                card.style.borderColor = "#006a61";
             }
-        }
-
-        function handleFormSubmit(event) {
-            // Put any password matching validation checks or backend processing routes here
-            alert("Registration Complete!");
-            return true;
-        }
-
-        // Active Focus styling highlights inside parent cards
-        document.addEventListener('DOMContentLoaded', () => {
-            const inputs = document.querySelectorAll('.form-control');
-            inputs.forEach(input => {
-                input.addEventListener('focus', () => {
-                    const card = input.closest('.form-card');
-                    if (card) card.style.borderColor = '#006a61';
-                });
-                input.addEventListener('blur', () => {
-                    const card = input.closest('.form-card');
-                    if (card) card.style.borderColor = '#e2e8f0';
-                });
-            });
         });
+
+        input.addEventListener("blur", () => {
+
+            const card =
+                input.closest(".form-card");
+
+            if (card) {
+                card.style.borderColor = "#e2e8f0";
+            }
+        });
+    });
+});
+
+
+// =============================
+// NAME VALIDATION FUNCTION
+// =============================
+function validateName(inputId, errorId, message) {
+
+    const input =
+        document.getElementById(inputId);
+
+    const error =
+        document.getElementById(errorId);
+
+    if (!input || !error) return;
+
+    input.addEventListener("input", () => {
+
+        const regex =
+            /^[A-Za-z\s]+$/;
+
+        if (input.value.trim() === "") {
+
+            input.classList.remove("invalid");
+            input.classList.remove("valid");
+
+            error.innerText = "";
+            error.style.display = "none";
+
+            return;
+        }
+
+        if (!regex.test(input.value)) {
+
+            input.classList.add("invalid");
+            input.classList.remove("valid");
+
+            error.innerText = message;
+            error.style.display = "block";
+
+        } else {
+
+            input.classList.remove("invalid");
+            input.classList.add("valid");
+
+            error.innerText = "";
+            error.style.display = "none";
+        }
+    });
+}
+
+
+// =============================
+// EMAIL VALIDATION
+// =============================
+const email =
+    document.getElementById("email");
+
+const emailError =
+    document.getElementById("emailError");
+
+if (email) {
+
+    email.addEventListener("input", () => {
+
+        const emailRegex =
+            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (email.value.trim() === "") {
+
+            email.classList.remove("invalid");
+            email.classList.remove("valid");
+
+            emailError.innerText = "";
+            emailError.style.display = "none";
+
+            return;
+        }
+
+        if (!emailRegex.test(email.value)) {
+
+            email.classList.add("invalid");
+            email.classList.remove("valid");
+
+            emailError.innerText =
+                "Enter a valid email address.";
+
+            emailError.style.display = "block";
+
+        } else {
+
+            email.classList.remove("invalid");
+            email.classList.add("valid");
+
+            emailError.innerText = "";
+            emailError.style.display = "none";
+        }
+    });
+}
+
+
+// =============================
+// PASSWORD VALIDATION
+// =============================
+const password =
+    document.getElementById("password");
+
+const passwordError =
+    document.getElementById("passwordError");
+
+if (password) {
+
+    password.addEventListener("input", () => {
+
+        const regex =
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,8}$/;
+
+        if (password.value.trim() === "") {
+
+            password.classList.remove("invalid");
+            password.classList.remove("valid");
+
+            passwordError.innerText = "";
+            passwordError.style.display = "none";
+
+            return;
+        }
+
+        if (!regex.test(password.value)) {
+
+            password.classList.add("invalid");
+            password.classList.remove("valid");
+
+            passwordError.innerText =
+                "Password must be 6-8 chars with A-Z, a-z, number and special character.";
+
+            passwordError.style.display = "block";
+
+        } else {
+
+            password.classList.remove("invalid");
+            password.classList.add("valid");
+
+            passwordError.innerText = "";
+            passwordError.style.display = "none";
+        }
+    });
+}
+
+
+// =============================
+// NAME VALIDATION CALLS
+// =============================
+validateName(
+    "fullName",
+    "fullNameError",
+    "Name should contain only letters."
+);
+
+validateName(
+    "contactName",
+    "contactNameError",
+    "Contact name should contain only letters."
+);
+
+
+// =============================
+// CONFIRM PASSWORD VALIDATION
+// =============================
+const confirmPassword =
+    document.getElementById("confirmPassword");
+
+const confirmPasswordError =
+    document.getElementById("confirmPasswordError");
+
+if (confirmPassword) {
+
+    confirmPassword.addEventListener("input", () => {
+
+        if (
+            confirmPassword.value !== "" &&
+            confirmPassword.value !== password.value
+        ) {
+
+            confirmPassword.classList.add("invalid");
+            confirmPassword.classList.remove("valid");
+
+            confirmPasswordError.innerText =
+                "Passwords do not match.";
+
+            confirmPasswordError.style.display = "block";
+
+        } else if (confirmPassword.value !== "") {
+
+            confirmPassword.classList.remove("invalid");
+            confirmPassword.classList.add("valid");
+
+            confirmPasswordError.innerText = "";
+            confirmPasswordError.style.display = "none";
+
+        } else {
+
+            confirmPassword.classList.remove("invalid");
+            confirmPassword.classList.remove("valid");
+
+            confirmPasswordError.innerText = "";
+            confirmPasswordError.style.display = "none";
+        }
+    });
+}
+
+
+// =============================
+// RECHECK CONFIRM PASSWORD
+// =============================
+if (password) {
+
+    password.addEventListener("input", () => {
+
+        if (
+            confirmPassword &&
+            confirmPassword.value !== "" &&
+            confirmPassword.value !== password.value
+        ) {
+
+            confirmPassword.classList.add("invalid");
+            confirmPassword.classList.remove("valid");
+
+            confirmPasswordError.innerText =
+                "Passwords do not match.";
+
+            confirmPasswordError.style.display = "block";
+
+        } else if (
+            confirmPassword &&
+            confirmPassword.value !== ""
+        ) {
+
+            confirmPassword.classList.remove("invalid");
+            confirmPassword.classList.add("valid");
+
+            confirmPasswordError.innerText = "";
+            confirmPasswordError.style.display = "none";
+        }
+    });
+}

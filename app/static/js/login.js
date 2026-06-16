@@ -1,126 +1,74 @@
-function setRole(roleName){
+// ===============================
+// Role Selection
+// ===============================
+function setRole(role) {
 
-    const tabs =
-        document.querySelectorAll(".role-tab");
+    // Save selected role
+    document.getElementById("selectedRole").value = role;
 
-    tabs.forEach(tab => {
+    // Remove active class from all buttons
+    document.querySelectorAll(".role-tab")
+        .forEach(btn => btn.classList.remove("active-role"));
 
-        if(tab.textContent.includes(roleName)){
+    // Add active class to clicked role
+    if (role === "Patient") {
+        document.querySelectorAll(".role-tab")[0]
+            .classList.add("active-role");
 
-            tab.classList.remove(
-                "bg-surface-container-high",
-                "text-on-surface-variant"
-            );
-
-            tab.classList.add(
-                "bg-secondary-container",
-                "text-on-secondary-container"
-            );
-
-        }
-        else{
-
-            tab.classList.remove(
-                "bg-secondary-container",
-                "text-on-secondary-container"
-            );
-
-            tab.classList.add(
-                "bg-surface-container-high",
-                "text-on-surface-variant"
-            );
-
-        }
-
-    });
-
-    const emailInput =
-        document.getElementById("email");
-
-    if(roleName === "Patient"){
-
-        emailInput.placeholder =
-            "SSN or Email";
-
-    }
-    else if(roleName === "Staff"){
-
-        emailInput.placeholder =
-            "Staff ID or Email";
-
-    }
-    else{
-
-        emailInput.placeholder =
-            "Admin Username";
-
-    }
-
-}
-
-function setRole(roleName){
-
-    const tabs =
-        document.querySelectorAll(".role-tab");
-
-    tabs.forEach(tab => {
-
-        tab.classList.remove(
-            "active-role"
-        );
-        
-
-    });
-
-    if(roleName === "Patient"){
-
-        tabs[0].classList.add(
-            "active-role"
-        );
-    }
-
-    else if(roleName === "Staff"){
-
-        tabs[1].classList.add(
-            "active-role"
-        );
-    }
-
-    else if(roleName === "Admin"){
-
-        tabs[2].classList.add(
-            "active-role"
-        );
-    }
-
-    const email =
-        document.getElementById("email");
-
-    if(roleName === "Patient"){
-
-        email.placeholder =
+        document.getElementById("email").placeholder =
             "Patient ID / Email";
     }
 
-    else if(roleName === "Staff"){
+    else if (role === "Staff") {
+        document.querySelectorAll(".role-tab")[1]
+            .classList.add("active-role");
 
-        email.placeholder =
+        document.getElementById("email").placeholder =
             "Staff ID / Email";
     }
 
-    else{
+    else if (role === "Admin") {
+        document.querySelectorAll(".role-tab")[2]
+            .classList.add("active-role");
 
-        email.placeholder =
+        document.getElementById("email").placeholder =
             "Admin Username";
     }
-
 }
-window.onload = function(){
 
+// Default Role
+window.onload = function () {
     setRole("Patient");
-
 };
 
+// ===============================
+// Show / Hide Password
+// ===============================
+function togglePassword() {
+
+    const password =
+        document.getElementById("password");
+
+    const eyeIcon =
+        document.getElementById("eye-icon");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        eyeIcon.textContent = "visibility_off";
+
+    } else {
+
+        password.type = "password";
+
+        eyeIcon.textContent = "visibility";
+    }
+}
+
+// ===============================
+// Login Form Submit
+// ===============================
 document
 .getElementById("loginForm")
 .addEventListener(
@@ -129,23 +77,32 @@ document
 
         event.preventDefault();
 
-        const email =
+        const username =
             document.getElementById("email").value;
 
         const password =
             document.getElementById("password").value;
+
+        const selectedRole =
+            document.getElementById("selectedRole").value;
 
         const formData =
             new URLSearchParams();
 
         formData.append(
             "username",
-            email
+            username
         );
 
         formData.append(
             "password",
             password
+        );
+
+        // Send selected role
+        formData.append(
+            "role",
+            selectedRole
         );
 
         try{

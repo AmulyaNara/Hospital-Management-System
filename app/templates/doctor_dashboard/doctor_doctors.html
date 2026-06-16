@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>MediAdmin - Doctor Directory</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet"
+      href="{{ url_for('static', path='css/doctor_dashboard.css') }}">
+      <link rel="stylesheet"
+      href="{{ url_for('static', path='css/doctor_doctors.css') }}"> 
+</head>
+<body>
+<div class="dashboard-container">
+    <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>MediFlow Pro</h2>
+                <span>General Hospital</span>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="/doctor-dashboard" id="dashboard-btn" class="menu-item">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+                <a href="/doctor-patients" class="menu-item">
+    <span class="material-symbols-outlined">groups</span>
+    Patients
+</a>
+                
+                <a href="/doctor-doctors" class="menu-item active">
+                    <span class="material-symbols-outlined">medical_services</span>
+                    Doctors
+                </a>
+                <a href="/doctor-visits" class="menu-item">
+    <span class="material-symbols-outlined">history</span>
+    Visits
+</a>
+
+<a href="/doctor-prescriptions" class="menu-item">
+    <span class="material-symbols-outlined">medical_information</span>
+    Prescriptions
+</a>
+
+<a href="/doctor-diagnosis" class="menu-item">
+    <span class="material-symbols-outlined">stethoscope</span>
+    Diagnosis
+</a>
+                <a href="#" class="menu-item">
+                    <span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-emergency">
+                    <span class="material-symbols-outlined">emergency</span>
+                    Emergency Alert
+                </button>
+                <a href="/logout" class="menu-item logout-item">
+                    <span class="material-symbols-outlined">logout</span>
+                    Logout
+                </a>
+            </div>
+        </aside>
+    
+    <div class="main-layout">
+    <header class="top-header">
+    <div class="search-wrapper" id="searchContainer">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input id="searchInput"
+               placeholder="Search patients, doctors, or records..."
+               type="text"/>
+    </div>
+
+    <div class="header-actions">
+        <button class="btn-icon">
+            <span class="material-symbols-outlined">notifications</span>
+            <span class="badge-dot"></span>
+        </button>
+
+        <div class="v-divider"></div>
+
+        
+            <div class="user-profile">
+        <div class="profile-meta">
+            <span class="user-name">Dr. Alexander Smith</span>
+            <span class="user-role">Senior Cardiologist</span>
+        </div>
+
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=100&q=80"
+     alt="Doctor Profile"
+     class="avatar-img">
+        
+    </div>
+</header>
+
+<main class="content-viewport">
+        <main class="content-viewport">    
+            <div class="bento-grid">
+                <div class="stat-card clinical-shadow primary-accent">
+                    <div class="stat-card-header">
+                        <div class="stat-icon-box">
+                            <span class="material-symbols-outlined" style="font-size:28px;">medical_services</span>
+                        </div>
+                        <span class="trend-pill primary font-label-sm">+12%</span>
+                    </div>
+                    <div>
+                        <p class="font-label-md">Total Doctors</p>
+                        <h2 class="font-display-lg">142</h2>
+                    </div>
+                </div>
+                <div class="stat-card clinical-shadow muted-accent">
+                    <div class="stat-card-header">
+                        <div class="stat-icon-box gray">
+                            <span class="material-symbols-outlined" style="font-size:28px;">groups</span>
+                        </div>
+                        <span class="trend-pill gray font-label-sm">+5.2%</span>
+                    </div>
+                    <div>
+                        <p class="font-label-md">Total Patients</p>
+                        <h2 class="font-display-lg">1,284</h2>
+                    </div>
+                </div>
+                <div class="stat-card clinical-shadow muted-accent">
+                    <div class="stat-card-header">
+                        <div class="stat-icon-box gray">
+                            <span class="material-symbols-outlined" style="font-size:28px;">stethoscope</span>
+                        </div>
+                        <span class="trend-pill gray font-label-sm">Stable</span>
+                    </div>
+                    <div>
+                        <p class="font-label-md">Active Staff</p>
+                        <h2 class="font-display-lg">312</h2>
+                    </div>
+                </div>
+                <div class="stat-card clinical-shadow danger-accent">
+                    <div class="stat-card-header">
+                        <div class="stat-icon-box danger">
+                            <span class="material-symbols-outlined" style="font-size:28px;">bed</span>
+                        </div>
+                        <span class="trend-pill danger font-label-sm">92%</span>
+                    </div>
+                    <div>
+                        <p class="font-label-md">Bed Occupancy</p>
+                        <h2 class="font-display-lg">442 / 480</h2>
+                    </div>
+                </div>
+            </div>
+
+            <section class="registry-section clinical-shadow">
+                <div class="registry-header">
+                    <div>
+                        <h3 class="font-headline-md">Doctors Registry</h3>
+                        <p class="font-body-sm">Manage hospital medical staff, credentials, and real-time status.</p>
+                    </div>
+                    <div class="registry-actions-group">
+                        <button class="btn-outline font-label-md">
+                            <span class="material-symbols-outlined" style="font-size:20px;">filter_list</span>
+                            Filter
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr class="font-label-sm" style="font-size: 11px;">
+                                <th style="padding-left: 40px;">Doctor Profile</th>
+                                <th>Specialty</th>
+                                <th>Clinical Status</th>
+                                <th>Contact Info</th>
+                            
+                            </tr>
+                        </thead>
+                        <tbody id="registryTableBody">
+                            <tr>
+                                <td style="padding-left: 40px;">
+                                    <div class="profile-cell">
+                                        <div class="avatar-placeholder">SC</div>
+                                        <div class="profile-info">
+                                            <p class="font-label-md name">Dr. Sarah Chen</p>
+                                            <p class="font-body-sm sub">ID: DOC-9284</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="specialty-pill font-label-sm">Cardiology</span></td>
+                                <td>
+                                    <div class="status-cell active">
+                                        <span class="status-dot"></span>
+                                        <span class="font-label-sm">Active</span>
+                                    </div>
+                                </td>
+                                <td class="font-body-sm" style="color: var(--on-surface-variant)">s.chen@hospital.com</td>
+                                <td style="padding-right: 40px;">
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 40px;">
+                                    <div class="profile-cell">
+                                        <img alt="Dr. Michael Ross" class="avatar-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIujARO0jdferRwmN_bxcKTMUHFINiYs-8AMpYeXU-W5uOQwvS5GKgypwKihctrnlOIB3-4_aLGvT2y4yQceiRGcD6ncroB4nsAM0dtAYkJcFflxn36g1gUsN8c3ndaVHkcKpLRrxzSusm75AiG5JU_N26f2Iy7EhJ2_5e--EUJ2wwnnbHHssIh-bT_TfZ1N6PrV_1OWaa7HqSSMlEkQP-8Yw2IVIflJydIVxIBvCQ3oA8D_1tfBxHu5sqyIo8RxVfwGK_spXgYxzi"/>
+                                        <div class="profile-info">
+                                            <p class="font-label-md name">Dr. Michael Ross</p>
+                                            <p class="font-body-sm sub">ID: DOC-4102</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="specialty-pill font-label-sm">Neurology</span></td>
+                                <td>
+                                    <div class="status-cell leave">
+                                        <span class="status-dot"></span>
+                                        <span class="font-label-sm">On Leave</span>
+                                    </div>
+                                </td>
+                                <td class="font-body-sm" style="color: var(--on-surface-variant)">m.ross@hospital.com</td>
+                                <td style="padding-right: 40px;">
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 40px;">
+                                    <div class="profile-cell">
+                                        <div class="avatar-placeholder" style="background-color: rgba(0,30,44,0.15); color: var(--tertiary-container)">ER</div>
+                                        <div class="profile-info">
+                                            <p class="font-label-md name">Dr. Elena Rodriguez</p>
+                                            <p class="font-body-sm sub">ID: DOC-7721</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="specialty-pill font-label-sm">Pediatrics</span></td>
+                                <td>
+                                    <div class="status-cell active">
+                                        <span class="status-dot"></span>
+                                        <span class="font-label-sm">Active</span>
+                                    </div>
+                                </td>
+                                <td class="font-body-sm" style="color: var(--on-surface-variant)">e.rodriguez@hospital.com</td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 40px;">
+                                    <div class="profile-cell">
+                                        <img alt="Dr. Alan Wright" class="avatar-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuS77CJOhkhofXkADOCm4ZpPRAzFMDmskJZyLDCZ5UYK4Ay0krXL1v0R0s_YwkfZMmlITYzn_kmUW-C_p5UEbFO6-4gFwZLyQWvvckbFjP498RNm2qYnyFhOjuY5cL-q-V5c5Q02cn_zXwgsxqZED4onRr5ljdSuuRo7N9VIupyKanqW4wKhoacUfDYgnCRItzPHdrYHj0S2wWcyY_CLVYc9kfBq8uKjvBRzxKqVUZHq_I6MKSPmKLg8sKBzMqMUfqZXsh9WgEDV4T"/>
+                                        <div class="profile-info">
+                                            <p class="font-label-md name">Dr. Alan Wright</p>
+                                            <p class="font-body-sm sub">ID: DOC-3315</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="specialty-pill font-label-sm">General Surgery</span></td>
+                                <td>
+                                    <div class="status-cell surgery">
+                                        <span class="status-dot"></span>
+                                        <span class="font-label-sm">In Surgery</span>
+                                    </div>
+                                </td>
+                                <td class="font-body-sm" style="color: var(--on-surface-variant)">a.wright@hospital.com</td>
+                                <td style="padding-right: 40px;">
+                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination-footer">
+                    <p class="font-body-sm">Showing 1-4 of 142 Doctors</p>
+                    <div class="pagination-controls">
+                        <button class="page-btn">
+                            <span class="material-symbols-outlined" style="font-size:18px;">chevron_left</span>
+                        </button>
+                        <button class="page-btn active font-label-sm">1</button>
+                        <button class="page-btn font-label-sm">2</button>
+                        <button class="page-btn font-label-sm">3</button>
+                        <span class="page-ellipse">...</span>
+                        <button class="page-btn font-label-sm">36</button>
+                        <button class="page-btn">
+                            <span class="material-symbols-outlined" style="font-size:18px;">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        
+        
+    </main>
+</div>
+</div>
+
+     <script src="{{ url_for('static', path='js/doctor_doctors.js') }}"></script>
+
+</body>
+</html>

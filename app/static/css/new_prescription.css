@@ -1,0 +1,35 @@
+.prescription-form-container{
+    max-width:700px;
+    margin:40px auto;
+    background:#fff;
+    padding:32px;
+    border-radius:12px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:20px;
+}
+
+.form-group label{
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.form-group input,
+.form-group textarea{
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+}
+
+.btn-save{
+    background:#006f66;
+    color:white;
+    border:none;
+    padding:12px 24px;
+    border-radius:8px;
+    cursor:pointer;
+}

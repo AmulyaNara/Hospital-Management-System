@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>MediFlow Pro - Prescription Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet"
+      href="{{ url_for('static', path='css/doctor_dashboard.css') }}">
+      <link rel="stylesheet"
+      href="{{ url_for('static', path='css/doctor_prescriptions.css') }}">
+</head>
+<body>
+
+    <aside class ="sidebar">
+        <div class="sidebar-brand">
+            <h2>MediFlow Pro</h2>
+            <span>General Hospital</span>
+        </div>
+            <nav class="sidebar-menu">
+
+    <a href="/doctor-dashboard" class="menu-item">
+        <span class="material-symbols-outlined">dashboard</span>
+        Dashboard
+    </a>
+
+    <a href="/doctor-patients" class="menu-item">
+        <span class="material-symbols-outlined">groups</span>
+        Patients
+    </a>
+
+    <a href="/doctor-doctors" class="menu-item">
+        <span class="material-symbols-outlined">medical_services</span>
+        Doctors
+    </a>
+
+    <a href="/doctor-visits" class="menu-item">
+        <span class="material-symbols-outlined">history</span>
+        Visits
+    </a>
+
+    <a href="/doctor-prescriptions" class="menu-item active">
+        <span class="material-symbols-outlined">medical_information</span>
+        Prescriptions
+    </a>
+
+    <a href="/doctor-diagnosis" class="menu-item">
+        <span class="material-symbols-outlined">stethoscope</span>
+        Diagnosis
+    </a>
+
+    <a href="#" class="menu-item">
+        <span class="material-symbols-outlined">settings</span>
+        Settings
+    </a>
+
+</nav>
+       <div class="sidebar-footer">
+
+    <button class="btn-emergency">
+        <span class="material-symbols-outlined">emergency</span>
+        Emergency Alert
+    </button>
+
+            <a href="/logout" class="menu-item logout-item">
+        <span class="material-symbols-outlined">logout</span>
+        Logout
+    </a>
+
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="searchInput" placeholder="Search patient records, meds, or notes..." type="text"/>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="badge"></span>
+                </button>
+                <button class="icon-btn">
+                    <i class="fa-regular fa-circle-question"></i>
+                </button>
+                <div class="profile-section">
+                    <div class="profile-info">
+                        <p class="name">Dr. Alexander Smith</p>
+                        <p class="role">Senior Cardiologist</p>
+                    </div>
+                    <img alt="Profile View" class="profile-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJeJ_1mvZjQfw7_eGCR2RHKMVFp341s3tr6EX1OVvtN4MF-d1HpZePfFmlg45bDUSYfGVHx1kX5f0v7IA74e_dlXVNyavo8RRXe3Pvj4hc4R8Bk4WhLsRlKo1lrUp4o5kMkfnFO2WJxXFT_tbxMHXQmk6GFKnTRDFEvcXJ4-qdOzhFBdhvk9GNOO3EDTShBIZlJ0TgNR3i5lYqFdL7vHyPeyeGoO2IWkwsxLIkWUMwIIayv1DwpEfx_lgYosQFBCA89g9YUl1BXXBo"/>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <div class="page-title-section">
+                <div>
+                    <h2>Prescription Management</h2>
+                    <p>Review and manage active medications for your patients.</p>
+                </div>
+                <button id="newPrescriptionBtn" class="btn-primary">
+    <i class="fa-solid fa-plus"></i>
+    <span>New Prescription</span>
+</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card active">
+                    <div>
+                        <p class="stat-label">Active Prescriptions</p>
+                        <p class="stat-value">842</p>
+                        <p class="stat-meta success">
+                            <i class="fa-solid fa-arrow-trend-up"></i> +12 this week
+                        </p>
+                    </div>
+                    <i class="fa-solid fa-capsules icon-bg"></i>
+                </div>
+                <div class="stat-card pending">
+                    <div>
+                        <p class="stat-label">Pending Refills</p>
+                        <p class="stat-value">14</p>
+                        <p class="stat-meta danger">
+                            <i class="fa-solid fa-circle-exclamation"></i> Requires immediate review
+                        </p>
+                    </div>
+                    <i class="fa-solid fa-rotate icon-bg"></i>
+                </div>
+                <div class="stat-card discontinued">
+                    <div>
+                        <p class="stat-label">Discontinued Today</p>
+                        <p class="stat-value">05</p>
+                        <p class="stat-meta neutral">Treatment completed</p>
+                    </div>
+                    <i class="fa-solid fa-ban icon-bg"></i>
+                </div>
+            </div>
+
+            <div class="data-card">
+                <div class="filter-bar">
+                    <div class="status-tabs">
+                        <button class="tab-btn active">All Statuses</button>
+                        <button class="tab-btn">Active</button>
+                        <button class="tab-btn">Pending Refill</button>
+                        <button class="tab-btn">Discontinued</button>
+                    </div>
+                    <div class="action-btns">
+                        <button class="btn-outline">
+                            <i class="fa-solid fa-sliders"></i> Filters
+                        </button>
+                        <button class="btn-outline">
+                            <i class="fa-solid fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Patient Name/ID</th>
+                                <th>Medication & Dosage</th>
+                                <th>Frequency</th>
+                                <th>Duration</th>
+                                <th>Date Prescribed</th>
+                                <th>Status</th>
+                                <th style="text-align: right;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="patient-cell">
+                                        <div class="avatar teal">JW</div>
+                                        <div>
+                                            <p class="cell-title">Jane Williams</p>
+                                            <p class="cell-sub">#PT-82741</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="cell-title">Lisinopril</p>
+                                    <p class="cell-sub">10mg Oral Tablet</p>
+                                </td>
+                                <td>Twice daily</td>
+                                <td>90 days</td>
+                                <td>Oct 24, 2023</td>
+                                <td><span class="badge-status active">Active</span></td>
+                                <td>
+                                    <div class="row-actions">
+                                        <button class="table-action-btn" title="Edit"><i class="fa-solid fa-pen"></i></button>
+                                        <button class="table-action-btn" title="View"><i class="fa-regular fa-eye"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="patient-cell">
+                                        <div class="avatar blue">RT</div>
+                                        <div>
+                                            <p class="cell-title">Robert Thompson</p>
+                                            <p class="cell-sub">#PT-91203</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="cell-title">Atorvastatin</p>
+                                    <p class="cell-sub">40mg Capsule</p>
+                                </td>
+                                <td>Once daily (PM)</td>
+                                <td>30 days</td>
+                                <td>Oct 15, 2023</td>
+                                <td><span class="badge-status refill">Refill Needed</span></td>
+                                <td>
+                                    <div class="row-actions">
+                                        <button class="table-action-btn"><i class="fa-solid fa-pen"></i></button>
+                                        <button class="table-action-btn"><i class="fa-regular fa-eye"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="patient-cell">
+                                        <div class="avatar purple">EM</div>
+                                        <div>
+                                            <p class="cell-title">Elena Martinez</p>
+                                            <p class="cell-sub">#PT-55421</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="cell-title">Metformin HCL</p>
+                                    <p class="cell-sub">500mg ER Tablet</p>
+                                </td>
+                                <td>Twice daily w/ meals</td>
+                                <td>Indefinite</td>
+                                <td>Sep 28, 2023</td>
+                                <td><span class="badge-status discontinued">Discontinued</span></td>
+                                <td>
+                                    <div class="row-actions">
+                                        <button class="table-action-btn"><i class="fa-solid fa-pen"></i></button>
+                                        <button class="table-action-btn"><i class="fa-regular fa-eye"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="patient-cell">
+                                        <div class="avatar teal">DK</div>
+                                        <div>
+                                            <p class="cell-title">David Kim</p>
+                                            <p class="cell-sub">#PT-11290</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="cell-title">Amlodipine</p>
+                                    <p class="cell-sub">5mg Oral Tablet</p>
+                                </td>
+                                <td>Once daily</td>
+                                <td>180 days</td>
+                                <td>Nov 02, 2023</td>
+                                <td><span class="badge-status active">Active</span></td>
+                                <td>
+                                    <div class="row-actions">
+                                        <button class="table-action-btn"><i class="fa-solid fa-pen"></i></button>
+                                        <button class="table-action-btn"><i class="fa-regular fa-eye"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination-footer">
+                    <p class="pagination-info">Showing 4 of 842 prescriptions</p>
+                    <div class="pagination-controls">
+                        <button class="page-btn nav-arrow" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <span style="padding: 0 4px; color: #94a3b8;">...</span>
+                        <button class="page-btn">84</button>
+                        <button class="page-btn nav-arrow"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h1>Prescriptions</h1>
+
+    </main>
+
+        <script src="{{ url_for('static', path='js/doctor_prescriptions.js') }}"></script>
+</body>
+</html>
