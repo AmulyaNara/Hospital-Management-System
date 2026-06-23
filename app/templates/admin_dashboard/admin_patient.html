@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Patients | MedCore HMS</title>
+
+    <link rel="stylesheet"
+          href="/static/css/admin_patient.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap"
+          rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ===========================
+            SIDEBAR
+    ============================ -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <div class="logo">
+
+                <h1>MedCore</h1>
+
+                <p>Admin Portal</p>
+
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="/admin-home"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+                        dashboard
+                    </span>
+
+                    Dashboard
+
+                </a>
+
+                <a href="/admin-patients"
+                   class="nav-item active">
+
+                    <span class="material-symbols-outlined">
+                        groups
+                    </span>
+
+                    Patients
+
+                </a>
+
+                <a href="/admin-doctors"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+                        medical_services
+                    </span>
+
+                    Doctors
+
+                </a>
+
+                <a href="#"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+                        assignment
+                    </span>
+
+                    Reports
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <button class="book-btn"
+                    id="newPatientBtn">
+
+                <span class="material-symbols-outlined">
+                    person_add
+                </span>
+
+                Register Patient
+
+            </button>
+
+            <a href="/logout"
+               class="nav-item logout">
+
+                <span class="material-symbols-outlined">
+                    logout
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- ===========================
+            MAIN CONTENT
+    ============================ -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <h2>
+
+                    Patient Registry
+
+                </h2>
+
+                <div class="search-box">
+
+                    <span class="material-symbols-outlined">
+
+                        search
+
+                    </span>
+
+                    <input type="text"
+                           id="searchPatient"
+                           placeholder="Search patient...">
+
+                </div>
+
+            </div>
+
+            <div class="top-actions">
+
+                <button>
+
+                    <span class="material-symbols-outlined">
+
+                        notifications
+
+                    </span>
+
+                </button>
+
+                <button>
+
+                    <span class="material-symbols-outlined">
+
+                        help
+
+                    </span>
+
+                </button>
+
+                <div class="profile">
+
+                    <div class="profile-info">
+
+                        <h4>
+
+                            Dr. Ananya Iyer
+
+                        </h4>
+
+                        <p>
+
+                            Chief Administrator
+
+                        </p>
+
+                    </div>
+
+                    <img src="/static/images/profile.jpg"
+                         alt="Admin">
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- CONTENT -->
+
+        <section class="content">
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>
+
+                        Patient Registry
+
+                    </h1>
+
+                    <p>
+
+                        Manage and monitor hospital patient records.
+
+                    </p>
+
+                </div>
+
+                <div class="header-actions">
+
+                    <button class="outline-btn">
+
+                        <span class="material-symbols-outlined">
+
+                            download
+
+                        </span>
+
+                        Export Records
+
+                    </button>
+
+                    <button class="primary-btn"
+                            id="registerPatient">
+
+                        <span class="material-symbols-outlined">
+
+                            person_add
+
+                        </span>
+
+                        Register Patient
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- ===========================
+                    STATS
+            ============================ -->
+
+            <section class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div>
+
+                            <p>Total Patients</p>
+
+                            <h2>12,482</h2>
+
+                        </div>
+
+                        <span class="material-symbols-outlined green">
+
+                            groups
+
+                        </span>
+
+                    </div>
+
+                    <small>+4.2% This Month</small>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div>
+
+                            <p>Admitted Today</p>
+
+                            <h2>156</h2>
+
+                        </div>
+
+                        <span class="material-symbols-outlined blue">
+
+                            person
+
+                        </span>
+
+                    </div>
+
+                    <small>+12 Admissions</small>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div>
+
+                            <p>Pending Bills</p>
+
+                            <h2>₹4.2L</h2>
+
+                        </div>
+
+                        <span class="material-symbols-outlined orange">
+
+                            payments
+
+                        </span>
+
+                    </div>
+
+                    <small>High</small>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div>
+
+                            <p>Discharged</p>
+
+                            <h2>84</h2>
+
+                        </div>
+
+                        <span class="material-symbols-outlined teal">
+
+                            logout
+
+                        </span>
+
+                    </div>
+
+                    <small>Today</small>
+
+                </div>
+
+            </section>
+                            <!-- ==========================================
+                    PATIENT REGISTRY
+            =========================================== -->
+
+            <section class="table-card">
+
+                <div class="table-header">
+
+                    <div class="table-filters">
+
+                        <button class="filter-btn">
+
+                            <span class="material-symbols-outlined">
+
+                                filter_list
+
+                            </span>
+
+                            Status : All
+
+                        </button>
+
+                        <button class="filter-btn">
+
+                            <span class="material-symbols-outlined">
+
+                                calendar_month
+
+                            </span>
+
+                            Last 30 Days
+
+                        </button>
+
+                    </div>
+
+                    <p>
+
+                        Showing 10 of 12,482 Patients
+
+                    </p>
+
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Patient ID</th>
+
+                                <th>Name</th>
+
+                                <th>Contact</th>
+
+                                <th>Last Visit</th>
+
+                                <th>Balance</th>
+
+                                <th>Status</th>
+
+                                <th>Actions</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="patientTable">
+
+                            <tr>
+
+                                <td>PID-2024-001</td>
+
+                                <td>
+
+                                    <div class="patient-info">
+
+                                        <div class="avatar green">
+
+                                            AS
+
+                                        </div>
+
+                                        <div>
+
+                                            <h4>
+
+                                                Arjun Sharma
+
+                                            </h4>
+
+                                            <small>
+
+                                                Male • 42 yrs
+
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    arjun@gmail.com
+
+                                    <br>
+
+                                    <small>
+
+                                        +91 9876543210
+
+                                    </small>
+
+                                </td>
+
+                                <td>
+
+                                    Oct 12, 2023
+
+                                </td>
+
+                                <td>
+
+                                    ₹0
+
+                                </td>
+
+                                <td>
+
+                                    <span class="status stable">
+
+                                        Stable
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            visibility
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            edit
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn delete">
+
+                                        <span class="material-symbols-outlined">
+
+                                            delete
+
+                                        </span>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>PID-2024-042</td>
+
+                                <td>
+
+                                    <div class="patient-info">
+
+                                        <div class="avatar blue">
+
+                                            PK
+
+                                        </div>
+
+                                        <div>
+
+                                            <h4>
+
+                                                Priya Kapoor
+
+                                            </h4>
+
+                                            <small>
+
+                                                Female • 29 yrs
+
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    priya@gmail.com
+
+                                    <br>
+
+                                    <small>
+
+                                        +91 9812345678
+
+                                    </small>
+
+                                </td>
+
+                                <td>
+
+                                    Today
+
+                                </td>
+
+                                <td>
+
+                                    ₹1,250
+
+                                </td>
+
+                                <td>
+
+                                    <span class="status critical">
+
+                                        Critical
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            visibility
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            edit
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn delete">
+
+                                        <span class="material-symbols-outlined">
+
+                                            delete
+
+                                        </span>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>PID-2024-118</td>
+
+                                <td>
+
+                                    <div class="patient-info">
+
+                                        <div class="avatar gray">
+
+                                            RK
+
+                                        </div>
+
+                                        <div>
+
+                                            <h4>
+
+                                                Rajesh Kumar
+
+                                            </h4>
+
+                                            <small>
+
+                                                Male • 65 yrs
+
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    rkumar@gmail.com
+
+                                    <br>
+
+                                    <small>
+
+                                        +91 9900122334
+
+                                    </small>
+
+                                </td>
+
+                                <td>
+
+                                    Oct 05, 2023
+
+                                </td>
+
+                                <td>
+
+                                    ₹0
+
+                                </td>
+
+                                <td>
+
+                                    <span class="status discharged">
+
+                                        Discharged
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            visibility
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            edit
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn delete">
+
+                                        <span class="material-symbols-outlined">
+
+                                            delete
+
+                                        </span>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="pagination">
+
+                    <button>
+
+                        Previous
+
+                    </button>
+
+                    <button class="active">
+
+                        1
+
+                    </button>
+
+                    <button>
+
+                        2
+
+                    </button>
+
+                    <button>
+
+                        3
+
+                    </button>
+
+                    <button>
+
+                        Next
+
+                    </button>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- ==========================================
+        REGISTER PATIENT MODAL
+========================================== -->
+
+<div class="modal"
+
+     id="patientModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+
+                Register Patient
+
+            </h2>
+
+            <button id="closeModal">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <form id="patientForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+
+                        Full Name
+
+                    </label>
+
+                    <input type="text">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Gender
+
+                    </label>
+
+                    <select>
+
+                        <option>Male</option>
+
+                        <option>Female</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Phone
+
+                    </label>
+
+                    <input type="text">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Email
+
+                    </label>
+
+                    <input type="email">
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button"
+
+                        id="cancelBtn"
+
+                        class="outline-btn">
+
+                    Cancel
+
+                </button>
+
+                <button class="primary-btn">
+
+                    Register Patient
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="/static/js/admin_patient.js"></script>
+
+</body>
+
+</html>

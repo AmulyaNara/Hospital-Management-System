@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MedCore | Medical Records</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', path='css/patient_reports.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ===========================
+            SIDEBAR
+    ============================ -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+
+                <span class="material-symbols-outlined">
+                    medical_services
+                </span>
+
+            </div>
+
+            <div>
+
+                <h2>MedCore</h2>
+
+                <p>Patient Portal</p>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="/patient-dashboard" class="menu-item">
+
+                <span class="material-symbols-outlined">
+                    dashboard
+                </span>
+
+                Dashboard
+
+            </a>
+
+            <a href="/patient-appointments" class="menu-item">
+
+                <span class="material-symbols-outlined">
+                    calendar_today
+                </span>
+
+                Appointments
+
+            </a>
+
+            <a href="/patient-reports" class="menu-item active">
+
+                <span class="material-symbols-outlined">
+                    description
+                </span>
+
+                Records
+
+            </a>
+
+            <a href="/patient-lab" class="menu-item">
+
+                <span class="material-symbols-outlined">
+                    biotech
+                </span>
+
+                Lab Results
+
+            </a>
+
+            <a href="/patient-billings" class="menu-item">
+
+                <span class="material-symbols-outlined">
+                    payments
+                </span>
+
+                Billing
+
+            </a>
+
+            <a href="/patient-settings" class="menu-item">
+
+                <span class="material-symbols-outlined">
+                    settings
+                </span>
+
+                Settings
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <button class="book-btn">
+
+                <span class="material-symbols-outlined">
+                    add
+                </span>
+
+                Book Appointment
+
+            </button>
+
+
+            <a href="/patient-support" class="menu-item">
+
+                <span class="material-symbols-outlined">
+
+                    contact_support
+
+                </span>
+
+                Support
+
+            </a>
+
+            <a href="/logout" class="menu-item logout">
+
+                <span class="material-symbols-outlined">
+
+                    logout
+
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ===========================
+            MAIN CONTENT
+    ============================ -->
+
+    <main class="main-content">
+
+
+        <!-- Header -->
+
+        <header class="topbar">
+
+            <h1>
+
+                Patient Records
+
+            </h1>
+
+            <div class="topbar-right">
+
+                <div class="search-box">
+
+                    <span class="material-symbols-outlined">
+
+                        search
+
+                    </span>
+
+                    <input
+                        type="text"
+                        placeholder="Global search..."
+                    >
+
+                </div>
+
+
+                <button class="icon-btn notification">
+
+                    <span class="material-symbols-outlined">
+
+                        notifications
+
+                    </span>
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+                <button class="icon-btn">
+
+                    <span class="material-symbols-outlined">
+
+                        help
+
+                    </span>
+
+                </button>
+
+
+                <div class="profile">
+
+                    <div class="profile-info">
+
+                        <h4 id="patientName"></h4>
+
+<p>
+    Patient ID :
+    <span id="patientId"></span>
+</p>
+
+                    </div>
+
+                    <img
+                        src="https://i.pravatar.cc/100?img=67"
+                        alt="Profile">
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- Content Area -->
+
+        <section class="content">
+
+            <!-- Search & Filter -->
+
+            <div class="toolbar">
+
+                <div class="search-record">
+
+                    <span class="material-symbols-outlined">
+
+                        search
+
+                    </span>
+
+                    <input
+                        type="text"
+                        placeholder="Search by document name or physician..."
+                    >
+
+                </div>
+
+                <div class="toolbar-buttons">
+
+                    <button>
+
+                        <span class="material-symbols-outlined">
+
+                            filter_list
+
+                        </span>
+
+                        Filter by Category
+
+                    </button>
+
+                    <button>
+
+                        <span class="material-symbols-outlined">
+
+                            event
+
+                        </span>
+
+                        Filter by Date
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PART 2 STARTS HERE -->
+
+            <div class="records-card">
+                <div class="records-header">
+
+    <h3>All Documents</h3>
+
+    <span class="record-count">
+
+        32 Total Items
+
+    </span>
+
+</div>
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>Document Name</th>
+
+    <th>Doctor</th>
+
+    <th>Category</th>
+
+    <th>Date</th>
+
+    <th class="text-right">Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="recordsTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+
+
+<div class="pagination">
+
+<button disabled>
+
+Previous
+
+</button>
+
+<div class="pages">
+
+<button class="active">
+
+1
+
+</button>
+
+<button>
+
+2
+
+</button>
+
+<button>
+
+3
+
+</button>
+
+<span>...</span>
+
+<button>
+
+7
+
+</button>
+
+</div>
+
+<button>
+
+Next
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- PART 3 STARTS HERE -->
+
+<aside class="right-panel">
+    <div class="right-panel-header">
+
+    <h3>Recent Reports</h3>
+
+    <p>Quick access to last 30 days</p>
+
+</div>
+
+
+
+<div class="reports-list">
+
+    <!-- Report 1 -->
+
+    <div class="report-item">
+
+        <div class="report-top">
+
+            <span class="tag urgent">
+
+                Urgent
+
+            </span>
+
+            <span class="report-date">
+
+                2 days ago
+
+            </span>
+
+        </div>
+
+        <h4>
+
+            Chest X-Ray Digital Copy
+
+        </h4>
+
+        <p>
+
+            Diagnostic Imaging Center
+
+        </p>
+
+        <div class="verified">
+
+            <span class="material-symbols-outlined">
+
+                download_done
+
+            </span>
+
+            Verified
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Report 2 -->
+
+    <div class="report-item">
+
+        <div class="report-top">
+
+            <span class="tag normal">
+
+                Standard
+
+            </span>
+
+            <span class="report-date">
+
+                1 week ago
+
+            </span>
+
+        </div>
+
+        <h4>
+
+            Complete Blood Count (CBC)
+
+        </h4>
+
+        <p>
+
+            Main Street Pathology Lab
+
+        </p>
+
+        <div class="verified">
+
+            <span class="material-symbols-outlined">
+
+                download_done
+
+            </span>
+
+            Verified
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Secure Records Card -->
+
+    <div class="security-card">
+
+        <div class="security-header">
+
+            <span class="material-symbols-outlined">
+
+                security
+
+            </span>
+
+            <h4>
+
+                Secure Records
+
+            </h4>
+
+        </div>
+
+        <p>
+
+            All documents are encrypted and HIPAA compliant.
+            You can view these records but modification is
+            restricted to authorized medical staff.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- Preview Image -->
+
+    <div class="preview-image">
+
+        <img
+
+        src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=800"
+
+        alt="Medical Document">
+
+    </div>
+
+</div>
+
+
+
+<div class="right-footer">
+
+    <button class="print-btn">
+
+        <span class="material-symbols-outlined">
+
+            print
+
+        </span>
+
+        Print Summary Report
+
+    </button>
+
+</div>
+
+</aside>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="{{ url_for('static', path='js/patient_reports.js') }}"></script>
+
+</body>
+
+</html>

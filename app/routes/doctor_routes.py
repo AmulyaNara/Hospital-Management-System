@@ -1,4 +1,7 @@
 from fastapi import APIRouter, Depends
+from app.database.session import SessionLocal
+from app.models.doctor_orm import Doctor
+from app.models.patient_orm import Patient
 
 from app.models.doctor_orm import (
     get_all_doctors,
@@ -12,6 +15,12 @@ from app.schemas.doctor_schema import DoctorCreate
 from app.security.oauth2 import get_current_user
 from app.security.role_checker import require_role
 
+from datetime import date
+from app.models.visit_orm import Visit
+
+from app.models.prescription_orm import Prescription
+
+from app.models.visit_orm import get_all_visits
 router = APIRouter()
 
 
@@ -28,6 +37,58 @@ def get_doctors(
 
     return get_all_doctors()
 
+@router.get("/doctor-stats")
+def get_doctor_stats():
+
+    db = SessionLocal()
+
+    try:
+
+        total_doctors = (
+            db.query(Doctor)
+            .count()
+        )
+
+        total_patients = (
+            db.query(Patient)
+            .count()
+        )
+        
+        today_visits = (
+            db.query(Visit)
+            .filter(Visit.visit_date == date.today())
+            .count()
+        )
+        pending_prescriptions = (
+    db.query(Prescription)
+    .count()
+)
+
+        active_staff = (
+            db.query(Doctor)
+            .filter(
+                Doctor.clinical_status == "Active"
+            )
+            .count()
+        )
+
+        return {
+    "total_doctors": total_doctors,
+    "total_patients": total_patients,
+    "today_visits": today_visits,
+    "pending_prescriptions": pending_prescriptions,
+    "pending_lab_results": 0,
+    "active_staff": active_staff,
+    "bed_occupancy": "442/480"
+}
+
+    finally:
+        db.close()
+
+@router.get("/doctor-upcoming-visits")
+def doctor_upcoming_visits():
+
+    return get_all_visits()
 
 # POST -> Create a new doctor
 @router.post("/doctors")
@@ -48,6 +109,7 @@ def add_doctor(
         doctor.email,
         doctor.password,
         doctor.experience_years
+        
     )
 
 

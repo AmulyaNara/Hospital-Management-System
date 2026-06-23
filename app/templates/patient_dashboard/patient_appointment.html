@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedCore | Patient Appointments</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', path='css/patient_appointment.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ================= Sidebar ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h1>MedCore</h1>
+
+            <p>Patient Portal</p>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="/patient-dashboard" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    dashboard
+                </span>
+
+                Dashboard
+
+            </a>
+
+            <a href="/patient-appointments" class="nav-item active">
+
+                <span class="material-symbols-outlined">
+                    calendar_today
+                </span>
+
+                Appointments
+
+            </a>
+
+            <a href="/patient-reports" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    description
+                </span>
+
+                Records
+
+            </a>
+
+            <a href="/patient-lab" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    biotech
+                </span>
+
+                Lab Results
+
+            </a>
+
+            <a href="/patient-billings" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    payments
+                </span>
+
+                Billing
+
+            </a>
+
+            <a href="/patient-settings" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    settings
+                </span>
+
+                Settings
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <a href="/patient-support" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    contact_support
+                </span>
+
+                Support
+
+            </a>
+
+            <a href="/logout" class="nav-item logout">
+
+                <span class="material-symbols-outlined">
+                    logout
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ================= Main ================= -->
+
+    <main class="main-content">
+
+
+        <!-- Header -->
+
+        <header class="topbar">
+
+            <div class="search-box">
+
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+
+                <input
+                        type="text"
+                        placeholder="Search clinic locations or doctors..."
+                >
+
+            </div>
+
+
+            <div class="header-right">
+
+
+                <button class="icon-btn notification">
+
+                    <span class="material-symbols-outlined">
+
+                        notifications
+
+                    </span>
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <button class="icon-btn">
+
+                    <span class="material-symbols-outlined">
+
+                        help
+
+                    </span>
+
+                </button>
+
+
+
+                <div class="profile">
+
+                    <div class="profile-info">
+
+                        <h4 id="patientName"></h4>
+
+<p>
+    Patient ID :
+    <span id="patientId"></span>
+</p>
+
+                    </div>
+
+                    <img
+                            src="https://i.pravatar.cc/100?img=48"
+                            alt="Profile"
+                    >
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- Page Header -->
+
+        <section class="page-header">
+
+            <div>
+
+                <h2>
+
+                    My Appointments
+
+                </h2>
+
+                <p>
+
+                    Manage your clinical schedule and view consultation history.
+
+                </p>
+
+            </div>
+
+
+            <button class="filter-btn">
+
+                <span class="material-symbols-outlined">
+
+                    filter_list
+
+                </span>
+
+                Filter by Date
+
+            </button>
+
+        </section>
+
+
+
+        <!-- NEXT PART STARTS HERE -->
+
+        <section class="appointments">
+            <!-- Appointment Card -->
+
+<div class="appointment-card">
+
+    <div class="card-header">
+
+        <h3>Scheduled Consultations</h3>
+
+        <div class="appointment-count">
+
+            <span class="upcoming">
+                <span class="dot green"></span>
+                Upcoming (2)
+            </span>
+
+            <span class="past">
+                <span class="dot gray"></span>
+                Past (14)
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th>Date & Time</th>
+
+                <th>Doctor</th>
+
+                <th>Speciality</th>
+
+                <th>Location</th>
+
+                <th>Status</th>
+
+                <th></th>
+
+            </tr>
+
+            </thead>
+
+
+            <tbody id="appointmentsTable">
+</tbody>
+
+        </table>
+
+    </div>
+
+
+    <div class="pagination">
+
+        <p>
+
+            Showing 1 to 4 of 16 appointments
+
+        </p>
+
+        <div class="page-buttons">
+
+            <button>
+
+                <span class="material-symbols-outlined">
+
+                    chevron_left
+
+                </span>
+
+            </button>
+
+            <button>
+
+                <span class="material-symbols-outlined">
+
+                    chevron_right
+
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- Grid Starts -->
+
+<div class="bottom-grid">
+    <!-- ================= Left Card ================= -->
+
+<div class="clinic-card">
+
+    <div class="clinic-header">
+
+        <h3>Clinic Locations</h3>
+
+        <button>
+
+            Full Map
+
+            <span class="material-symbols-outlined">
+
+                open_in_new
+
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <div class="map-container">
+
+        <img
+            src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200"
+            alt="Clinic Map">
+
+        <div class="map-overlay"></div>
+
+        <div class="location-marker">
+
+            <span class="material-symbols-outlined">
+
+                location_on
+
+            </span>
+
+            <div class="marker-popup">
+
+                <h4>Central Medical Center</h4>
+
+                <p>122 Health Way, Suite 400</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= Right Column ================= -->
+
+<div class="right-column">
+
+
+    <!-- Next Session Card -->
+
+    <div class="next-session">
+
+        <div class="circle-bg"></div>
+
+        <div class="icon-box">
+
+            <span class="material-symbols-outlined">
+
+                event_available
+
+            </span>
+
+        </div>
+
+        <small>
+
+            NEXT SESSION
+
+        </small>
+
+        <h3>
+
+            Annual Cardiovascular Screening
+
+        </h3>
+
+
+        <div class="session-details">
+
+            <div>
+
+                <span>Date</span>
+
+                <strong>Oct 24, 2023</strong>
+
+            </div>
+
+            <div>
+
+                <span>Time</span>
+
+                <strong>09:30 AM</strong>
+
+            </div>
+
+        </div>
+
+        <div class="insurance">
+
+            <span class="material-symbols-outlined">
+
+                verified
+
+            </span>
+
+            Insurance pre-approved
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Preparation Card -->
+
+    <div class="preparation-card">
+
+        <div class="prep-icon">
+
+            <span class="material-symbols-outlined">
+
+                priority_high
+
+            </span>
+
+        </div>
+
+        <div class="prep-content">
+
+            <h4>
+
+                Preparation Required
+
+            </h4>
+
+            <p>
+
+                Please ensure you fast for 8 hours before your
+                09:30 AM screening. Water is permitted.
+
+            </p>
+
+            <a href="#">
+
+                View Instructions
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="{{ url_for('static', path='js/patient_appointment.js') }}"></script>
+
+</body>
+</html>

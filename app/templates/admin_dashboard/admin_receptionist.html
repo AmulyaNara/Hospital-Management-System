@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receptionist Registry | MedCore Admin</title>
+
+    <link rel="stylesheet" href="/static/css/admin_receptionist.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ========================================= -->
+    <!-- SIDEBAR -->
+    <!-- ========================================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                <span class="material-symbols-outlined">
+                    local_hospital
+                </span>
+            </div>
+
+            <div>
+                <h2>MediAdmin</h2>
+                <p>Clinical Systems</p>
+            </div>
+
+        </div>
+
+        <nav>
+
+            <a href="/admin-home">
+                <span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+
+            <a href="/admin-doctors">
+                <span class="material-symbols-outlined">medical_services</span>
+                Doctors
+            </a>
+
+            <a href="/admin-patients">
+                <span class="material-symbols-outlined">group</span>
+                Patients
+            </a>
+
+            <a href="/admin-diagnosis">
+                <span class="material-symbols-outlined">clinical_notes</span>
+                Diagnosis
+            </a>
+
+            <a href="/admin-prescription">
+                <span class="material-symbols-outlined">description</span>
+                Prescriptions
+            </a>
+
+            <a href="/admin-receptionists" class="active">
+                <span class="material-symbols-outlined">badge</span>
+                Receptionists
+            </a>
+
+            <a href="#">
+                <span class="material-symbols-outlined">history</span>
+                System Logs
+            </a>
+
+            <a href="#">
+                <span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="profile-card">
+
+            <img src="/static/images/admin.png" alt="Admin">
+
+            <div>
+
+                <h3>Dr. Aris Thorne</h3>
+
+                <p>Chief Administrator</p>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- ========================================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ========================================= -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="search-box">
+
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Search receptionist by name or ID..."
+                    id="searchReceptionist">
+
+            </div>
+
+            <div class="top-actions">
+
+                <button class="icon-btn">
+
+                    <span class="material-symbols-outlined">
+                        notifications
+                    </span>
+
+                </button>
+
+                <button class="icon-btn">
+
+                    <span class="material-symbols-outlined">
+                        account_circle
+                    </span>
+
+                </button>
+
+                <div class="hospital-info">
+
+                    <h4>Hospital Management System</h4>
+
+                    <p>v2.4.1 Active</p>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <div>
+
+                <h1>Receptionist Registry</h1>
+
+                <p>
+                    Manage and monitor administrative staff
+                    across all clinical departments.
+                </p>
+
+            </div>
+
+            <button class="primary-btn" id="addReceptionistBtn">
+
+                <span class="material-symbols-outlined">
+                    person_add
+                </span>
+
+                Add Receptionist
+
+            </button>
+
+        </section>
+
+        <!-- ========================================= -->
+        <!-- STATISTICS -->
+        <!-- ========================================= -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="icon blue">
+
+                    <span class="material-symbols-outlined">
+                        badge
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <h2>124</h2>
+
+                    <p>Total Staff</p>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="icon green">
+
+                    <span class="material-symbols-outlined">
+                        radio_button_checked
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <h2>48</h2>
+
+                    <p>Active Now</p>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="icon orange">
+
+                    <span class="material-symbols-outlined">
+                        desktop_windows
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <h2>12</h2>
+
+                    <p>Vacant Desks</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ========================================= -->
+        <!-- TABLE -->
+        <!-- ========================================= -->
+
+        <section class="table-card">
+
+            <div class="table-header">
+
+                <h2>Receptionist List</h2>
+
+                <div class="table-actions">
+
+                    <button class="outline-btn">
+
+                        <span class="material-symbols-outlined">
+                            filter_list
+                        </span>
+
+                        Filter
+
+                    </button>
+
+                    <button class="outline-btn">
+
+                        <span class="material-symbols-outlined">
+                            download
+                        </span>
+
+                        Export
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="table-responsive">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Name</th>
+
+                            <th>Employee ID</th>
+
+                            <th>Department</th>
+
+                            <th>Shift</th>
+
+                            <th>Status</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                                                <!-- Receptionist 1 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="staff-info">
+
+                                    <img src="/static/images/admin.png" alt="Receptionist">
+
+                                    <div>
+
+                                        <h4>Alex Thompson</h4>
+
+                                        <p>alex@medcore.com</p>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>MC-88210</td>
+
+                            <td>Emergency</td>
+
+                            <td>Day (07:00 - 15:00)</td>
+
+                            <td>
+
+                                <span class="status active">
+                                    Active
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button class="icon-btn">
+
+                                    <span class="material-symbols-outlined">
+                                        visibility
+                                    </span>
+
+                                </button>
+
+                                <button class="icon-btn">
+
+                                    <span class="material-symbols-outlined">
+                                        edit
+                                    </span>
+
+                                </button>
+
+                                <button class="icon-btn delete">
+
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <!-- Receptionist 2 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="staff-info">
+
+                                    <img src="/static/images/admin.png" alt="Receptionist">
+
+                                    <div>
+
+                                        <h4>Elena Rodriguez</h4>
+
+                                        <p>elena@medcore.com</p>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>MC-88245</td>
+
+                            <td>Cardiology</td>
+
+                            <td>Night (23:00 - 07:00)</td>
+
+                            <td>
+
+                                <span class="status active">
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button class="icon-btn">
+
+                                    <span class="material-symbols-outlined">
+                                        visibility
+                                    </span>
+
+                                </button>
+
+                                <button class="icon-btn">
+
+                                    <span class="material-symbols-outlined">
+                                        edit
+                                    </span>
+
+                                </button>
+
+                                <button class="icon-btn delete">
+
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <!-- Receptionist 3 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="staff-info">
+
+                                    <img src="/static/images/admin.png" alt="Receptionist">
+
+                                    <div>
+
+                                        <h4>Jordan Smith</h4>
+
+                                        <p>jordan@medcore.com</p>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>MC-88301</td>
+
+                            <td>Pediatrics</td>
+
+                            <td>Swing (15:00 - 23:00)</td>
+
+                            <td>
+
+                                <span class="status off">
+
+                                    Off Duty
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button class="icon-btn">
+
+                                    <span class="material-symbols-outlined">
+                                        visibility
+                                    </span>
+
+                                </button>
+
+                                <button class="icon-btn">
+
+                                    <span class="material-symbols-outlined">
+                                        edit
+                                    </span>
+
+                                </button>
+
+                                <button class="icon-btn delete">
+
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <!-- Receptionist 4 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="staff-info">
+
+                                    <img src="/static/images/admin.png" alt="Receptionist">
+
+                                    <div>
+
+                                        <h4>Monica Vance</h4>
+
+                                        <p>monica@medcore.com</p>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>MC-88412</td>
+
+                            <td>Outpatient Clinic</td>
+
+                            <td>Day (07:00 - 15:00)</td>
+
+                            <td>
+
+                                <span class="status break">
+
+                                    On Break
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button class="icon-btn">
+
+                                    <span class="material-symbols-outlined">
+                                        visibility
+                                    </span>
+
+                                </button>
+
+                                <button class="icon-btn">
+
+                                    <span class="material-symbols-outlined">
+                                        edit
+                                    </span>
+
+                                </button>
+
+                                <button class="icon-btn delete">
+
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- Pagination -->
+
+            <div class="pagination">
+
+                <button>Previous</button>
+
+                <button class="active">1</button>
+
+                <button>2</button>
+
+                <button>3</button>
+
+                <button>Next</button>
+
+            </div>
+
+        </section>
+
+        <!-- ====================================== -->
+        <!-- ADD RECEPTIONIST MODAL -->
+        <!-- ====================================== -->
+
+        <div class="modal" id="receptionistModal">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h2>Add Receptionist</h2>
+
+                    <button id="closeModal">
+
+                        <span class="material-symbols-outlined">
+
+                            close
+
+                        </span>
+
+                    </button>
+
+                </div>
+
+                <form id="receptionistForm">
+
+                    <div class="form-group">
+
+                        <label>Full Name</label>
+
+                        <input
+                            type="text"
+                            placeholder="Enter receptionist name"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Email</label>
+
+                        <input
+                            type="email"
+                            placeholder="Enter email"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Employee ID</label>
+
+                        <input
+                            type="text"
+                            placeholder="MC-00000"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Department</label>
+
+                        <select>
+
+                            <option>Emergency</option>
+
+                            <option>Cardiology</option>
+
+                            <option>Pediatrics</option>
+
+                            <option>Orthopedics</option>
+
+                            <option>General Medicine</option>
+
+                        </select>
+            
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Shift</label>
+
+                        <select>
+
+                            <option>Day (07:00 - 15:00)</option>
+
+                            <option>Evening (15:00 - 23:00)</option>
+
+                            <option>Night (23:00 - 07:00)</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Phone Number</label>
+
+                        <input
+                            type="tel"
+                            placeholder="+91 9876543210"
+                            maxlength="10"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Password</label>
+
+                        <input
+                            type="password"
+                            placeholder="Create Password"
+                            required>
+
+                    </div>
+
+                    <div class="modal-buttons">
+
+                        <button
+                            type="button"
+                            class="cancel-btn"
+                            id="cancelBtn">
+
+                            Cancel
+
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="save-btn">
+
+                            Save Receptionist
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- ========================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================= -->
+
+<script src="/static/js/admin_receptionist.js"></script>
+
+</body>
+</html>

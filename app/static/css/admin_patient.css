@@ -1,0 +1,1652 @@
+/* ==========================================================
+   MEDCORE HOSPITAL MANAGEMENT SYSTEM
+   ADMIN PATIENTS
+==========================================================*/
+
+/* ==========================================================
+   VARIABLES
+==========================================================*/
+
+:root{
+
+    --primary:#111827;
+    --primary-light:#1F2937;
+
+    --secondary:#00A896;
+    --secondary-dark:#00897B;
+    --secondary-light:#DFF8F2;
+
+    --background:#F7F9FB;
+    --surface:#FFFFFF;
+
+    --border:#E5E7EB;
+
+    --text:#111827;
+    --text-light:#374151;
+    --muted:#6B7280;
+
+    --success:#22C55E;
+    --warning:#F59E0B;
+    --danger:#EF4444;
+    --info:#3B82F6;
+
+    --radius:18px;
+
+    --shadow-sm:0 8px 24px rgba(15,23,42,.05);
+    --shadow-md:0 18px 40px rgba(15,23,42,.08);
+
+}
+
+/* ==========================================================
+   RESET
+==========================================================*/
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:var(--background);
+
+    color:var(--text);
+
+    overflow-x:hidden;
+
+}
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+button{
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+}
+
+img{
+
+    display:block;
+
+    max-width:100%;
+
+}
+
+/* ==========================================================
+   SCROLLBAR
+==========================================================*/
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#CBD5E1;
+
+    border-radius:20px;
+
+}
+
+/* ==========================================================
+   DASHBOARD
+==========================================================*/
+
+.dashboard{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+/* ==========================================================
+   SIDEBAR
+==========================================================*/
+
+.sidebar{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:260px;
+
+    height:100vh;
+
+    background:#fff;
+
+    border-right:1px solid var(--border);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    padding:28px 18px;
+
+    z-index:1000;
+
+}
+
+.logo{
+
+    margin-bottom:36px;
+
+}
+
+.logo h1{
+
+    font-family:'Manrope',sans-serif;
+
+    font-size:34px;
+
+    font-weight:800;
+
+}
+
+.logo p{
+
+    margin-top:6px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+}
+
+/* ==========================================================
+   NAVIGATION
+==========================================================*/
+
+.sidebar-nav{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.nav-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:14px 18px;
+
+    border-radius:14px;
+
+    color:#4B5563;
+
+    transition:.25s;
+
+    position:relative;
+
+    font-size:15px;
+
+    font-weight:500;
+
+}
+
+.nav-item:hover{
+
+    background:#F3F4F6;
+
+    transform:translateX(4px);
+
+}
+
+.nav-item.active{
+
+    background:var(--secondary-light);
+
+    color:var(--secondary-dark);
+
+    font-weight:600;
+
+}
+
+.nav-item.active::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-18px;
+
+    top:0;
+
+    width:5px;
+
+    height:100%;
+
+    background:var(--secondary);
+
+    border-radius:0 8px 8px 0;
+
+}
+
+.nav-item .material-symbols-outlined{
+
+    font-size:24px;
+
+}
+
+/* ==========================================================
+   SIDEBAR FOOTER
+==========================================================*/
+
+.sidebar-footer{
+
+    border-top:1px solid var(--border);
+
+    padding-top:18px;
+
+}
+
+.book-btn{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:var(--primary);
+
+    color:#fff;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.book-btn:hover{
+
+    background:var(--primary-light);
+
+}
+
+.logout{
+
+    margin-top:15px;
+
+    color:var(--danger);
+
+}
+
+/* ==========================================================
+   MAIN CONTENT
+==========================================================*/
+
+.main-content{
+
+    margin-left:260px;
+
+    width:calc(100% - 260px);
+
+    min-height:100vh;
+
+    background:var(--background);
+
+}
+
+/* ==========================================================
+   TOPBAR
+==========================================================*/
+
+.topbar{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+    background:rgba(255,255,255,.95);
+
+    backdrop-filter:blur(10px);
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px 32px;
+
+}
+
+.topbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:28px;
+
+}
+
+.topbar-left h2{
+
+    font-family:'Manrope',sans-serif;
+
+    font-size:26px;
+
+    font-weight:700;
+
+}
+
+/* ==========================================================
+   SEARCH
+==========================================================*/
+
+.search-box{
+
+    width:360px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 18px;
+
+    background:#F3F4F6;
+
+    border-radius:12px;
+
+}
+
+.search-box input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    font-size:14px;
+
+}
+
+.search-box .material-symbols-outlined{
+
+    color:var(--muted);
+
+}
+
+/* ==========================================================
+   TOP ACTIONS
+==========================================================*/
+
+.top-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.top-actions button{
+
+    width:44px;
+
+    height:44px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#F3F4F6;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transition:.25s;
+
+}
+
+.top-actions button:hover{
+
+    background:#E5E7EB;
+
+}
+
+/* ==========================================================
+   PROFILE
+==========================================================*/
+
+.profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.profile-info{
+
+    text-align:right;
+
+}
+
+.profile-info h4{
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+.profile-info p{
+
+    font-size:12px;
+
+    color:var(--muted);
+
+}
+
+.profile img{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+}
+
+/* ==========================================================
+   CONTENT
+==========================================================*/
+
+.content{
+
+    padding:32px;
+
+}
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.page-header h1{
+
+    font-family:'Manrope',sans-serif;
+
+    font-size:38px;
+
+    margin-bottom:8px;
+
+}
+
+.page-header p{
+
+    color:var(--muted);
+
+}
+/* ==========================================================
+   HEADER BUTTONS
+==========================================================*/
+
+.header-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.outline-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:12px 20px;
+
+    border:1px solid var(--border);
+
+    background:#FFFFFF;
+
+    border-radius:12px;
+
+    color:var(--text);
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.outline-btn:hover{
+
+    background:#F3F4F6;
+
+}
+
+.primary-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:12px 22px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--primary);
+
+    color:#FFFFFF;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.primary-btn:hover{
+
+    background:var(--primary-light);
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================================
+   STATS GRID
+==========================================================*/
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:22px;
+
+    margin-bottom:30px;
+
+}
+
+.stat-card{
+
+    background:#FFFFFF;
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:24px;
+
+    box-shadow:var(--shadow-sm);
+
+    transition:.3s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.stat-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+}
+
+.stat-top p{
+
+    font-size:13px;
+
+    color:var(--muted);
+
+    margin-bottom:10px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+}
+
+.stat-top h2{
+
+    font-size:34px;
+
+    font-weight:700;
+
+    color:var(--text);
+
+}
+
+.stat-card small{
+
+    display:block;
+
+    margin-top:16px;
+
+    font-size:13px;
+
+    color:var(--muted);
+
+}
+
+/* ==========================================================
+   STAT ICONS
+==========================================================*/
+
+.green{
+
+    color:#22C55E;
+
+}
+
+.blue{
+
+    color:#3B82F6;
+
+}
+
+.orange{
+
+    color:#F59E0B;
+
+}
+
+.teal{
+
+    color:#00A896;
+
+}
+
+.stat-card .material-symbols-outlined{
+
+    font-size:30px;
+
+}
+
+/* ==========================================================
+   TABLE CARD
+==========================================================*/
+
+.table-card{
+
+    background:#FFFFFF;
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+/* ==========================================================
+   TABLE HEADER
+==========================================================*/
+
+.table-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:22px 24px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.table-header p{
+
+    color:var(--muted);
+
+    font-size:13px;
+
+}
+
+.table-filters{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+.filter-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:10px 16px;
+
+    background:#FFFFFF;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    font-size:13px;
+
+    transition:.25s;
+
+}
+
+.filter-btn:hover{
+
+    background:#F3F4F6;
+
+}
+
+.filter-btn .material-symbols-outlined{
+
+    font-size:18px;
+
+}
+
+/* ==========================================================
+   TABLE WRAPPER
+==========================================================*/
+
+.table-wrapper{
+
+    width:100%;
+
+    overflow-x:auto;
+
+}
+/* ==========================================================
+   TABLE
+==========================================================*/
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:1100px;
+
+}
+
+thead{
+
+    background:#F8FAFC;
+
+}
+
+thead th{
+
+    padding:18px 24px;
+
+    text-align:left;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    color:var(--muted);
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+tbody tr{
+
+    transition:.25s;
+
+}
+
+tbody tr:hover{
+
+    background:#F9FAFB;
+
+}
+
+tbody td{
+
+    padding:20px 24px;
+
+    border-bottom:1px solid var(--border);
+
+    vertical-align:middle;
+
+    font-size:14px;
+
+    color:var(--text);
+
+}
+
+/* ==========================================================
+   PATIENT INFO
+==========================================================*/
+
+.patient-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.patient-info h4{
+
+    font-size:15px;
+
+    font-weight:600;
+
+    margin-bottom:4px;
+
+}
+
+.patient-info small{
+
+    color:var(--muted);
+
+    font-size:12px;
+
+}
+
+/* ==========================================================
+   AVATAR
+==========================================================*/
+
+.avatar{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    flex-shrink:0;
+
+}
+
+.avatar.green{
+
+    background:#22C55E;
+
+}
+
+.avatar.blue{
+
+    background:#3B82F6;
+
+}
+
+.avatar.orange{
+
+    background:#F59E0B;
+
+}
+
+.avatar.red{
+
+    background:#EF4444;
+
+}
+
+.avatar.gray{
+
+    background:#6B7280;
+
+}
+
+.avatar.purple{
+
+    background:#8B5CF6;
+
+}
+
+/* ==========================================================
+   STATUS BADGES
+==========================================================*/
+
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:7px 14px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.status.stable{
+
+    background:#DCFCE7;
+
+    color:#15803D;
+
+}
+
+.status.critical{
+
+    background:#FEE2E2;
+
+    color:#DC2626;
+
+}
+
+.status.observation{
+
+    background:#FEF3C7;
+
+    color:#B45309;
+
+}
+
+.status.discharged{
+
+    background:#E0F2FE;
+
+    color:#0369A1;
+
+}
+
+/* ==========================================================
+   ACTION BUTTONS
+==========================================================*/
+
+.icon-btn{
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#F3F4F6;
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-right:8px;
+
+    transition:.25s;
+
+}
+
+.icon-btn:hover{
+
+    background:var(--secondary-light);
+
+    color:var(--secondary);
+
+}
+
+.icon-btn.delete:hover{
+
+    background:#FEE2E2;
+
+    color:#DC2626;
+
+}
+
+.icon-btn .material-symbols-outlined{
+
+    font-size:20px;
+
+}
+
+/* ==========================================================
+   CONTACT INFO
+==========================================================*/
+
+td small{
+
+    color:var(--muted);
+
+    font-size:12px;
+
+}
+
+/* ==========================================================
+   PAGINATION
+==========================================================*/
+
+.pagination{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:22px 24px;
+
+}
+
+.pagination button{
+
+    min-width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#F3F4F6;
+
+    color:var(--text);
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.pagination button:hover{
+
+    background:#E5E7EB;
+
+}
+
+.pagination button.active{
+
+    background:var(--secondary);
+
+    color:#fff;
+
+}
+/* ==========================================================
+   MODAL
+==========================================================*/
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(17,24,39,.55);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+
+    z-index:9999;
+
+    backdrop-filter:blur(4px);
+
+}
+
+.modal.active{
+
+    display:flex;
+
+}
+
+.modal-content{
+
+    width:100%;
+
+    max-width:720px;
+
+    background:#FFFFFF;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.18);
+
+    animation:modalFade .35s ease;
+
+}
+
+.modal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:24px 30px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.modal-header h2{
+
+    font-family:'Manrope',sans-serif;
+
+    font-size:28px;
+
+}
+
+.modal-header button{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#F3F4F6;
+
+    font-size:20px;
+
+}
+
+.modal-header button:hover{
+
+    background:#E5E7EB;
+
+}
+
+/* ==========================================================
+   FORM
+==========================================================*/
+
+#patientForm{
+
+    padding:30px;
+
+}
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:22px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.form-group label{
+
+    margin-bottom:8px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.form-group input,
+.form-group select{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    outline:none;
+
+    font-size:14px;
+
+    transition:.25s;
+
+}
+
+.form-group input:focus,
+.form-group select:focus{
+
+    border-color:var(--secondary);
+
+    box-shadow:0 0 0 4px rgba(0,168,150,.12);
+
+}
+
+.modal-footer{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:14px;
+
+    margin-top:30px;
+
+}
+
+/* ==========================================================
+   TOAST
+==========================================================*/
+
+.toast{
+
+    position:fixed;
+
+    top:30px;
+
+    right:30px;
+
+    background:var(--secondary);
+
+    color:#FFFFFF;
+
+    padding:14px 22px;
+
+    border-radius:12px;
+
+    font-size:14px;
+
+    box-shadow:var(--shadow-md);
+
+    opacity:0;
+
+    transform:translateY(-20px);
+
+    transition:.35s;
+
+    z-index:99999;
+
+}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+/* ==========================================================
+   ANIMATIONS
+==========================================================*/
+
+@keyframes modalFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px) scale(.95);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0) scale(1);
+
+    }
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.stat-card,
+.table-card{
+
+    animation:fadeUp .5s ease;
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+==========================================================*/
+
+@media(max-width:1200px){
+
+.stats-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:992px){
+
+.sidebar{
+
+width:220px;
+
+}
+
+.main-content{
+
+margin-left:220px;
+
+width:calc(100% - 220px);
+
+}
+
+.search-box{
+
+width:260px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.sidebar{
+
+display:none;
+
+}
+
+.main-content{
+
+margin-left:0;
+
+width:100%;
+
+}
+
+.topbar{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:20px;
+
+}
+
+.topbar-left{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+width:100%;
+
+}
+
+.search-box{
+
+width:100%;
+
+}
+
+.page-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:20px;
+
+}
+
+.header-actions{
+
+width:100%;
+
+flex-direction:column;
+
+}
+
+.header-actions button{
+
+width:100%;
+
+}
+
+.stats-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.form-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.table-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:18px;
+
+}
+
+.table-filters{
+
+flex-wrap:wrap;
+
+}
+
+.pagination{
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.content{
+
+padding:18px;
+
+}
+
+.modal{
+
+padding:15px;
+
+}
+
+.modal-content{
+
+max-width:100%;
+
+}
+
+.modal-footer{
+
+flex-direction:column;
+
+}
+
+.modal-footer button{
+
+width:100%;
+
+}
+
+}
+
+/* ==========================================================
+   UTILITIES
+==========================================================*/
+
+.text-center{
+
+text-align:center;
+
+}
+
+.mt-20{
+
+margin-top:20px;
+
+}
+
+.mb-20{
+
+margin-bottom:20px;
+
+}
+
+.hidden{
+
+display:none;
+
+}

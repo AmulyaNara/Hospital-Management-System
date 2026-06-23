@@ -408,11 +408,11 @@
                             </div>
                                 <div class="field-group">
                                     <label class="field-label">Date of Birth</label>
-                                    <input class="form-control" type="date"/>
+                                    <input id="dateOfBirth" class="form-control" type="date"/>
                                 </div>
                                 <div class="field-group">
                                     <label class="field-label">Gender</label>
-                                    <select class="form-control">
+                                    <select id="gender" class="form-control">
                                         <option value="">Select gender</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
@@ -441,11 +441,21 @@
                                 </div>
                                 <div class="field-group">
                                     <label class="field-label">Phone Number</label>
-                                    <input class="form-control" placeholder="+91" type="tel"/>
+                                    <input
+        id="phone"
+        name="phone"
+        class="form-control"
+        type="tel"
+        placeholder="+91"
+        maxlength="10"
+        pattern="[6-9][0-9]{9}"
+        required
+    >
+    <div id="phoneError" class="error-message"></div>
                                 </div>
                                 <div class="col-span-full field-group">
                                     <label class="field-label">Residential Address</label>
-                                    <input class="form-control" placeholder="Street address, City, State, Zip" type="text"/>
+                                    <input id="address" class="form-control" placeholder="Street address, City, State, Zip" type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -469,7 +479,15 @@
                                 </div>
                                 <div class="field-group">
                                     <label class="field-label">Contact Phone</label>
-                                    <input class="form-control" placeholder="+91" type="tel"/>
+                                    <input
+        id="emergencyPhone"
+        class="form-control"
+        type="tel"
+        placeholder="+91"
+        maxlength="10"
+        required
+    >
+    <div id="emergencyPhoneError" class="error-message"></div>
                                 </div>
                             </div>
                         </div>

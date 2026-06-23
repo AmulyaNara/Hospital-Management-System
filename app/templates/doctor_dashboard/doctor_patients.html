@@ -96,7 +96,7 @@
 
     <div class="user-profile">
         <div class="profile-meta">
-            <span class="user-name">Dr. Alexander Smith</span>
+            <span class="user-name">Dr. Ajay</span>
             <span class="user-role">Senior Cardiologist</span>
         </div>
 
@@ -117,7 +117,11 @@
                 <div class="stat-card border-stable">
                     <p class="stat-label">Total Patients</p>
                     <div class="stat-value-row">
-                        <span class="stat-number">1,284</span>
+                        <span
+                        class="stat-number"
+                        id="totalPatients">
+                        0
+                    </span>
                         <span class="trend-indicator up">
                             <span class="material-symbols-outlined text-sm">trending_up</span> +12%
                         </span>
@@ -126,21 +130,32 @@
                 <div class="stat-card border-critical">
                     <p class="stat-label">Critical Care</p>
                     <div class="stat-value-row">
-                        <span class="stat-number">14</span>
+                        <span
+    class="stat-number"
+    id="criticalCare">
+    0
+</span>
                         <span class="badge-priority alert">High Priority</span>
                     </div>
                 </div>
                 <div class="stat-card border-followup">
                     <p class="stat-label">Pending Follow-ups</p>
                     <div class="stat-value-row">
-                        <span class="stat-number">42</span>
+                        <span
+    class="stat-number"
+    id="pendingFollowups">
+    0
+</span>
                         <span class="badge-priority timeline">This Week</span>
                     </div>
                 </div>
                 <div class="stat-card border-neutral">
                     <p class="stat-label">Avg. Wait Time</p>
                     <div class="stat-value-row">
-                        <span class="stat-number">18<span class="stat-unit">min</span></span>
+                        <span class="stat-number">
+<span id="avgWaitTime">0</span>
+<span class="stat-unit">min</span>
+</span>
                         <span class="trend-indicator neutral">
                             <span class="material-symbols-outlined text-sm">check_circle</span> Stable
                         </span>
@@ -162,159 +177,37 @@
                                 <th style="width: 20%; text-align: right;">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Patient Entry Row 1 -->
-                            <tr class="clinical-table-row">
-                                <td>
-                                    <div class="patient-identity-cell">
-                                        <img alt="Sarah Jenkins" class="patient-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6-IJ099P0FIQ-Ke4FAv7zujgdJOeMOklEgz3yl3dAfWLQQ80vtXoI4ey2U2FIHcByz44448Pe25uS3CVkjZiImg4stvMF6c4i-GlztsxQPOmFg4F8RotlEF41CwC4UYypONBu1vw8RXAS7gqlTAHdOKLOgGH0lIxAN59hWhtZeaSmE1sERVFU4-2voNxBoZ-Wi20WytnR5QD5QOczGuXiubMJ4AUkNcFWL-DWcAc3ZShR0z_OQ1rsO7L6OE5gilRR8SvpaneeTiuL"/>
-                                        <div>
-                                            <p class="p-name">Sarah Jenkins</p>
-                                            <p class="p-condition">Hypertension Management</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="stack-cell">
-                                        <p class="p-id font-mono">#MC-40912</p>
-                                        <p class="p-age">34 Years</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="stack-cell">
-                                        <p class="p-date">Oct 12, 2023</p>
-                                        <p class="p-time">10:30 AM</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="status-badge stable">
-                                        <span class="status-dot"></span> Stable
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="row-actions">
-                                        <button class="btn-view">View Records</button>
-                                    
-                                    </div>
-                                </td>
-    
-                            </tr>
-                            <!-- Patient Entry Row 2 -->
-                            <tr class="clinical-table-row">
-                                <td>
-                                    <div class="patient-identity-cell">
-                                        <img alt="Marcus Holloway" class="patient-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlAyk2D1lSQJh6zno-F-4pKTUYu_Eok1kon4A-5a6R6iLRgEgQwbJBtnki4Y-gyYAhMyPNxa11WBCpGx0FZwxIVl9sf_rlRaTG2Pc0BnWvJFDxWpxZIh9QIYoQv5OVstzAY0qV8Ev9YSeofYTZrDQPMgnn2_QlATlCpresCuYOUbUzpsQqyHye9w4JWuzBySjU0J2GmqxXne0Jyc4Bo5Ns0vO0Rd1Z4M9sbULygR13NYMwmqFf_jNPoX8OYsQHSkSB8Ew6cSUCcopO"/>
-                                        <div>
-                                            <p class="p-name">Marcus Holloway</p>
-                                            <p class="p-condition">Post-Op Recovery</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="stack-cell">
-                                        <p class="p-id font-mono">#MC-82104</p>
-                                        <p class="p-age">52 Years</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="stack-cell">
-                                        <p class="p-date">Oct 14, 2023</p>
-                                        <p class="p-time">08:15 AM</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="status-badge critical">
-                                        <span class="status-dot animated-pulse"></span> Critical
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="row-actions">
-                                        <button class="btn-view">View Records</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- Patient Entry Row 3 -->
-                            <tr class="clinical-table-row">
-                                <td>
-                                    <div class="patient-identity-cell">
-                                        <img alt="Elena Rodriguez" class="patient-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAugW3Q0aH_1eZ2O-GWL2sReETHzQJNvy4C2jaiYEjxbDXzZ3Y-sjVCVERaxcTn4ZKvy2DRw2kBmLPXBo5FM_TWIVe-Nhm4DTp4GvPKOpqfWvUjBjhUdMee_e8AwGA5YrQPwWPfQRZKRf5fzmD8-njkAzGkEg1ukIWJOujRPvENSZlsVB070ELpK6KL4rT6OYv2-FSD2Fvx0ipBwTxeFyaxqevAl_5hgeX8hOEbGzCn0V07cNiFscdkPNwPUNEJTzzoZgPUdi2eBfod"/>
-                                        <div>
-                                            <p class="p-name">Elena Rodriguez</p>
-                                            <p class="p-condition">Diabetes Screening</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="stack-cell">
-                                        <p class="p-id font-mono">#MC-29471</p>
-                                        <p class="p-age">68 Years</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="stack-cell">
-                                        <p class="p-date">Oct 14, 2023</p>
-                                        <p class="p-time">02:45 PM</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="status-badge followup">
-                                        <span class="status-dot"></span> Follow-up
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="row-actions">
-                                        <button class="btn-view">View Records</button>
-                                        
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- Patient Entry Row 4 -->
-                            <tr class="clinical-table-row">
-                                <td>
-                                    <div class="patient-identity-cell">
-                                        <img alt="Julian Chen" class="patient-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6nyQsXznZUAEaOsyhEHIPE7uUcxbjvB0u9so0WFbP01rZAkJN28UX0UEnXSuDgKqB8cuXraGIVw3CaAMMWMWKm4tBPEkQuWoFXjE9sZVbaJydXTkdmYy-_au3-lMrHAnfRbQoFYXj96y5X3acFIp2b6iaIVA2-7EpvkZV0uLOqb4msjH79Pm9XdTkUjdTgGGebSeh6eR9Bcw41hLnyneFTx-U0J4jVojfF1j5O7Q7GIZyrw0UJP0iEz3XiQrA6jWeYJ0NTB_BG3p"/>
-                                        <div>
-                                            <p class="p-name">Julian Chen</p>
-                                            <p class="p-condition">Asthma Review</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="stack-cell">
-                                        <p class="p-id font-mono">#MC-11029</p>
-                                        <p class="p-age">25 Years</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="stack-cell">
-                                        <p class="p-date">Oct 15, 2023</p>
-                                        <p class="p-time">09:00 AM</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="status-badge stable">
-                                        <span class="status-dot"></span> Stable
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="row-actions">
-                                        <button class="btn-view">View Records</button>
-                                        
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody id="patientsTableBody">
+                    </tbody>
                     </table>
                 </div>
                 
                 <!-- Explicit Pagination Component Footer -->
                 <footer class="table-footer">
-                    <p class="footer-count">Showing <span class="highlight">1-4</span> of <span class="highlight">1,284</span> records</p>
-                    <div class="pagination-buttons">
-                        <button class="btn-nav">Previous</button>
-                        <button class="btn-nav active">Next Page</button>
-                    </div>
-                </footer>
+
+    <p
+        class="footer-count"
+        id="paginationInfo">
+        Showing 1-6 of 0 records
+    </p>
+
+    <div class="pagination-buttons">
+
+        <button
+            class="btn-nav"
+            id="prevBtn">
+            Previous
+        </button>
+
+        <button
+            class="btn-nav active"
+            id="nextBtn">
+            Next Page
+        </button>
+
+    </div>
+
+</footer>
             </div>
             
             <!-- Bottom Interactive Continuous Sync Control Triggers -->

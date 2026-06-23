@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text,Date
 from app.database.base import Base
 from app.database.session import SessionLocal
+from datetime import date
 
 
 class Prescription(Base):
@@ -13,16 +14,22 @@ class Prescription(Base):
     )
 
     visit_id = Column(Integer, nullable=False)
-
     medicine_name = Column(String(255))
-
     dosage = Column(String(100))
-
     frequency = Column(String(100))
-
     duration = Column(String(100))
-
     instructions = Column(Text)
+    patient_name = Column(String(100))
+    patient_code = Column(String(30))
+    date_prescribed = Column(Date)
+    prescription_status = Column(
+        String(30),
+        default="Active"
+    )
+    doctor_id = Column(Integer)
+    doctor_name = Column(String(100))
+    diagnosis = Column(String(255))
+    doctor_notes = Column(Text)
 
     #created_at = Column(TIMESTAMP)
 
@@ -44,7 +51,19 @@ def get_all_prescriptions():
                 "dosage": prescription.dosage,
                 "frequency": prescription.frequency,
                 "duration": prescription.duration,
-                "instructions": prescription.instructions
+                "instructions": prescription.instructions,
+                "patient_name": prescription.patient_name,
+                "patient_code": prescription.patient_code,
+                "date_prescribed": (
+                    str(prescription.date_prescribed)
+                        if prescription.date_prescribed
+                        else "Not Available"
+                        ),
+                "prescription_status": prescription.prescription_status,
+                "doctor_id": prescription.doctor_id,
+                "doctor_name": prescription.doctor_name,
+                "diagnosis": prescription.diagnosis,
+                "doctor_notes": prescription.doctor_notes,
             })
 
         return prescription_list
@@ -63,7 +82,14 @@ def create_prescription(
     dosage,
     frequency,
     duration,
-    instructions
+    instructions,
+    patient_name,
+    patient_code,
+    prescription_status,
+    doctor_id,
+    doctor_name,
+    diagnosis,
+    doctor_notes
 ):
     db = SessionLocal()
 
@@ -74,7 +100,15 @@ def create_prescription(
             dosage=dosage,
             frequency=frequency,
             duration=duration,
-            instructions=instructions
+            instructions=instructions,
+            patient_name=patient_name,
+            patient_code=patient_code,
+            date_prescribed=date.today(),
+            prescription_status=prescription_status,
+            doctor_id=doctor_id,
+            doctor_name=doctor_name,
+            diagnosis=diagnosis,
+            doctor_notes=doctor_notes
         )
 
         db.add(new_prescription)
@@ -100,7 +134,9 @@ def update_prescription(
     dosage,
     frequency,
     duration,
-    instructions
+    instructions,
+    diagnosis,
+    doctor_notes
 ):
     db = SessionLocal()
 
@@ -123,6 +159,8 @@ def update_prescription(
         prescription.frequency = frequency
         prescription.duration = duration
         prescription.instructions = instructions
+        prescription.diagnosis = diagnosis
+        prescription.doctor_notes = doctor_notes
 
         db.commit()
 

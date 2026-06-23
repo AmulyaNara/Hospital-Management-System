@@ -1,4 +1,12 @@
-from sqlalchemy import Column, Integer, String, TIMESTAMP
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    TIMESTAMP,
+    Date
+)
+from sqlalchemy.sql import func
+
 from app.database.base import Base
 from app.database.session import SessionLocal
 from app.security.hash import hash_password
@@ -7,30 +15,63 @@ class User(Base):
     __tablename__ = "users"
 
     user_id = Column(Integer, primary_key=True, index=True)
+
     name = Column(String(100), nullable=False)
+
     email = Column(String(100), unique=True, nullable=False)
+
     password = Column(String(255), nullable=False)
+
     role = Column(String(50), nullable=False)
+
     phone = Column(String(15))
-    created_at = Column(TIMESTAMP)
+
+    date_of_birth = Column(Date)
+
+    gender = Column(String(20))
+
+    address = Column(String)
+
+    emergency_contact_name = Column(String(100))
+
+    emergency_contact_phone = Column(String(15))
+
+    
+
+    created_at = Column(
+        TIMESTAMP,
+        server_default=func.now()
+    )
 def create_user(
     name,
     email,
     password,
     role,
-    phone
+    phone,
+    date_of_birth,
+    gender,
+    address,
+    emergency_contact_name,
+    emergency_contact_phone
 ):
     db = SessionLocal()
 
     try:
 
         new_user = User(
-            name=name,
-            email=email,
-            password=hash_password(password),
-            role=role,
-            phone=phone
-        )
+    name=name,
+    email=email,
+    password=hash_password(password),
+    role=role,
+    phone=phone,
+
+    date_of_birth=date_of_birth,
+    gender=gender,
+    address=address,
+
+    emergency_contact_name=emergency_contact_name,
+    emergency_contact_phone=emergency_contact_phone
+)
 
         db.add(new_user)
         db.commit()

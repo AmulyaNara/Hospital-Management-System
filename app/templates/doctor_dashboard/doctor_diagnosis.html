@@ -90,7 +90,7 @@
                     <div class="header-divider"></div>
                     <div class="user-profile">
                         <div class="user-info">
-                            <p class="user-name">Dr. Alexander Smith</p>
+                            <p class="user-name">Dr. Ajay</p>
                             <p class="user-role">Chief Surgeon</p>
                         </div>
                         <img alt="Chief Surgeon Profile" class="avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4OvbqTZo-xmyuMlc0kEeu0oHsdq5HRQ9ENwcduZje1a2EeXBwtHM8kORLCGbbBQzR-5XNbcrwMuCR_te2fHNWB4hFLacyIsXMvSRRvgGpa1B0gWCgrSqJxjNggUbqNH-51HLwHDGGVh4ZlCwA_vtMKi4usde2mykxCz91HCwPUjc5EZHY1sUW_TcwC9oW08kDAf_OMWvf3qkEI6BF1lECzbKx9W7ODS3c1fO5hMAtmRcOqHS84hQu-AhNho6tMcSxhD1sWN3dTwVK"/>
@@ -118,7 +118,11 @@
                         <div class="metric-card">
                             <div>
                                 <p class="metric-label">Total Diagnoses</p>
-                                <h3 class="metric-value">1,248</h3>
+                                <h3
+    class="metric-value"
+    id="totalDiagnosis">
+    0
+</h3>
                                 <p class="metric-trend up">
                                     <span class="material-symbols-outlined">trending_up</span>
                                     +42 this month
@@ -131,8 +135,15 @@
 
                         <div class="metric-card alert-card">
                             <div>
-                                <p class="metric-label">Pending Reviews</p>
-                                <h3 class="metric-value">28</h3>
+                                <p class="metric-label">
+    Active Diagnosis
+</p>
+
+<h3
+    class="metric-value"
+    id="activeDiagnosis">
+    0
+</h3>
                                 <p class="metric-trend danger">
                                     <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">error</span>
                                     Requires immediate attention
@@ -145,8 +156,15 @@
 
                         <div class="metric-card chronic-card">
                             <div>
-                                <p class="metric-label">Recent Chronic Cases</p>
-                                <h3 class="metric-value">15</h3>
+                                <p class="metric-label">
+    High Severity Cases
+</p>
+
+<h3
+    class="metric-value"
+    id="highSeverity">
+    0
+</h3>
                                 <p class="metric-trend neutral">Managed in last 7 days</p>
                             </div>
                             <div class="metric-icon-badge">
@@ -187,125 +205,13 @@
                                         <th style="text-align: right;">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr data-status="active">
-                                        <td>
-                                            <div class="patient-cell">
-                                                <div class="avatar-initials row-jw">JW</div>
-                                                <div>
-                                                    <p class="cell-title">Jane Williams</p>
-                                                    <p class="cell-subtitle">#PT-82741</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="cell-title">Essential Hypertension</p>
-                                            <p class="cell-subtitle">ICD-10: I10</p>
-                                        </td>
-                                        <td><span class="badge moderate">Moderate</span></td>
-                                        <td>Oct 24, 2023</td>
-                                        <td>
-                                            <span class="status-indicator active">
-                                                <span class="dot"></span>Active
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class="actions-cell">
-                                                <button class="table-action-btn"><span class="material-symbols-outlined">edit</span></button>
-                                                <button class="table-action-btn"><span class="material-symbols-outlined">visibility</span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-status="pending">
-                                        <td>
-                                            <div class="patient-cell">
-                                                <div class="avatar-initials row-rt">RT</div>
-                                                <div>
-                                                    <p class="cell-title">Robert Thompson</p>
-                                                    <p class="cell-subtitle">#PT-91203</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="cell-title">Type 2 Diabetes Mellitus</p>
-                                            <p class="cell-subtitle">ICD-10: E11.9</p>
-                                        </td>
-                                        <td><span class="badge high-risk">High Risk</span></td>
-                                        <td>Oct 15, 2023</td>
-                                        <td>
-                                            <span class="status-indicator review">
-                                                <span class="dot"></span>Review Needed
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class="actions-cell">
-                                                <button class="table-action-btn"><span class="material-symbols-outlined">edit</span></button>
-                                                <button class="table-action-btn"><span class="material-symbols-outlined">visibility</span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-status="resolved">
-                                        <td>
-                                            <div class="patient-cell">
-                                                <div class="avatar-initials row-em">EM</div>
-                                                <div>
-                                                    <p class="cell-title">Elena Martinez</p>
-                                                    <p class="cell-subtitle">#PT-55102</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="cell-title">Acute Sinusitis</p>
-                                            <p class="cell-subtitle">ICD-10: J01.90</p>
-                                        </td>
-                                        <td><span class="badge low">Low</span></td>
-                                        <td>Sep 28, 2023</td>
-                                        <td>
-                                            <span class="status-indicator resolved">
-                                                <span class="dot"></span>Resolved
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class="actions-cell">
-                                                <button class="table-action-btn"><span class="material-symbols-outlined">edit</span></button>
-                                                <button class="table-action-btn"><span class="material-symbols-outlined">visibility</span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-status="chronic">
-                                        <td>
-                                            <div class="patient-cell">
-                                                <div class="avatar-initials row-dk">DK</div>
-                                                <div>
-                                                    <p class="cell-title">David Kim</p>
-                                                    <p class="cell-subtitle">#PT-33219</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="cell-title">Hyperlipidemia</p>
-                                            <p class="cell-subtitle">ICD-10: E78.5</p>
-                                        </td>
-                                        <td><span class="badge moderate">Moderate</span></td>
-                                        <td>Sep 12, 2023</td>
-                                        <td>
-                                            <span class="status-indicator active">
-                                                <span class="dot"></span>Chronic
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class="actions-cell">
-                                                <button class="table-action-btn"><span class="material-symbols-outlined">edit</span></button>
-                                                <button class="table-action-btn"><span class="material-symbols-outlined">visibility</span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <tbody id="diagnosisTableBody">
+</tbody>
                             </table>
                         </div>
 
                         <div class="panel-footer">
-                            <p class="footer-text">Showing 1-4 of 4 results</p>
+                            <p class="footer-text">Showing 1-6 of 6 results</p>
                             <div class="pagination-controls">
                                 <button class="page-btn" disabled>
                                     <span class="material-symbols-outlined" style="font-size: 18px;">chevron_left</span>

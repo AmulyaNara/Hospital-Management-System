@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MedCore | Diagnosis Registry</title>
+
+    <link rel="stylesheet"
+          href="/static/css/admin_diagnosis.css">
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Material Icons -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ===========================================
+                    SIDEBAR
+    ============================================ -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <div class="logo">
+
+                <h2>MedCore</h2>
+
+                <p>Admin Portal</p>
+
+            </div>
+
+            <nav>
+
+                <a href="/admin-home"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        dashboard
+
+                    </span>
+
+                    Dashboard
+
+                </a>
+
+                <a href="/admin-doctors"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        medical_services
+
+                    </span>
+
+                    Doctors
+
+                </a>
+
+                <a href="/admin-patients"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        groups
+
+                    </span>
+
+                    Patients
+
+                </a>
+
+                <a href="/admin-diagnosis"
+                   class="nav-item active">
+
+                    <span class="material-symbols-outlined">
+
+                        clinical_notes
+
+                    </span>
+
+                    Diagnosis
+
+                </a>
+
+                <a href="/admin-prescriptions"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        description
+
+                    </span>
+
+                    Prescriptions
+
+                </a>
+
+                <a href="/admin-receptionists"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        badge
+
+                    </span>
+
+                    Receptionists
+
+                </a>
+
+                <a href="/admin-logs"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        history
+
+                    </span>
+
+                    System Logs
+
+                </a>
+
+                <a href="/admin-settings"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        settings
+
+                    </span>
+
+                    Settings
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <button
+                id="newDiagnosisBtn"
+                class="primary-btn">
+
+                <span class="material-symbols-outlined">
+
+                    add
+
+                </span>
+
+                New Diagnosis
+
+            </button>
+
+            <a href="/logout"
+               class="logout">
+
+                <span class="material-symbols-outlined">
+
+                    logout
+
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- ===========================================
+                    MAIN CONTENT
+    ============================================ -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="search-box">
+
+                <span class="material-symbols-outlined">
+
+                    search
+
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Search diagnosis, patient or doctor...">
+
+            </div>
+
+            <div class="top-actions">
+
+                <button>
+
+                    <span class="material-symbols-outlined">
+
+                        notifications
+
+                    </span>
+
+                </button>
+
+                <button>
+
+                    <span class="material-symbols-outlined">
+
+                        help
+
+                    </span>
+
+                </button>
+
+                <div class="profile">
+
+                    <div>
+
+                        <h4>
+
+                            Dr. Ananya Iyer
+
+                        </h4>
+
+                        <p>
+
+                            Chief Administrator
+
+                        </p>
+
+                    </div>
+
+                    <img src="https://i.pravatar.cc/80?img=45">
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- PAGE -->
+
+        <section class="content">
+
+            <div class="breadcrumb">
+
+                Records >
+
+                <span>
+
+                    Diagnosis Registry
+
+                </span>
+
+            </div>
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>
+
+                        Diagnosis Registry
+
+                    </h1>
+
+                    <p>
+
+                        Real-time clinical tracking of hospital-wide patient diagnoses.
+
+                    </p>
+
+                </div>
+
+                <div class="header-buttons">
+
+                    <button
+                        class="outline-btn"
+                        id="exportBtn">
+
+                        <span class="material-symbols-outlined">
+
+                            download
+
+                        </span>
+
+                        Export
+
+                    </button>
+
+                    <button
+                        class="primary-btn"
+                        id="addDiagnosisBtn">
+
+                        <span class="material-symbols-outlined">
+
+                            add_circle
+
+                        </span>
+
+                        Add Diagnosis
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- ===========================================
+                    STATS
+            ============================================ -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <h5>Total Diagnoses</h5>
+
+                    <h2>12,482</h2>
+
+                    <span class="success">
+
+                        +12% this month
+
+                    </span>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h5>Critical Cases</h5>
+
+                    <h2>142</h2>
+
+                    <span class="danger">
+
+                        Requires Attention
+
+                    </span>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h5>Pending Reviews</h5>
+
+                    <h2>58</h2>
+
+                    <span>
+
+                        ETA 4.5 hrs
+
+                    </span>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h5>Avg Billing</h5>
+
+                    <h2>₹4,250</h2>
+
+                    <span>
+
+                        Per Diagnosis
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- ===========================================
+                    TABLE CARD
+            ============================================ -->
+
+            <div class="table-card">
+
+                <div class="table-toolbar">
+
+                    <button class="outline-btn">
+
+                        <span class="material-symbols-outlined">
+
+                            filter_list
+
+                        </span>
+
+                        Filter Categories
+
+                    </button>
+
+                    <select>
+
+                        <option>
+
+                            All Statuses
+
+                        </option>
+
+                        <option>
+
+                            Confirmed
+
+                        </option>
+
+                        <option>
+
+                            Under Review
+
+                        </option>
+
+                        <option>
+
+                            Critical
+
+                        </option>
+
+                    </select>
+
+                    <div class="table-count">
+
+                        Showing 1-15 of 12,482 entries
+
+                    </div>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Diagnosis ID</th>
+
+                            <th>Patient</th>
+
+                            <th>Doctor</th>
+
+                            <th>Date</th>
+
+                            <th>Category</th>
+
+                            <th>Status</th>
+
+                            <th>Consult Fee</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                                                <tr>
+
+                            <td>#DX-89210</td>
+
+                            <td>
+
+                                <div class="patient-info">
+
+                                    <div class="avatar green">
+
+                                        RS
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>Rajesh Sharma</strong>
+
+                                        <small>M, 54 Yrs</small>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>Dr. Priya Iyer</td>
+
+                            <td>24 Oct 2023</td>
+
+                            <td>
+
+                                <span class="badge danger">
+
+                                    Acute
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span class="status confirmed">
+
+                                    ● Confirmed
+
+                                </span>
+
+                            </td>
+
+                            <td>₹2,500</td>
+
+                            <td>
+
+                                <button class="icon-btn">
+
+                                    <span class="material-symbols-outlined">
+
+                                        visibility
+
+                                    </span>
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>#DX-89209</td>
+
+                            <td>
+
+                                <div class="patient-info">
+
+                                    <div class="avatar blue">
+
+                                        AM
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>Amanya Misra</strong>
+
+                                        <small>F, 25 Yrs</small>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>Dr. Amit Khurana</td>
+
+                            <td>23 Oct 2023</td>
+
+                            <td>
+
+                                <span class="badge info">
+
+                                    Chronic
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span class="status review">
+
+                                    ● Under Review
+
+                                </span>
+
+                            </td>
+
+                            <td>₹1,800</td>
+
+                            <td>
+
+                                <button class="icon-btn">
+
+                                    <span class="material-symbols-outlined">
+
+                                        visibility
+
+                                    </span>
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>#DX-89208</td>
+
+                            <td>
+
+                                <div class="patient-info">
+
+                                    <div class="avatar green">
+
+                                        VS
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>Vikram Singh</strong>
+
+                                        <small>M, 61 Yrs</small>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>Dr. Sameer Reddy</td>
+
+                            <td>23 Oct 2023</td>
+
+                            <td>
+
+                                <span class="badge danger">
+
+                                    Acute
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span class="status confirmed">
+
+                                    ● Confirmed
+
+                                </span>
+
+                            </td>
+
+                            <td>₹5,500</td>
+
+                            <td>
+
+                                <button class="icon-btn">
+
+                                    <span class="material-symbols-outlined">
+
+                                        visibility
+
+                                    </span>
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>#DX-89207</td>
+
+                            <td>
+
+                                <div class="patient-info">
+
+                                    <div class="avatar blue">
+
+                                        SD
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>Sunita Devi</strong>
+
+                                        <small>F, 42 Yrs</small>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>Dr. Arnab Goswami</td>
+
+                            <td>22 Oct 2023</td>
+
+                            <td>
+
+                                <span class="badge">
+
+                                    Observation
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span class="status priority">
+
+                                    ● Priority
+
+                                </span>
+
+                            </td>
+
+                            <td>₹950</td>
+
+                            <td>
+
+                                <button class="icon-btn">
+
+                                    <span class="material-symbols-outlined">
+
+                                        visibility
+
+                                    </span>
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>#DX-89206</td>
+
+                            <td>
+
+                                <div class="patient-info">
+
+                                    <div class="avatar green">
+
+                                        KN
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>Karan Nair</strong>
+
+                                        <small>M, 19 Yrs</small>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>Dr. Priya Iyer</td>
+
+                            <td>22 Oct 2023</td>
+
+                            <td>
+
+                                <span class="badge info">
+
+                                    Chronic
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span class="status confirmed">
+
+                                    ● Confirmed
+
+                                </span>
+
+                            </td>
+
+                            <td>₹3,200</td>
+
+                            <td>
+
+                                <button class="icon-btn">
+
+                                    <span class="material-symbols-outlined">
+
+                                        visibility
+
+                                    </span>
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- PAGINATION -->
+
+            <div class="pagination">
+
+                <button>
+
+                    Previous
+
+                </button>
+
+                <button class="active">
+
+                    1
+
+                </button>
+
+                <button>
+
+                    2
+
+                </button>
+
+                <button>
+
+                    3
+
+                </button>
+
+                <button>
+
+                    ...
+
+                </button>
+
+                <button>
+
+                    48
+
+                </button>
+
+                <button>
+
+                    Next
+
+                </button>
+
+            </div>
+
+            <!-- LOWER GRID -->
+
+            <div class="bottom-grid">
+
+                <div class="system-card">
+
+                    <h3>
+
+                        System Logs
+
+                    </h3>
+
+                    <p>
+
+                        View complete diagnosis activity logs and audit history.
+
+                    </p>
+
+                    <button
+                        id="viewLogsBtn"
+                        class="primary-btn">
+
+                        View System Logs
+
+                    </button>
+
+                </div>
+
+                <div class="security-card">
+
+                    <h3>
+
+                        Security Protocol
+
+                    </h3>
+
+                    <div class="security-item">
+
+                        <span class="material-symbols-outlined">
+
+                            verified_user
+
+                        </span>
+
+                        <div>
+
+                            <strong>
+
+                                Encrypted Entry
+
+                            </strong>
+
+                            <small>
+
+                                Diagnosis records protected using AES-256.
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="security-item">
+
+                        <span class="material-symbols-outlined">
+
+                            health_and_safety
+
+                        </span>
+
+                        <div>
+
+                            <strong>
+
+                                Biometric Verification
+
+                            </strong>
+
+                            <small>
+
+                                Required for editing critical diagnoses.
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="/static/js/admin_diagnosis.js"></script>
+
+</body>
+
+</html>

@@ -12,6 +12,9 @@ from app.schemas.diagnosis_schema import DiagnosisCreate
 from app.security.oauth2 import get_current_user
 from app.security.role_checker import require_role
 
+from app.database.session import SessionLocal
+from app.models.diagnosis_orm import Diagnosis
+
 router = APIRouter()
 
 
@@ -28,6 +31,49 @@ def get_diagnosis(
 
     return get_all_diagnosis()
 
+@router.get("/diagnosis-stats")
+def get_diagnosis_stats(
+    current_user=Depends(get_current_user)
+):
+
+    require_role(
+        current_user,
+        ["admin", "doctor"]
+    )
+
+    db = SessionLocal()
+
+    try:
+
+        total_diagnosis = db.query(Diagnosis).count()
+
+        active_diagnosis = (
+            db.query(Diagnosis)
+            .filter(Diagnosis.diagnosis_status == "Active")
+            .count()
+        )
+
+        completed_diagnosis = (
+            db.query(Diagnosis)
+            .filter(Diagnosis.diagnosis_status == "Completed")
+            .count()
+        )
+
+        high_severity = (
+            db.query(Diagnosis)
+            .filter(Diagnosis.severity == "High")
+            .count()
+        )
+
+        return {
+            "total_diagnosis": total_diagnosis,
+            "active_diagnosis": active_diagnosis,
+            "completed_diagnosis": completed_diagnosis,
+            "high_severity": high_severity
+        }
+
+    finally:
+        db.close()
 
 # POST
 @router.post("/diagnosis")
@@ -45,7 +91,12 @@ def add_diagnosis(
         diagnosis.visit_id,
         diagnosis.disease,
         diagnosis.symptoms,
-        diagnosis.doctor_notes
+        diagnosis.doctor_notes,
+        diagnosis.patient_name,
+        diagnosis.patient_code,
+        diagnosis.severity,
+        diagnosis.diagnosis_status,
+        diagnosis.icd_code
     )
 
 

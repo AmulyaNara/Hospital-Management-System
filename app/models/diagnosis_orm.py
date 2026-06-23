@@ -7,16 +7,16 @@ class Diagnosis(Base):
     __tablename__ = "diagnosis"
 
     diagnosis_id = Column(Integer, primary_key=True, index=True)
-
     visit_id = Column(Integer, nullable=False)
-
     disease = Column(String(200), nullable=False)
-
     symptoms = Column(Text)
-
     doctor_notes = Column(Text)
-
     diagnosis_date = Column(Date)
+    patient_name = Column(String(100))
+    patient_code = Column(String(30))
+    severity = Column(String(30))
+    diagnosis_status = Column(String(30))
+    icd_code = Column(String(30))
 
 
 # GET
@@ -35,11 +35,15 @@ def get_all_diagnosis():
                 "disease": diagnosis.disease,
                 "symptoms": diagnosis.symptoms,
                 "doctor_notes": diagnosis.doctor_notes,
-                "diagnosis_date": (
-    str(diagnosis.diagnosis_date)
-    if diagnosis.diagnosis_date
-    else "Not Available"
-)
+                "diagnosis_date":(                                    str(diagnosis.diagnosis_date)
+                                    if diagnosis.diagnosis_date
+                                    else "Not Available" ),
+                "patient_name": diagnosis.patient_name,
+                "patient_code": diagnosis.patient_code,
+                "severity": diagnosis.severity,
+                "diagnosis_status": diagnosis.diagnosis_status,
+                "icd_code": diagnosis.icd_code,
+
             })
 
         return diagnosis_list
@@ -56,7 +60,12 @@ def create_diagnosis(
     visit_id,
     disease,
     symptoms,
-    doctor_notes
+    doctor_notes,
+    patient_name,
+    patient_code,
+    severity,
+    diagnosis_status,
+    icd_code
 ):
     db = SessionLocal()
 
@@ -66,7 +75,12 @@ def create_diagnosis(
     disease=disease,
     symptoms=symptoms,
     doctor_notes=doctor_notes,
-    diagnosis_date=date.today()
+    diagnosis_date=date.today(),
+    patient_name=patient_name,
+    patient_code=patient_code,
+    severity=severity,
+    diagnosis_status=diagnosis_status,
+    icd_code=icd_code
 )
 
         db.add(new_diagnosis)

@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Prescription Registry</title>
+
+    <link rel="stylesheet"
+          href="/static/css/admin_prescriptions.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap"
+          rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ===========================================
+                SIDEBAR
+    ============================================ -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <div class="logo">
+
+                <h1>MedCore</h1>
+
+                <p>Admin Portal</p>
+
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="/admin-home"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        dashboard
+
+                    </span>
+
+                    Dashboard
+
+                </a>
+
+                <a href="/admin-patients"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        groups
+
+                    </span>
+
+                    Patients
+
+                </a>
+
+                <a href="/admin-doctors"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        medical_services
+
+                    </span>
+
+                    Doctors
+
+                </a>
+
+                <a href="/admin-prescriptions"
+                   class="nav-item active">
+
+                    <span class="material-symbols-outlined">
+
+                        description
+
+                    </span>
+
+                    Records
+
+                </a>
+
+                <a href="/admin-appointments"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        calendar_month
+
+                    </span>
+
+                    Appointments
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <button class="book-btn"
+                    id="addPrescriptionBtn">
+
+                <span class="material-symbols-outlined">
+
+                    medication
+
+                </span>
+
+                Add Prescription
+
+            </button>
+
+            <a href="/logout"
+               class="nav-item logout">
+
+                <span class="material-symbols-outlined">
+
+                    logout
+
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- ===========================================
+                MAIN CONTENT
+    ============================================ -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <h2>
+
+                    Prescription Registry
+
+                </h2>
+
+                <div class="search-box">
+
+                    <span class="material-symbols-outlined">
+
+                        search
+
+                    </span>
+
+                    <input type="text"
+                           id="searchPrescription"
+                           placeholder="Search prescriptions, patients...">
+
+                </div>
+
+            </div>
+
+            <div class="top-actions">
+
+                <button>
+
+                    <span class="material-symbols-outlined">
+
+                        notifications
+
+                    </span>
+
+                </button>
+
+                <button>
+
+                    <span class="material-symbols-outlined">
+
+                        chat
+
+                    </span>
+
+                </button>
+
+                <div class="profile">
+
+                    <div class="profile-info">
+
+                        <h4>
+
+                            Dr. Arjun Mehta
+
+                        </h4>
+
+                        <p>
+
+                            Chief Pharmacist
+
+                        </p>
+
+                    </div>
+
+                    <img src="/static/images/profile.jpg"
+                         alt="Admin">
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- ===========================================
+                    PAGE CONTENT
+        ============================================ -->
+
+        <section class="content">
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>
+
+                        Prescription Registry
+
+                    </h1>
+
+                    <p>
+
+                        Centralized database of medication orders across the hospital.
+
+                    </p>
+
+                </div>
+
+                <button class="primary-btn"
+                        id="newPrescription">
+
+                    <span class="material-symbols-outlined">
+
+                        medication
+
+                    </span>
+
+                    Add Prescription
+
+                </button>
+
+            </div>
+
+            <!-- ===========================================
+                        STATISTICS
+            ============================================ -->
+
+            <section class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div>
+
+                            <p>
+
+                                Active Prescriptions
+
+                            </p>
+
+                            <h2>
+
+                                1,248
+
+                            </h2>
+
+                        </div>
+
+                        <span class="material-symbols-outlined green">
+
+                            prescription
+
+                        </span>
+
+                    </div>
+
+                    <small>
+
+                        +12% From Last Month
+
+                    </small>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div>
+
+                            <p>
+
+                                Pending Refills
+
+                            </p>
+
+                            <h2>
+
+                                42
+
+                            </h2>
+
+                        </div>
+
+                        <span class="material-symbols-outlined blue">
+
+                            autorenew
+
+                        </span>
+
+                    </div>
+
+                    <small>
+
+                        Requires Review
+
+                    </small>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div>
+
+                            <p>
+
+                                Registry Revenue
+
+                            </p>
+
+                            <h2>
+
+                                ₹8.4L
+
+                            </h2>
+
+                        </div>
+
+                        <span class="material-symbols-outlined orange">
+
+                            account_balance_wallet
+
+                        </span>
+
+                    </div>
+
+                    <small>
+
+                        Monthly Total
+
+                    </small>
+
+                </div>
+
+            </section>
+                            <!-- ===========================================
+                    PRESCRIPTION TABLE
+            ============================================ -->
+
+            <section class="table-card">
+
+                <div class="table-header">
+
+                    <h3>
+
+                        Recent Prescriptions
+
+                    </h3>
+
+                    <div class="table-actions">
+
+                        <button class="outline-btn">
+
+                            <span class="material-symbols-outlined">
+
+                                filter_list
+
+                            </span>
+
+                            Filter
+
+                        </button>
+
+                        <button class="outline-btn">
+
+                            <span class="material-symbols-outlined">
+
+                                download
+
+                            </span>
+
+                            Export
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table id="prescriptionTable">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>Patient</th>
+
+                                <th>Doctor</th>
+
+                                <th>Medication</th>
+
+                                <th>Dosage</th>
+
+                                <th>Date</th>
+
+                                <th>Status</th>
+
+                                <th>Actions</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>#RX-88210</td>
+
+                                <td>Aditi Sharma</td>
+
+                                <td>Dr. Rajesh Kumar</td>
+
+                                <td>Metformin 500mg</td>
+
+                                <td>1-0-1 (After Meal)</td>
+
+                                <td>24 Oct 2023</td>
+
+                                <td>
+
+                                    <span class="status dispensed">
+
+                                        Dispensed
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            visibility
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            edit
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn delete">
+
+                                        <span class="material-symbols-outlined">
+
+                                            block
+
+                                        </span>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>#RX-88211</td>
+
+                                <td>Vikram Singh</td>
+
+                                <td>Dr. Priya Iyer</td>
+
+                                <td>Amoxicillin 250mg</td>
+
+                                <td>1-1-1 (7 Days)</td>
+
+                                <td>25 Oct 2023</td>
+
+                                <td>
+
+                                    <span class="status pending">
+
+                                        Pending
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            visibility
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            edit
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn delete">
+
+                                        <span class="material-symbols-outlined">
+
+                                            block
+
+                                        </span>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>#RX-88215</td>
+
+                                <td>Sanya Verma</td>
+
+                                <td>Dr. Arjun Mehta</td>
+
+                                <td>Lisinopril 10mg</td>
+
+                                <td>1-0-0 (Morning)</td>
+
+                                <td>26 Oct 2023</td>
+
+                                <td>
+
+                                    <span class="status expired">
+
+                                        Expired
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            visibility
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            edit
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn delete">
+
+                                        <span class="material-symbols-outlined">
+
+                                            block
+
+                                        </span>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>#RX-88219</td>
+
+                                <td>Rahul Kapoor</td>
+
+                                <td>Dr. Sneha Patil</td>
+
+                                <td>Paracetamol 650mg</td>
+
+                                <td>SOS</td>
+
+                                <td>26 Oct 2023</td>
+
+                                <td>
+
+                                    <span class="status dispensed">
+
+                                        Dispensed
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            visibility
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            edit
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn delete">
+
+                                        <span class="material-symbols-outlined">
+
+                                            block
+
+                                        </span>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>#RX-88224</td>
+
+                                <td>Meera Desai</td>
+
+                                <td>Dr. Rajesh Kumar</td>
+
+                                <td>Atorvastatin 20mg</td>
+
+                                <td>0-0-1 (Night)</td>
+
+                                <td>27 Oct 2023</td>
+
+                                <td>
+
+                                    <span class="status pending">
+
+                                        Pending
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            visibility
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn">
+
+                                        <span class="material-symbols-outlined">
+
+                                            edit
+
+                                        </span>
+
+                                    </button>
+
+                                    <button class="icon-btn delete">
+
+                                        <span class="material-symbols-outlined">
+
+                                            block
+
+                                        </span>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="pagination">
+
+                    <button>
+
+                        Previous
+
+                    </button>
+
+                    <button class="active">
+
+                        1
+
+                    </button>
+
+                    <button>
+
+                        2
+
+                    </button>
+
+                    <button>
+
+                        3
+
+                    </button>
+
+                    <button>
+
+                        Next
+
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- ===========================================
+                    ANALYTICS
+            ============================================ -->
+
+            <section class="analytics-grid">
+
+                <div class="trend-card">
+
+                    <div class="card-title">
+
+                        <h3>
+
+                            Prescription Trends
+
+                        </h3>
+
+                        <p>
+
+                            Weekly medication activity
+
+                        </p>
+
+                    </div>
+
+                    <div class="chart-placeholder">
+
+                        <span class="material-symbols-outlined">
+
+                            monitoring
+
+                        </span>
+
+                        <p>
+
+                            Trend chart will appear here
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="reliability-card">
+
+                    <div class="card-title">
+
+                        <h3>
+
+                            Clinic Reliability
+
+                        </h3>
+
+                    </div>
+
+                    <h1>
+
+                        99.8%
+
+                    </h1>
+
+                    <div class="progress">
+
+                        <div class="progress-bar"></div>
+
+                    </div>
+
+                    <p>
+
+                        All prescriptions fulfilled within SLA standards.
+
+                    </p>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- ===========================================
+        ADD PRESCRIPTION MODAL
+============================================ -->
+
+<div class="modal"
+     id="prescriptionModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+
+                Add Prescription
+
+            </h2>
+
+            <button id="closeModal">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <form id="prescriptionForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Patient Name</label>
+
+                    <input type="text"
+                           required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Doctor</label>
+
+                    <input type="text"
+                           required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Medication</label>
+
+                    <input type="text"
+                           required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Dosage</label>
+
+                    <input type="text"
+                           required>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="outline-btn"
+                    id="cancelBtn">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+
+                    Save Prescription
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="/static/js/admin_prescriptions.js"></script>
+
+</body>
+
+</html>

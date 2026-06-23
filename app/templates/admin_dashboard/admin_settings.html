@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Settings | SJ Medical</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/admin_settings.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ===================================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                <span class="material-symbols-outlined">
+                    local_hospital
+                </span>
+            </div>
+
+            <div>
+
+                <h2>SJ Medical</h2>
+
+                <p>Central Management</p>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="/admin-home" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    dashboard
+                </span>
+
+                Dashboard
+
+            </a>
+
+
+            <a href="/admin-doctors" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    medical_services
+                </span>
+
+                Doctors
+
+            </a>
+
+
+            <a href="/admin-patients" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    groups
+                </span>
+
+                Patients
+
+            </a>
+
+
+            <a href="/admin-diagnosis" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    clinical_notes
+                </span>
+
+                Diagnosis
+
+            </a>
+
+
+            <a href="/admin-prescription" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    description
+                </span>
+
+                Prescriptions
+
+            </a>
+
+
+            <a href="/admin-receptionists" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    badge
+                </span>
+
+                Receptionists
+
+            </a>
+
+
+            <a href="/admin-logs" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    history
+                </span>
+
+                System Logs
+
+            </a>
+
+
+            <a href="/admin-settings" class="nav-item active">
+
+                <span class="material-symbols-outlined">
+                    settings
+                </span>
+
+                Settings
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="admin-card">
+
+                <img src="/static/images/admin.png"
+                     alt="Admin">
+
+                <div>
+
+                    <h4>Dr. Sarah Jenkins</h4>
+
+                    <p>Chief Administrator</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- ===================================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================================== -->
+
+    <main class="main-content">
+
+        <!-- Header -->
+
+        <header class="topbar">
+
+            <div class="search-box">
+
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Search settings...">
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <button class="icon-btn">
+
+                    <span class="material-symbols-outlined">
+                        notifications
+                    </span>
+
+                </button>
+
+                <button class="icon-btn">
+
+                    <span class="material-symbols-outlined">
+                        help
+                    </span>
+
+                </button>
+
+                <div class="user-profile">
+
+                    <div>
+
+                        <h4>Dr. Sarah Jenkins</h4>
+
+                        <small>Chief Administrator</small>
+
+                    </div>
+
+                    <img src="/static/images/admin.png"
+                         alt="Profile">
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- Page Title -->
+
+        <section class="page-header">
+
+            <h1>Admin Settings</h1>
+
+            <p>
+                Configure security, preferences,
+                notifications and application settings.
+            </p>
+
+        </section>
+
+        <!-- Main Grid Starts -->
+
+        <section class="settings-grid">
+                    <!-- ========================================= -->
+        <!-- LEFT COLUMN -->
+        <!-- ========================================= -->
+
+        <div class="left-column">
+
+            <!-- Profile Card -->
+
+            <div class="card profile-card">
+
+                <div class="profile-top">
+
+                    <img
+                        src="/static/images/admin.png"
+                        alt="Administrator">
+
+                    <button
+                        class="edit-profile-btn">
+
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+
+                    </button>
+
+                </div>
+
+                <h2>Dr. Sarah Jenkins</h2>
+
+                <p class="designation">
+                    Chief Administrator,
+                    MedCore
+                </p>
+
+                <div class="profile-tags">
+
+                    <span>
+                        Admin Access
+                    </span>
+
+                    <span>
+                        System Architect
+                    </span>
+
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="profile-info">
+
+                    <div class="info-row">
+
+                        <label>Email</label>
+
+                        <span>
+                            s.jenkins@medcore.org
+                        </span>
+
+                    </div>
+
+                    <div class="info-row">
+
+                        <label>Staff ID</label>
+
+                        <span>
+                            MC-8829-ADM
+                        </span>
+
+                    </div>
+
+                    <div class="info-row">
+
+                        <label>Subscription</label>
+
+                        <span>
+                            Enterprise Tier
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ===================================== -->
+            <!-- APP PREFERENCES -->
+            <!-- ===================================== -->
+
+            <div class="card preferences-card">
+
+                <h3>
+
+                    <span class="material-symbols-outlined">
+                        tune
+                    </span>
+
+                    App Preferences
+
+                </h3>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Language
+
+                    </label>
+
+                    <select id="language">
+
+                        <option>
+                            English (United States)
+                        </option>
+
+                        <option>
+                            English (India)
+                        </option>
+
+                        <option>
+                            Telugu
+                        </option>
+
+                        <option>
+                            Hindi
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Timezone
+
+                    </label>
+
+                    <select id="timezone">
+
+                        <option>
+                            GMT +05:30 | India
+                        </option>
+
+                        <option>
+                            UTC
+                        </option>
+
+                        <option>
+                            GMT +01:00
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Display Currency
+
+                    </label>
+
+                    <select id="currency">
+
+                        <option>
+                            INR (₹)
+                        </option>
+
+                        <option>
+                            USD ($)
+                        </option>
+
+                        <option>
+                            EUR (€)
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ========================================= -->
+        <!-- RIGHT COLUMN -->
+        <!-- ========================================= -->
+
+        <div class="right-column">
+                        <!-- ========================================= -->
+            <!-- SECURITY SETTINGS -->
+            <!-- ========================================= -->
+
+            <div class="card security-card">
+
+                <div class="card-title">
+
+                    <div class="title-left">
+
+                        <span class="material-symbols-outlined">
+                            shield_lock
+                        </span>
+
+                        <h3>Security Settings</h3>
+
+                    </div>
+
+                </div>
+
+                <div class="security-grid">
+
+                    <!-- Left Side -->
+
+                    <div class="security-form">
+
+                        <div class="section-title">
+
+                            Authentication
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Current Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="currentPassword"
+                                placeholder="Enter current password">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="newPassword"
+                                placeholder="Minimum 12 characters">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Confirm Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="Confirm new password">
+
+                        </div>
+
+                        <button
+                            class="primary-btn"
+                            id="updatePassword">
+
+                            <span class="material-symbols-outlined">
+                                lock_reset
+                            </span>
+
+                            Update Security Key
+
+                        </button>
+
+                    </div>
+
+                    <!-- Right Side -->
+
+                    <div class="security-side">
+
+                        <!-- 2FA -->
+
+                        <div class="security-box">
+
+                            <div class="security-header">
+
+                                <div>
+
+                                    <h4>
+                                        Two-Factor Authentication
+                                    </h4>
+
+                                    <small>
+                                        Add another layer of security
+                                    </small>
+
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="twoFactor"
+                                        checked>
+
+                                    <span class="slider"></span>
+
+                                </label>
+
+                            </div>
+
+                            <p class="enabled-text">
+
+                                <span class="material-symbols-outlined">
+                                    verified
+                                </span>
+
+                                Active via Authenticator App
+
+                            </p>
+
+                        </div>
+
+                        <!-- Active Sessions -->
+
+                        <div class="security-box">
+
+                            <h4>
+
+                                Active Sessions
+
+                            </h4>
+
+                            <div class="session-item">
+
+                                <div>
+
+                                    <strong>
+                                        Windows 11 Desktop
+                                    </strong>
+
+                                    <small>
+                                        Mumbai, India • Current
+                                    </small>
+
+                                </div>
+
+                                <button
+                                    class="session-close">
+
+                                    <span class="material-symbols-outlined">
+                                        close
+                                    </span>
+
+                                </button>
+
+                            </div>
+
+                            <div class="session-item">
+
+                                <div>
+
+                                    <strong>
+                                        Android Phone
+                                    </strong>
+
+                                    <small>
+                                        Chennai • 2 hours ago
+                                    </small>
+
+                                </div>
+
+                                <button
+                                    class="session-close">
+
+                                    <span class="material-symbols-outlined">
+                                        close
+                                    </span>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+                        <!-- ========================================= -->
+            <!-- NOTIFICATION PREFERENCES -->
+            <!-- ========================================= -->
+
+            <div class="card notification-card">
+
+                <div class="card-title">
+
+                    <div class="title-left">
+
+                        <span class="material-symbols-outlined">
+                            notifications
+                        </span>
+
+                        <h3>Notification Preferences</h3>
+
+                    </div>
+
+                </div>
+
+                <table class="notification-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Event Type</th>
+
+                            <th>Email</th>
+
+                            <th>SMS</th>
+
+                            <th>Push</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+                                    Emergency Alerts
+                                </strong>
+
+                                <p>
+                                    Critical system and patient
+                                    emergency notifications.
+                                </p>
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+                                    Appointment Updates
+                                </strong>
+
+                                <p>
+                                    New appointments,
+                                    cancellations and reschedules.
+                                </p>
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox">
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+                                    Billing & Payments
+                                </strong>
+
+                                <p>
+                                    Invoice reminders and
+                                    payment confirmations.
+                                </p>
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox">
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox">
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+                                    Doctor Availability
+                                </strong>
+
+                                <p>
+                                    Shift updates and doctor
+                                    availability notifications.
+                                </p>
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+                                    Security Alerts
+                                </strong>
+
+                                <p>
+                                    Login attempts,
+                                    password changes and
+                                    suspicious activity.
+                                </p>
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                            </td>
+
+                            <td>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+                        <!-- ========================================= -->
+            <!-- APPEARANCE -->
+            <!-- ========================================= -->
+
+            <div class="card appearance-card">
+
+                <div class="card-title">
+
+                    <div class="title-left">
+
+                        <span class="material-symbols-outlined">
+                            palette
+                        </span>
+
+                        <h3>Appearance</h3>
+
+                    </div>
+
+                </div>
+
+                <div class="theme-options">
+
+                    <label class="theme-card active">
+
+                        <input
+                            type="radio"
+                            name="theme"
+                            checked>
+
+                        <span class="material-symbols-outlined">
+
+                            light_mode
+
+                        </span>
+
+                        <h4>Light</h4>
+
+                        <p>Bright interface for daytime use.</p>
+
+                    </label>
+
+                    <label class="theme-card">
+
+                        <input
+                            type="radio"
+                            name="theme">
+
+                        <span class="material-symbols-outlined">
+
+                            dark_mode
+
+                        </span>
+
+                        <h4>Dark</h4>
+
+                        <p>Comfortable viewing at night.</p>
+
+                    </label>
+
+                    <label class="theme-card">
+
+                        <input
+                            type="radio"
+                            name="theme">
+
+                        <span class="material-symbols-outlined">
+
+                            routine
+
+                        </span>
+
+                        <h4>System</h4>
+
+                        <p>Follow operating system theme.</p>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+            <!-- ========================================= -->
+            <!-- DATABASE STATUS -->
+            <!-- ========================================= -->
+
+            <div class="card database-card">
+
+                <div class="card-title">
+
+                    <div class="title-left">
+
+                        <span class="material-symbols-outlined">
+
+                            storage
+
+                        </span>
+
+                        <h3>Database Status</h3>
+
+                    </div>
+
+                </div>
+
+                <div class="database-grid">
+
+                    <div class="database-item">
+
+                        <span class="material-symbols-outlined success">
+
+                            cloud_done
+
+                        </span>
+
+                        <div>
+
+                            <h4>Server Status</h4>
+
+                            <p>Connected</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="database-item">
+
+                        <span class="material-symbols-outlined primary">
+
+                            database
+
+                        </span>
+
+                        <div>
+
+                            <h4>Database</h4>
+
+                            <p>PostgreSQL 17</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="database-item">
+
+                        <span class="material-symbols-outlined warning">
+
+                            backup
+
+                        </span>
+
+                        <div>
+
+                            <h4>Last Backup</h4>
+
+                            <p>Today • 02:00 AM</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="database-item">
+
+                        <span class="material-symbols-outlined success">
+
+                            memory
+
+                        </span>
+
+                        <div>
+
+                            <h4>Storage Usage</h4>
+
+                            <p>68% Used</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ========================================= -->
+            <!-- SAVE SETTINGS -->
+            <!-- ========================================= -->
+
+            <div class="settings-actions">
+
+                <button
+                    class="secondary-btn"
+                    id="resetSettings">
+
+                    <span class="material-symbols-outlined">
+
+                        restart_alt
+
+                    </span>
+
+                    Reset Changes
+
+                </button>
+
+                <button
+                    class="primary-btn"
+                    id="saveSettings">
+
+                    <span class="material-symbols-outlined">
+
+                        save
+
+                    </span>
+
+                    Save Settings
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+</div>
+
+<!-- ========================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================= -->
+
+<script src="/static/js/admin_settings.js"></script>
+
+</body>
+
+</html>

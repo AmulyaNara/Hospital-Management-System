@@ -76,7 +76,10 @@
             <h2>MediFlow Dashboard</h2>
             <div class="search-container">
                 <span class="material-symbols-outlined search-icon">search</span>
-                <input type="text" placeholder="Search patients or records...">
+                <input
+    id="visitSearchInput"
+    type="text"
+    placeholder="Search patients or records...">
             </div>
         </div>
         
@@ -92,7 +95,7 @@
      alt="Doctor Profile"
      class="avatar-img">
                     <div class="profile-meta">
-                        <p class="user-name">Dr. Alexander Smith</p>
+                        <p class="user-name">Dr. ajay</p>
                         <p class="user-status">Senior Cardiologist</p>
                     </div>
                 </div>
@@ -122,21 +125,24 @@
         <!-- DASHBOARD OVERVIEW SCORE CARDS -->
         <div class="stats-grid">
             <div class="stat-card primary-accent">
-                <p class="stat-label">TOTAL APPOINTMENTS</p>
-                <p class="stat-value">24</p>
-            </div>
-            <div class="stat-card">
-                <p class="stat-label">WAITING</p>
-                <p class="stat-value">06</p>
-            </div>
-            <div class="stat-card">
-                <p class="stat-label">CONSULTATION</p>
-                <p class="stat-value">02</p>
-            </div>
-            <div class="stat-card">
-                <p class="stat-label">COMPLETED</p>
-                <p class="stat-value">16</p>
-            </div>
+    <p class="stat-label">TOTAL APPOINTMENTS</p>
+    <p class="stat-value" id="totalAppointments">0</p>
+</div>
+
+<div class="stat-card">
+    <p class="stat-label">WAITING</p>
+    <p class="stat-value" id="waitingCount">0</p>
+</div>
+
+<div class="stat-card">
+    <p class="stat-label">CONSULTATION</p>
+    <p class="stat-value" id="consultationCount">0</p>
+</div>
+
+<div class="stat-card">
+    <p class="stat-label">COMPLETED</p>
+    <p class="stat-value" id="completedCount">0</p>
+</div>
         </div>
 
         <!-- VISITS ROW LAYOUT REGISTRY -->
@@ -150,94 +156,33 @@
                 <div class="col-actions">ACTIONS</div>
             </div>
             
-            <!-- Entry Row 1 -->
-            <div class="table-row table-body-row" data-patient-id="45293">
-                <div class="col-time time-text">09:00 AM</div>
-                <div class="col-patient patient-cell">
-                    <div class="avatar-placeholder color-blue">JD</div>
-                    <div>
-                        <p class="patient-name">Johnathan Doe</p>
-                        <p class="patient-id">ID: #45293-M</p>
-                    </div>
-                </div>
-                <div class="col-reason reason-text">Post-Op Follow-up (Cardiac)</div>
-                <div class="col-status status-cell">
-                    <span class="status-pill status-consultation">
-                        <span class="pulse-dot"></span>
-                        In-Consultation
-                    </span>
-                </div>
-                <div class="col-actions actions-cell">
-                    <button class="row-btn" title="Edit Notes"><span class="material-symbols-outlined">edit_note</span></button>
-                    <button class="row-btn" title="More Options"><span class="material-symbols-outlined">more_vert</span></button>
-                </div>
-            </div>
-
-            <!-- Entry Row 2 -->
-            <div class="table-row table-body-row" data-patient-id="12884">
-                <div class="col-time time-text">09:30 AM</div>
-                <div class="col-patient patient-cell">
-                    <div class="avatar-placeholder color-cyan">SA</div>
-                    <div>
-                        <p class="patient-name">Sarah Adams</p>
-                        <p class="patient-id">ID: #12884-F</p>
-                    </div>
-                </div>
-                <div class="col-reason reason-text">Hypertension Check</div>
-                <div class="col-status status-cell">
-                    <span class="status-pill status-arrived">Arrived</span>
-                </div>
-                <div class="col-actions actions-cell">
-                    <button class="row-btn"><span class="material-symbols-outlined">edit_note</span></button>
-                    <button class="row-btn"><span class="material-symbols-outlined">more_vert</span></button>
-                </div>
-            </div>
-
-            <!-- Entry Row 3 -->
-            <div class="table-row table-body-row" data-patient-id="99321">
-                <div class="col-time time-text">10:00 AM</div>
-                <div class="col-patient patient-cell">
-                    <img alt="Maria Lopez" class="patient-avatar-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABRo03XTfvBCwqeXcNzqjzneTZLc12wijpqjAcld6W2q55mxyGxKWIUrS5EPOCS8UtopftBje6WwXrPoCwzw3P6MxlfGePw9-wkUP-xzPNZ_cvMoyd9r5jG9bxnOF2bH1NYKfOo5lPyS3SKXXyRvEDuCgoOJF6EtN1FWGaWOaZusOmGoAxtrGKFUgHDVuBClEqqo-jSCUCRQ0SSCyu8U01eKQwwpIQMPMVwyztGG6w_FjFljcPWNJ1CTG-ndP2AGOLzNGSbC54VNDr">
-                    <div>
-                        <p class="patient-name">Maria Lopez</p>
-                        <p class="patient-id">ID: #99321-F</p>
-                    </div>
-                </div>
-                <div class="col-reason reason-text">Diabetes Consultation</div>
-                <div class="col-status status-cell">
-                    <span class="status-pill status-waiting">Waiting</span>
-                </div>
-                <div class="col-actions actions-cell">
-                    <button class="row-btn"><span class="material-symbols-outlined">edit_note</span></button>
-                    <button class="row-btn"><span class="material-symbols-outlined">more_vert</span></button>
-                </div>
-            </div>
-
-            <!-- Entry Row 4 -->
-            <div class="table-row table-body-row" data-patient-id="88214">
-                <div class="col-time time-text">10:15 AM</div>
-                <div class="col-patient patient-cell">
-                    <div class="avatar-placeholder color-red">RW</div>
-                    <div>
-                        <p class="patient-name">Robert White</p>
-                        <p class="patient-id">ID: #88214-M</p>
-                    </div>
-                </div>
-                <div class="col-reason reason-text">Emergency - Acute Abdominal Pain</div>
-                <div class="col-status status-cell">
-                    <span class="status-pill status-emergency">
-                        <span class="material-symbols-outlined icon-alert">priority_high</span>
-                        Emergency
-                    </span>
-                </div>
-                <div class="col-actions actions-cell">
-                    <button class="row-btn"><span class="material-symbols-outlined">more_vert</span></button>
-                </div>
-            </div>
+            <div id="visitsTableBody"></div>
 
             <div class="table-footer">
-                <button class="btn-text-link">View All 24 Appointments</button>
-            </div>
+
+    <p
+        class="footer-count"
+        id="paginationInfo">
+        Showing 1-6 of 0 Visits
+    </p>
+
+    <div class="pagination-buttons">
+
+        <button
+            class="btn-nav"
+            id="prevBtn">
+            Previous
+        </button>
+
+        <button
+            class="btn-nav active"
+            id="nextBtn">
+            Next
+        </button>
+
+    </div>
+
+</div>
         </div>
 
         <!-- BENTO CLINIC INSIGHT PANEL BLOCKS -->

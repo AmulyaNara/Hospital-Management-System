@@ -118,17 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
         prescriptionsBtn.classList.add("active");
     });
 
-    diagnosisBtn?.addEventListener("click", (e) => {
-        e.preventDefault();
-        hideAllSections();
-
-        if (diagnosisSection)
-            diagnosisSection.style.display = "block";
-
-        removeActive();
-        diagnosisBtn.classList.add("active");
-    });
-
     // Issue Prescription Button Redirect
     const issuePrescriptionBtn =
         document.getElementById("issuePrescriptionBtn");
@@ -138,5 +127,100 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "/doctor-prescriptions";
         });
     }
+    async function loadDashboard() {
+
+    try {
+
+        const response = await fetch("/doctor-stats");
+
+        const data = await response.json();
+
+        document.getElementById("totalPatients").textContent =
+            data.total_patients;
+
+        document.getElementById("todayVisits").textContent =
+            data.today_visits;
+
+        document.getElementById("pendingRx").textContent =
+            data.pending_prescriptions;
+
+        document.getElementById("labResults").textContent =
+            data.pending_lab_results;
+
+    } catch (err) {
+
+        console.error("Dashboard Error:", err);
+
+    }
+
+}
+async function loadUpcomingVisits() {
+
+    try {
+
+        const response = await fetch("/doctor-upcoming-visits");
+
+        console.log("Response:", response);
+
+        const visits = await response.json();
+
+        console.log("Visits:", visits);
+
+        const tbody = document.getElementById("upcomingVisitsBody");
+
+        console.log("Tbody:", tbody);
+
+        tbody.innerHTML = "";
+
+        let html = "";
+
+        visits.forEach(visit => {
+
+            html += `
+            <tr>
+                <td>${visit.visit_time || "-"}</td>
+
+                <td>
+                    <div class="patient-profile-tag">
+                        <span>${visit.patient_name}</span>
+                    </div>
+                </td>
+
+                <td>${visit.chief_complaint}</td>
+
+                <td>
+                    <span class="status-tag">
+                        ${visit.visit_status || "Pending"}
+                    </span>
+                </td>
+
+                <td>
+                    <button class="table-action-btn">
+                        <span class="material-symbols-outlined">
+                            more_vert
+                        </span>
+                    </button>
+                </td>
+            </tr>
+            `;
+
+        });
+
+        tbody.innerHTML = html;
+
+        console.log("Rows Loaded:", visits.length);
+
+    } catch (err) {
+
+        console.error("Upcoming Visits Error:", err);
+
+    }
+
+}
+
+loadUpcomingVisits();
+
+// Call the function
+loadDashboard();
 
 });

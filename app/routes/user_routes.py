@@ -14,9 +14,17 @@ def add_user(
         user.name,
         user.email,
         user.password,
-        user.role,
-        user.phone
-    )
+        "patient",
+        user.phone,
+
+        user.date_of_birth,
+        user.gender,
+        user.address,
+
+        user.emergency_contact_name,
+        user.emergency_contact_phone
+)
+
     
 from app.models.user_orm import (
     create_user,

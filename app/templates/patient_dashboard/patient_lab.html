@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MedCore | Lab Results</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap"
+rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+rel="stylesheet">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', path='css/patient_lab.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h1>MedCore</h1>
+
+<p>PATIENT PORTAL</p>
+
+</div>
+
+<nav>
+
+<a href="/patient-dashboard" class="nav-item">
+
+<span class="material-symbols-outlined">
+dashboard
+</span>
+
+Dashboard
+
+</a>
+
+<a href="/patient-appointments" class="nav-item">
+
+<span class="material-symbols-outlined">
+calendar_today
+</span>
+
+Appointments
+
+</a>
+
+<a href="/patient-reports" class="nav-item">
+
+<span class="material-symbols-outlined">
+folder_shared
+</span>
+
+Records
+
+</a>
+
+<a href="/patient-lab" class="nav-item active">
+
+<span class="material-symbols-outlined">
+science
+</span>
+
+Lab Results
+
+</a>
+
+<a href="/patient-billings" class="nav-item">
+
+<span class="material-symbols-outlined">
+payments
+</span>
+
+Billing
+
+</a>
+
+<a href="/patient-settings" class="nav-item">
+
+<span class="material-symbols-outlined">
+settings
+</span>
+
+Settings
+
+</a>
+
+</nav>
+
+<div class="doctor-card">
+
+<img src="https://i.pravatar.cc/100?img=68">
+
+<div>
+
+<h4>Dr. Aris Thorne</h4>
+
+<p>Attending Physician</p>
+
+</div>
+
+</div>
+
+</aside>
+
+<!-- ================= MAIN ================= -->
+
+<main class="main-content">
+
+<header class="topbar">
+
+<div class="search-box">
+
+<span class="material-symbols-outlined">
+search
+</span>
+
+<input
+type="text"
+placeholder="Search test results or physicians...">
+
+</div>
+
+<div class="header-right">
+
+<button class="icon-btn">
+
+<span class="material-symbols-outlined">
+
+notifications
+
+</span>
+
+<div class="dot"></div>
+
+</button>
+
+<button class="icon-btn">
+
+<span class="material-symbols-outlined">
+
+help
+
+</span>
+
+</button>
+
+<div class="profile">
+
+<span>
+
+John Doe
+
+</span>
+
+<div class="avatar">
+
+JD
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+<section class="page-content">
+
+<div class="breadcrumb">
+
+Dashboard /
+
+<span>
+
+Lab Results
+
+</span>
+
+</div>
+
+<div class="page-header">
+
+<div>
+
+<h2>
+
+Laboratory Investigations
+
+</h2>
+
+<p>
+
+View and track your clinical diagnostics from the last 12 months.
+
+</p>
+
+</div>
+
+<div class="page-actions">
+
+<button class="btn-outline">
+
+<span class="material-symbols-outlined">
+
+filter_list
+
+</span>
+
+Filter
+
+</button>
+
+<button class="btn-dark">
+
+<span class="material-symbols-outlined">
+
+download
+
+</span>
+
+Download All
+
+</button>
+
+</div>
+
+</div>
+
+<!-- PART 2 STARTS HERE -->
+
+<div class="dashboard-grid">
+    <!-- ================= LEFT : TREND ANALYSIS ================= -->
+
+<div class="trend-card">
+
+    <div class="trend-header">
+
+        <h3>
+
+            <span class="material-symbols-outlined">
+                trending_up
+            </span>
+
+            Trend Analysis : Glucose (HbA1c)
+
+        </h3>
+
+        <span class="trend-period">
+
+            Past 6 Months
+
+        </span>
+
+    </div>
+
+
+    <!-- Fake Chart -->
+
+    <div class="chart">
+
+        <div class="bar-group">
+
+            <div class="bar h70"></div>
+
+            <span>Jan</span>
+
+        </div>
+
+        <div class="bar-group">
+
+            <div class="bar h60"></div>
+
+            <span>Feb</span>
+
+        </div>
+
+        <div class="bar-group">
+
+            <div class="bar h80"></div>
+
+            <span>Mar</span>
+
+        </div>
+
+        <div class="bar-group">
+
+            <div class="bar h65"></div>
+
+            <span>Apr</span>
+
+        </div>
+
+        <div class="bar-group">
+
+            <div class="bar h75"></div>
+
+            <span>May</span>
+
+        </div>
+
+        <div class="bar-group active">
+
+            <div class="value-tag">
+
+                5.6%
+
+            </div>
+
+            <div class="bar h120"></div>
+
+            <span>
+
+                JUN
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= RIGHT SUMMARY ================= -->
+
+<div class="summary-panel">
+
+
+    <!-- Cholesterol -->
+
+    <div class="summary-card">
+
+        <div>
+
+            <small>
+
+                Total Cholesterol
+
+            </small>
+
+            <h2>
+
+                180
+
+                <span>
+
+                    mg/dL
+
+                </span>
+
+            </h2>
+
+            <p class="success">
+
+                <span class="material-symbols-outlined">
+
+                    check_circle
+
+                </span>
+
+                Optimal Range
+
+            </p>
+
+        </div>
+
+        <div class="summary-icon">
+
+            <span class="material-symbols-outlined">
+
+                ecg
+
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- HbA1c -->
+
+    <div class="summary-card">
+
+        <div>
+
+            <small>
+
+                Hemoglobin A1c
+
+            </small>
+
+            <h2>
+
+                5.6
+
+                <span>
+
+                    %
+
+                </span>
+
+            </h2>
+
+            <p class="success">
+
+                <span class="material-symbols-outlined">
+
+                    check_circle
+
+                </span>
+
+                Normal
+
+            </p>
+
+        </div>
+
+        <div class="summary-icon">
+
+            <span class="material-symbols-outlined">
+
+                bloodtype
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+<!-- ================= TABLE ================= -->
+
+<div class="lab-table-card">
+
+    <div class="table-header">
+
+        <h3>
+
+            Recent Lab Investigations
+
+        </h3>
+
+        <span>
+
+            Showing 5 of 24 Results
+
+        </span>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Investigation Name</th>
+
+                <th>Order Date</th>
+
+                <th>Physician</th>
+
+                <th>Status</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="labTable">
+
+</tbody>
+
+</table>
+
+
+
+<div class="load-more">
+
+    <button>
+
+        Load More Records
+
+        <span class="material-symbols-outlined">
+
+            expand_more
+
+        </span>
+
+    </button>
+
+</div>
+
+</div>
+
+
+
+<footer class="page-footer">
+
+<div class="security">
+
+<span class="material-symbols-outlined">
+
+lock
+
+</span>
+
+All laboratory data is encrypted and protected under HIPAA compliance.
+
+</div>
+
+<p>
+
+Disclaimer: These results are for informational purposes only.
+Please consult your healthcare provider for clinical interpretation
+and treatment decisions.
+
+</p>
+
+</footer>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="{{ url_for('static', path='js/patient_lab.js') }}"></script>
+
+</body>
+
+</html>

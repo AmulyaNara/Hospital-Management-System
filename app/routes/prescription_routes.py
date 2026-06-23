@@ -12,8 +12,9 @@ from app.schemas.prescription_schema import PrescriptionCreate
 from app.security.oauth2 import get_current_user
 from app.security.role_checker import require_role
 
+from app.database.session import SessionLocal
+from app.models.prescription_orm import Prescription
 router = APIRouter()
-
 
 # GET
 @router.get("/prescriptions")
@@ -28,7 +29,59 @@ def get_prescriptions(
 
     return get_all_prescriptions()
 
+@router.get("/prescription-stats")
+def get_prescription_stats(
+    current_user=Depends(get_current_user)
+):
+    print("INSIDE PRESCRIPTION STATS")
 
+    require_role(current_user, ["admin", "doctor"])
+
+    db = SessionLocal()
+
+    try:
+        from datetime import date
+
+        print("COUNTING TOTAL")
+        total_prescriptions = db.query(Prescription).count()
+
+        print("COUNTING ACTIVE")
+        active_prescriptions = (
+            db.query(Prescription)
+            .filter(Prescription.prescription_status == "Active")
+            .count()
+        )
+
+        print("COUNTING COMPLETED")
+        completed_prescriptions = (
+            db.query(Prescription)
+            .filter(Prescription.prescription_status == "Completed")
+            .count()
+        )
+
+        print("COUNTING TODAY")
+        today_prescriptions = (
+            db.query(Prescription)
+            .filter(Prescription.date_prescribed == date.today())
+            .count()
+        )
+
+        print("DONE")
+
+        return {
+            "total_prescriptions": total_prescriptions,
+            "active_prescriptions": active_prescriptions,
+            "completed_prescriptions": completed_prescriptions,
+            "today_prescriptions": today_prescriptions
+        }
+
+    except Exception as e:
+        print("ERROR:", e)
+        raise
+    
+
+    finally:
+        db.close()
 # POST
 @router.post("/prescriptions")
 def add_prescription(
@@ -47,7 +100,14 @@ def add_prescription(
         prescription.dosage,
         prescription.frequency,
         prescription.duration,
-        prescription.instructions
+        prescription.instructions,
+        prescription.patient_name,
+        prescription.patient_code,
+        prescription.prescription_status,
+        prescription.doctor_id,
+        prescription.doctor_name,
+        prescription.diagnosis,
+        prescription.doctor_notes
     )
 
 
@@ -70,7 +130,9 @@ def edit_prescription(
         prescription.dosage,
         prescription.frequency,
         prescription.duration,
-        prescription.instructions
+        prescription.instructions,
+        prescription.diagnosis,
+        prescription.doctor_notes
     )
 
 

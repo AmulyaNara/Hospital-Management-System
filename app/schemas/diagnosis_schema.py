@@ -5,3 +5,8 @@ class DiagnosisCreate(BaseModel):
     disease: str
     symptoms: str
     doctor_notes: str
+    patient_name: str
+    patient_code: str
+    severity: str
+    diagnosis_status: str
+    icd_code: str

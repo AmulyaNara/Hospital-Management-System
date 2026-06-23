@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Patient Care Portal | Billing</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap"
+rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+rel="stylesheet">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', path='css/patient_billings.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- ======================================
+SIDEBAR
+====================================== -->
+
+ <aside class="sidebar">
+
+        <div class="logo">
+
+            <h1>MedCore</h1>
+
+            <p>Patient Portal</p>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="/patient-dashboard" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    dashboard
+                </span>
+
+                Dashboard
+
+            </a>
+
+            <a href="/patient-appointments" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    calendar_today
+                </span>
+
+                Appointments
+
+            </a>
+
+            <a href="/patient-reports" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    description
+                </span>
+
+                Records
+
+            </a>
+
+            <a href="/patient-lab" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    biotech
+                </span>
+
+                Lab Results
+
+            </a>
+
+            <a href="/patient-billings" class="nav-item active">
+
+                <span class="material-symbols-outlined">
+                    payments
+                </span>
+
+                Billing
+
+            </a>
+
+            <a href="/patient-settings" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    settings
+                </span>
+
+                Settings
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <a href="/patient-support" class="nav-item">
+
+                <span class="material-symbols-outlined">
+                    contact_support
+                </span>
+
+                Support
+
+            </a>
+
+            <a href="/logout" class="nav-item logout">
+
+                <span class="material-symbols-outlined">
+                    logout
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+<!-- ======================================
+MAIN
+====================================== -->
+
+<main class="main-content">
+
+<header class="topbar">
+
+<div class="portal-name">
+
+Patient Care Portal
+
+</div>
+
+<div class="top-actions">
+
+<a href="#">Support</a>
+
+<a href="#">FAQ</a>
+
+<button>
+
+<span class="material-symbols-outlined">
+
+notifications
+
+</span>
+
+</button>
+
+<button>
+
+<span class="material-symbols-outlined">
+
+help
+
+</span>
+
+</button>
+
+<button>
+
+<span class="material-symbols-outlined">
+
+settings
+
+</span>
+
+</button>
+
+<div class="profile">
+
+    <div class="profile-info">
+
+        <h4 id="patientName"></h4>
+
+        <p>
+            Patient ID :
+            <span id="patientId"></span>
+        </p>
+
+    </div>
+
+    <img
+        src="https://i.pravatar.cc/80?img=15"
+        alt="Profile">
+
+</div>
+
+
+</div>
+
+</header>
+
+<section class="content">
+
+<div class="page-title">
+
+<h1>
+
+Billing & Invoices
+
+</h1>
+
+<p>
+
+View and manage your clinical service fees and insurance claims.
+
+</p>
+
+</div>
+
+<!-- PART 2 STARTS HERE -->
+
+<div class="summary-grid">
+    <!-- ======================================
+OUTSTANDING BALANCE
+====================================== -->
+
+<div class="summary-card secondary">
+
+    <div class="card-top">
+
+        <span>
+
+            Outstanding Balance
+
+        </span>
+
+        <span class="material-symbols-outlined">
+
+            account_balance_wallet
+
+        </span>
+
+    </div>
+
+    <h2>
+
+        ₹4,250.00
+
+    </h2>
+
+    <div class="card-footer">
+
+        <span class="material-symbols-outlined">
+
+            info
+
+        </span>
+
+        Due in 12 days
+
+    </div>
+
+</div>
+
+
+
+<!-- ======================================
+TOTAL PAID
+====================================== -->
+
+<div class="summary-card primary">
+
+    <div class="card-top">
+
+        <span>
+
+            Total Paid (YTD)
+
+        </span>
+
+        <span class="material-symbols-outlined">
+
+            payments
+
+        </span>
+
+    </div>
+
+    <h2>
+
+        ₹1,02,400.00
+
+    </h2>
+
+    <div class="card-footer success">
+
+        <span class="material-symbols-outlined">
+
+            check_circle
+
+        </span>
+
+        Updated Oct 24
+
+    </div>
+
+</div>
+
+
+
+<!-- ======================================
+RECENT CREDITS
+====================================== -->
+
+<div class="summary-card tertiary">
+
+    <div class="card-top">
+
+        <span>
+
+            Recent Credits
+
+        </span>
+
+        <span class="material-symbols-outlined">
+
+            redeem
+
+        </span>
+
+    </div>
+
+    <h2>
+
+        ₹3,750.00
+
+    </h2>
+
+    <div class="card-footer">
+
+        <span class="material-symbols-outlined">
+
+            history
+
+        </span>
+
+        From Insurance Refund
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+<!-- ======================================
+TABS
+====================================== -->
+
+<div class="tabs">
+
+    <button class="tab active">
+
+        Invoices
+
+    </button>
+
+    <button class="tab">
+
+        Payment History
+
+    </button>
+
+</div>
+
+
+
+<!-- ======================================
+TABLE CARD
+====================================== -->
+
+<div class="invoice-card">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Invoice ID
+
+</th>
+
+<th>
+
+Date & Service
+
+</th>
+
+<th>
+
+Patient Responsibility
+
+</th>
+
+<th>
+
+Status
+
+</th>
+
+<th>
+
+View
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="billingTable">
+
+</tbody>
+
+</table>
+
+
+
+<!-- ============================
+Security Footer
+============================= -->
+
+<div class="invoice-footer">
+
+<div class="security">
+
+<span class="material-symbols-outlined">
+
+lock
+
+</span>
+
+Secure View-Only Protocol Enabled.
+Actions are restricted to administrative verified portals only.
+
+</div>
+
+<div class="updated">
+
+Last Updated: Oct 26, 2023 • 10:42 AM IST
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ============================
+Support Card
+============================= -->
+
+<div class="support-card">
+
+<div class="support-icon">
+
+<span class="material-symbols-outlined">
+
+info
+
+</span>
+
+</div>
+
+<div>
+
+<h3>
+
+Billing Support
+
+</h3>
+
+<p>
+
+If you have questions regarding an invoice or your insurance
+coverage, please reach out to our billing coordination team.
+
+For security reasons, this portal does not support direct
+payments. Please use the official hospital kiosk or the
+verified bank link sent to your registered mobile number.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="{{ url_for('static', path='js/patient_billings.js') }}"></script>
+
+
+</body>
+
+</html>

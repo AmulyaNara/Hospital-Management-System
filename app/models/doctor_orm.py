@@ -15,8 +15,8 @@ class Doctor(Base):
     password = Column(String(255))
     experience_years = Column(Integer)
     created_at = Column(TIMESTAMP)
-
-
+    clinical_status = Column(String(20), default="Active")
+    #profile_image = Column(String(255))
 # GET
 def get_all_doctors():
     db = SessionLocal()
@@ -34,7 +34,8 @@ def get_all_doctors():
                 "phone": doctor.phone,
                 "email": doctor.email,
                 "password": "********",
-                "experience_years": doctor.experience_years
+                "experience_years": doctor.experience_years,
+                "clinical_status": doctor.clinical_status
             })
 
         return doctor_list
@@ -61,7 +62,8 @@ def create_doctor(
             phone=phone,
             email=email,
             password=hash_password(password),
-            experience_years=experience
+            experience_years=experience,
+            clinical_status="Active"
         )
 
         db.add(new_doctor)

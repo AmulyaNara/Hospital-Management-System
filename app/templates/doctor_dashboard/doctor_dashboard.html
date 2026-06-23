@@ -84,7 +84,7 @@
                     </button>
                     <div class="user-profile">
                         <div class="profile-meta">
-                            <span class="user-name">Dr. Alexander Smith</span>
+                            <span class="user-name">Dr. Ajay</span>
                             <span class="user-role">Senior Cardiologist</span>
                         </div>
                         <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=100&q=80" alt="Doctor Profile" class="avatar-img">
@@ -104,7 +104,7 @@
                             <span class="material-symbols-outlined icon-box">calendar_today</span>
                         </div>
                         <div class="metric-body">
-                            <h2>12</h2>
+                            <h2 id="todayVisits">0</h2>
                             <p class="trend-up"><span class="material-symbols-outlined">arrow_upward</span> 2 remaining for today</p>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                             <span class="material-symbols-outlined icon-box">description</span>
                         </div>
                         <div class="metric-body">
-                            <h2>05</h2>
+                            <h2 id="pendingRx">0</h2>
                             <p class="alert-text">Requires immediate review</p>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                             <span class="material-symbols-outlined icon-box">biotech</span>
                         </div>
                         <div class="metric-body">
-                            <h2>08</h2>
+                            <h2 id="labResults">0</h2>
                             <p class="danger-text"><span class="material-symbols-outlined">warning</span> 2 Critical Alerts</p>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                             <span class="material-symbols-outlined icon-box">groups</span>
                         </div>
                         <div class="metric-body">
-                            <h2>1,248</h2>
+                            <h2 id="totalPatients">0</h2>
                             <p class="sub-text">+14 New this month</p>
                         </div>
                     </div>
@@ -160,44 +160,8 @@
                                         <th>ACTION</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="time-col">09:30 AM</td>
-                                        <td>
-                                            <div class="patient-profile-tag">
-                                                <div class="initials-avatar cy">JW</div>
-                                                <span>Jane Williams</span>
-                                            </div>
-                                        </td>
-                                        <td>Post-Op Follow-up</td>
-                                        <td><span class="status-tag consulting">In-Consultation</span></td>
-                                        <td><button class="table-action-btn"><span class="material-symbols-outlined">more_vert</span></button></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="time-col">10:15 AM</td>
-                                        <td>
-                                            <div class="patient-profile-tag">
-                                                <div class="initials-avatar bl">RT</div>
-                                                <span>Robert Thompson</span>
-                                            </div>
-                                        </td>
-                                        <td>Hypertension Check</td>
-                                        <td><span class="status-tag arrived">Arrived</span></td>
-                                        <td><button class="table-action-btn"><span class="material-symbols-outlined">more_vert</span></button></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="time-col">11:00 AM</td>
-                                        <td>
-                                            <div class="patient-profile-tag">
-                                                <div class="initials-avatar pur">EM</div>
-                                                <span>Elena Martinez</span>
-                                            </div>
-                                        </td>
-                                        <td>New Patient Intake</td>
-                                        <td><span class="status-tag waiting">Waiting</span></td>
-                                        <td><button class="table-action-btn"><span class="material-symbols-outlined">more_vert</span></button></td>
-                                    </tr>
-                                </tbody>
+                                <tbody id="upcomingVisitsBody">
+                            </tbody>
                             </table>
                         </div>
                     </div>

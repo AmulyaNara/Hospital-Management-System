@@ -86,7 +86,7 @@
         
             <div class="user-profile">
         <div class="profile-meta">
-            <span class="user-name">Dr. Alexander Smith</span>
+            <span class="user-name">Dr. Ajay</span>
             <span class="user-role">Senior Cardiologist</span>
         </div>
 
@@ -109,7 +109,7 @@
                     </div>
                     <div>
                         <p class="font-label-md">Total Doctors</p>
-                        <h2 class="font-display-lg">142</h2>
+                        <h2 class="font-display-lg"><span id="totalDoctors">0</span></h2>
                     </div>
                 </div>
                 <div class="stat-card clinical-shadow muted-accent">
@@ -121,7 +121,7 @@
                     </div>
                     <div>
                         <p class="font-label-md">Total Patients</p>
-                        <h2 class="font-display-lg">1,284</h2>
+                        <h2 class="font-display-lg"><span id="totalPatients">0</span></h2>
                     </div>
                 </div>
                 <div class="stat-card clinical-shadow muted-accent">
@@ -133,7 +133,7 @@
                     </div>
                     <div>
                         <p class="font-label-md">Active Staff</p>
-                        <h2 class="font-display-lg">312</h2>
+                        <h2 class="font-display-lg"><span id="activeStaff">0</span></h2>
                     </div>
                 </div>
                 <div class="stat-card clinical-shadow danger-accent">
@@ -145,7 +145,7 @@
                     </div>
                     <div>
                         <p class="font-label-md">Bed Occupancy</p>
-                        <h2 class="font-display-lg">442 / 480</h2>
+                        <h2 class="font-display-lg"><span id="bedOccupancy">0/0</span></h2>
                     </div>
                 </div>
             </div>
@@ -176,111 +176,31 @@
                             </tr>
                         </thead>
                         <tbody id="registryTableBody">
-                            <tr>
-                                <td style="padding-left: 40px;">
-                                    <div class="profile-cell">
-                                        <div class="avatar-placeholder">SC</div>
-                                        <div class="profile-info">
-                                            <p class="font-label-md name">Dr. Sarah Chen</p>
-                                            <p class="font-body-sm sub">ID: DOC-9284</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="specialty-pill font-label-sm">Cardiology</span></td>
-                                <td>
-                                    <div class="status-cell active">
-                                        <span class="status-dot"></span>
-                                        <span class="font-label-sm">Active</span>
-                                    </div>
-                                </td>
-                                <td class="font-body-sm" style="color: var(--on-surface-variant)">s.chen@hospital.com</td>
-                                <td style="padding-right: 40px;">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding-left: 40px;">
-                                    <div class="profile-cell">
-                                        <img alt="Dr. Michael Ross" class="avatar-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIujARO0jdferRwmN_bxcKTMUHFINiYs-8AMpYeXU-W5uOQwvS5GKgypwKihctrnlOIB3-4_aLGvT2y4yQceiRGcD6ncroB4nsAM0dtAYkJcFflxn36g1gUsN8c3ndaVHkcKpLRrxzSusm75AiG5JU_N26f2Iy7EhJ2_5e--EUJ2wwnnbHHssIh-bT_TfZ1N6PrV_1OWaa7HqSSMlEkQP-8Yw2IVIflJydIVxIBvCQ3oA8D_1tfBxHu5sqyIo8RxVfwGK_spXgYxzi"/>
-                                        <div class="profile-info">
-                                            <p class="font-label-md name">Dr. Michael Ross</p>
-                                            <p class="font-body-sm sub">ID: DOC-4102</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="specialty-pill font-label-sm">Neurology</span></td>
-                                <td>
-                                    <div class="status-cell leave">
-                                        <span class="status-dot"></span>
-                                        <span class="font-label-sm">On Leave</span>
-                                    </div>
-                                </td>
-                                <td class="font-body-sm" style="color: var(--on-surface-variant)">m.ross@hospital.com</td>
-                                <td style="padding-right: 40px;">
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding-left: 40px;">
-                                    <div class="profile-cell">
-                                        <div class="avatar-placeholder" style="background-color: rgba(0,30,44,0.15); color: var(--tertiary-container)">ER</div>
-                                        <div class="profile-info">
-                                            <p class="font-label-md name">Dr. Elena Rodriguez</p>
-                                            <p class="font-body-sm sub">ID: DOC-7721</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="specialty-pill font-label-sm">Pediatrics</span></td>
-                                <td>
-                                    <div class="status-cell active">
-                                        <span class="status-dot"></span>
-                                        <span class="font-label-sm">Active</span>
-                                    </div>
-                                </td>
-                                <td class="font-body-sm" style="color: var(--on-surface-variant)">e.rodriguez@hospital.com</td>
-                                
-                            </tr>
-                            <tr>
-                                <td style="padding-left: 40px;">
-                                    <div class="profile-cell">
-                                        <img alt="Dr. Alan Wright" class="avatar-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuS77CJOhkhofXkADOCm4ZpPRAzFMDmskJZyLDCZ5UYK4Ay0krXL1v0R0s_YwkfZMmlITYzn_kmUW-C_p5UEbFO6-4gFwZLyQWvvckbFjP498RNm2qYnyFhOjuY5cL-q-V5c5Q02cn_zXwgsxqZED4onRr5ljdSuuRo7N9VIupyKanqW4wKhoacUfDYgnCRItzPHdrYHj0S2wWcyY_CLVYc9kfBq8uKjvBRzxKqVUZHq_I6MKSPmKLg8sKBzMqMUfqZXsh9WgEDV4T"/>
-                                        <div class="profile-info">
-                                            <p class="font-label-md name">Dr. Alan Wright</p>
-                                            <p class="font-body-sm sub">ID: DOC-3315</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="specialty-pill font-label-sm">General Surgery</span></td>
-                                <td>
-                                    <div class="status-cell surgery">
-                                        <span class="status-dot"></span>
-                                        <span class="font-label-sm">In Surgery</span>
-                                    </div>
-                                </td>
-                                <td class="font-body-sm" style="color: var(--on-surface-variant)">a.wright@hospital.com</td>
-                                <td style="padding-right: 40px;">
-                                    
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="pagination-footer">
-                    <p class="font-body-sm">Showing 1-4 of 142 Doctors</p>
+                    <p
+    class="footer-count"
+    id="paginationInfo">
+    Showing 1-6 of 13 Doctors
+</p>
                     <div class="pagination-controls">
-                        <button class="page-btn">
-                            <span class="material-symbols-outlined" style="font-size:18px;">chevron_left</span>
-                        </button>
-                        <button class="page-btn active font-label-sm">1</button>
-                        <button class="page-btn font-label-sm">2</button>
-                        <button class="page-btn font-label-sm">3</button>
-                        <span class="page-ellipse">...</span>
-                        <button class="page-btn font-label-sm">36</button>
-                        <button class="page-btn">
-                            <span class="material-symbols-outlined" style="font-size:18px;">chevron_right</span>
-                        </button>
-                    </div>
+
+    <button
+        class="page-btn"
+        id="prevBtn">
+        <
+    </button>
+
+    <button
+        class="page-btn active"
+        id="nextBtn">
+        >
+    </button>
+
+</div>
                 </div>
             </section>
         

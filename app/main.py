@@ -14,6 +14,10 @@ from app.routes.user_routes import router as user_router
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.responses import HTMLResponse
+from app.routes.settings_routes import router as settings_router
+
+from app.routes.lab_routes import router as lab_router
+from app.routes.billing_routes import router as billing_router
 app = FastAPI()
 
 app.add_middleware(
@@ -39,8 +43,9 @@ app.include_router(prescription_router)
 app.include_router(auth_router)
 app.include_router(admin_router)
 app.include_router(user_router)
-
-
+app.include_router(lab_router)
+app.include_router(billing_router)
+app.include_router(settings_router)
 # =========================
 # Login Page
 # =========================
@@ -193,4 +198,130 @@ def new_diagnosis(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="doctor_dashboard/new_diagnosis.html"
+    )
+# =========================
+# Patient Appointments
+# =========================
+@app.get("/patient-appointments")
+def patient_appointments(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="patient_dashboard/patient_appointment.html"
+    )
+
+
+# =========================
+# Patient Reports
+# =========================
+@app.get("/patient-reports")
+def patient_reports(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="patient_dashboard/patient_reports.html"
+    )
+
+
+# =========================
+# Patient Lab Results
+# =========================
+@app.get("/patient-lab")
+def patient_lab(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="patient_dashboard/patient_lab.html"
+    )
+
+
+# =========================
+# Patient Billing
+# =========================
+@app.get("/patient-billings")
+def patient_billings(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="patient_dashboard/patient_billings.html"
+    )
+
+
+# =========================
+# Patient Settings
+# =========================
+@app.get("/patient-settings")
+def patient_settings(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="patient_dashboard/patient_settings.html"
+    )
+
+
+# =========================
+# Patient Support
+# =========================
+@app.get("/patient-support")
+def patient_support(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="patient_dashboard/patient_support.html"
+    )
+    
+# =========================
+# Patient Support
+# =========================
+@app.get("/patient-support")
+def patient_support(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="patient_dashboard/patient_support.html"
+    )
+  
+@app.get("/patient-settings")
+def patient_settings(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="patient_dashboard/patient_settings.html"
+    )
+    
+@app.get("/receptionist-appointments")
+def receptionist_appointments(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="reception_dashboard/receptionist_appointments.html"
+    )
+    
+@app.get("/admin-patients")
+def admin_patients(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="admin_dashboard/admin_patient.html"
+
+    )
+
+@app.get("/admin-diagnosis")
+def admin_diagnosis(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="admin_dashboard/admin_diagnosis.html"
+    )
+
+
+@app.get("/admin-prescriptions")
+def admin_prescriptions(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="admin_dashboard/admin_prescriptions.html"
+    )
+
+@app.get("/admin-receptionists")
+def admin_receptionists(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="admin_dashboard/admin_receptionist.html"
+    )
+    
+@app.get("/admin-settings")
+def admin_settings(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="admin_dashboard/admin_settings.html"
     )

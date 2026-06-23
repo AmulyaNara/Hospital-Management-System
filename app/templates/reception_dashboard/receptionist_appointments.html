@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MedCore | Reception Appointments</title>
+
+    <!-- Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Icons -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+          rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='css/receptionist_appointments.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ===================================================
+         SIDEBAR
+    ==================================================== -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <div class="logo">
+
+                <h1>
+
+                    MedCore
+
+                </h1>
+
+                <p>
+
+                    Reception Portal
+
+                </p>
+
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="/receptionist-dashboard"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        dashboard
+
+                    </span>
+
+                    <span>
+
+                        Dashboard
+
+                    </span>
+
+                </a>
+
+                <a href="/receptionist-appointments"
+                   class="nav-item active">
+
+                    <span class="material-symbols-outlined">
+
+                        calendar_month
+
+                    </span>
+
+                    <span>
+
+                        Appointments
+
+                    </span>
+
+                </a>
+
+                <a href="/receptionist-patients"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        groups
+
+                    </span>
+
+                    <span>
+
+                        Patients
+
+                    </span>
+
+                </a>
+
+                <a href="/receptionist-doctors"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        stethoscope
+
+                    </span>
+
+                    <span>
+
+                        Doctors
+
+                    </span>
+
+                </a>
+
+                <a href="/receptionist-records"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        description
+
+                    </span>
+
+                    <span>
+
+                        Records
+
+                    </span>
+
+                </a>
+
+                <a href="/receptionist-settings"
+                   class="nav-item">
+
+                    <span class="material-symbols-outlined">
+
+                        settings
+
+                    </span>
+
+                    <span>
+
+                        Settings
+
+                    </span>
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <!-- Sidebar Footer -->
+
+        <div class="sidebar-footer">
+
+            <button class="book-btn"
+                    id="newAppointmentBtn">
+
+                <span class="material-symbols-outlined">
+
+                    add
+
+                </span>
+
+                <span>
+
+                    New Appointment
+
+                </span>
+
+            </button>
+
+            <a href="/logout"
+               class="nav-item logout">
+
+                <span class="material-symbols-outlined">
+
+                    logout
+
+                </span>
+
+                <span>
+
+                    Logout
+
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- ===================================================
+         MAIN CONTENT
+    ==================================================== -->
+
+    <main class="main-content">
+
+        <!-- ===================================================
+             TOPBAR
+        ==================================================== -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <h2>
+
+                    Appointments
+
+                </h2>
+
+                <div class="search-box">
+
+                    <span class="material-symbols-outlined">
+
+                        search
+
+                    </span>
+
+                    <input
+                        type="text"
+                        placeholder="Search patient or appointment...">
+
+                </div>
+
+            </div>
+
+            <div class="top-actions">
+
+                <button>
+
+                    <span class="material-symbols-outlined">
+
+                        notifications
+
+                    </span>
+
+                </button>
+
+                <button>
+
+                    <span class="material-symbols-outlined">
+
+                        help
+
+                    </span>
+
+                </button>
+
+                <div class="profile">
+
+                    <div class="profile-info">
+
+                        <h4>
+
+                            Priya Sharma
+
+                        </h4>
+
+                        <p>
+
+                            Reception Lead
+
+                        </p>
+
+                    </div>
+
+                    <img src="https://i.pravatar.cc/80?img=47"
+                         alt="Receptionist">
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- ===================================================
+             PAGE CONTENT
+        ==================================================== -->
+
+        <section class="content">
+                        <!-- ===================================================
+                 PAGE HEADER
+            ==================================================== -->
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>
+
+                        Appointment Management
+
+                    </h1>
+
+                    <p>
+
+                        Manage patient appointments, waiting queues and daily schedules.
+
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-btn">
+
+                    <span class="material-symbols-outlined">
+
+                        add_circle
+
+                    </span>
+
+                    Book Appointment
+
+                </button>
+
+            </div>
+
+            <!-- ===================================================
+                 STATISTICS CARDS
+            ==================================================== -->
+
+            <section class="stats-grid">
+
+                <!-- Today's Appointments -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon green">
+
+                            <span class="material-symbols-outlined">
+
+                                calendar_month
+
+                            </span>
+
+                        </div>
+
+                        <span class="stat-change positive">
+
+                            +12%
+
+                        </span>
+
+                    </div>
+
+                    <p class="stat-title">
+
+                        Today's Appointments
+
+                    </p>
+
+                    <h2>
+
+                        42
+
+                    </h2>
+
+                    <small>
+
+                        7 appointments remaining
+
+                    </small>
+
+                </div>
+
+                <!-- Waiting -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon blue">
+
+                            <span class="material-symbols-outlined">
+
+                                hourglass_empty
+
+                            </span>
+
+                        </div>
+
+                        <span class="stat-change negative">
+
+                            -3%
+
+                        </span>
+
+                    </div>
+
+                    <p class="stat-title">
+
+                        Waiting Patients
+
+                    </p>
+
+                    <h2>
+
+                        08
+
+                    </h2>
+
+                    <small>
+
+                        Average wait 14 mins
+
+                    </small>
+
+                </div>
+
+                <!-- Revenue -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon orange">
+
+                            <span class="material-symbols-outlined">
+
+                                payments
+
+                            </span>
+
+                        </div>
+
+                        <span class="stat-change neutral">
+
+                            Daily Target
+
+                        </span>
+
+                    </div>
+
+                    <p class="stat-title">
+
+                        Revenue (Today)
+
+                    </p>
+
+                    <h2>
+
+                        ₹24,500
+
+                    </h2>
+
+                    <small>
+
+                        81% of daily target
+
+                    </small>
+
+                </div>
+
+                <!-- Completed -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon teal">
+
+                            <span class="material-symbols-outlined">
+
+                                task_alt
+
+                            </span>
+
+                        </div>
+
+                        <span class="stat-change positive">
+
+                            82%
+
+                        </span>
+
+                    </div>
+
+                    <p class="stat-title">
+
+                        Completed
+
+                    </p>
+
+                    <h2>
+
+                        34
+
+                    </h2>
+
+                    <small>
+
+                        Successfully checked in
+
+                    </small>
+
+                </div>
+
+            </section>
+
+            <!-- ===================================================
+                 MAIN GRID
+            ==================================================== -->
+
+            <section class="appointment-layout">
+
+                <!-- ===================================================
+                     LEFT PANEL
+                ==================================================== -->
+
+                <div class="appointments-panel">
+                                    <!-- ===================================================
+                     APPOINTMENTS TABLE
+                ==================================================== -->
+
+                <div class="table-card">
+
+                    <div class="table-header">
+
+                        <div>
+
+                            <h2>
+
+                                Active Schedules
+
+                            </h2>
+
+                            <p>
+
+                                Real-time appointment tracking and patient flow.
+
+                            </p>
+
+                        </div>
+
+                        <div class="table-actions">
+
+                            <button class="outline-btn">
+
+                                <span class="material-symbols-outlined">
+
+                                    filter_list
+
+                                </span>
+
+                                Filter
+
+                            </button>
+
+                            <button class="outline-btn">
+
+                                <span class="material-symbols-outlined">
+
+                                    download
+
+                                </span>
+
+                                Export
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+
+                                        Patient
+
+                                    </th>
+
+                                    <th>
+
+                                        Doctor
+
+                                    </th>
+
+                                    <th>
+
+                                        Time
+
+                                    </th>
+
+                                    <th>
+
+                                        Type
+
+                                    </th>
+
+                                    <th>
+
+                                        Status
+
+                                    </th>
+
+                                    <th>
+
+                                        Action
+
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <!-- Row 1 -->
+
+                                <tr>
+
+                                    <td>
+
+                                        <div class="patient-info">
+
+                                            <div class="patient-avatar">
+
+                                                RK
+
+                                            </div>
+
+                                            <div>
+
+                                                <h4>
+
+                                                    Rajesh Kumar
+
+                                                </h4>
+
+                                                <small>
+
+                                                    ID : MED-0021
+
+                                                </small>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+
+                                        Dr. Anjali Mehta
+
+                                    </td>
+
+                                    <td>
+
+                                        09:30 AM
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="badge follow">
+
+                                            Follow-up
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status confirmed">
+
+                                            ● Confirmed
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <button class="icon-btn">
+
+                                            <span class="material-symbols-outlined">
+
+                                                more_horiz
+
+                                            </span>
+
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+
+                                <!-- Row 2 -->
+
+                                <tr>
+
+                                    <td>
+
+                                        <div class="patient-info">
+
+                                            <div class="patient-avatar green">
+
+                                                SP
+
+                                            </div>
+
+                                            <div>
+
+                                                <h4>
+
+                                                    Sunita Patel
+
+                                                </h4>
+
+                                                <small>
+
+                                                    ID : MED-7742
+
+                                                </small>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+
+                                        Dr. Vikram Singh
+
+                                    </td>
+
+                                    <td>
+
+                                        10:15 AM
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="badge general">
+
+                                            General
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status waiting">
+
+                                            ● Waiting
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <button class="icon-btn">
+
+                                            <span class="material-symbols-outlined">
+
+                                                more_horiz
+
+                                            </span>
+
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+
+                                <!-- Row 3 -->
+
+                                <tr>
+
+                                    <td>
+
+                                        <div class="patient-info">
+
+                                            <div class="patient-avatar blue">
+
+                                                AS
+
+                                            </div>
+
+                                            <div>
+
+                                                <h4>
+
+                                                    Amit Sharma
+
+                                                </h4>
+
+                                                <small>
+
+                                                    ID : MED-1130
+
+                                                </small>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+
+                                        Dr. Anjali Mehta
+
+                                    </td>
+
+                                    <td>
+
+                                        11:00 AM
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="badge emergency">
+
+                                            Emergency
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status progress">
+
+                                            ● In Progress
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <button class="icon-btn">
+
+                                            <span class="material-symbols-outlined">
+
+                                                more_horiz
+
+                                            </span>
+
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+
+                                <!-- Row 4 -->
+
+                                <tr>
+
+                                    <td>
+
+                                        <div class="patient-info">
+
+                                            <div class="patient-avatar teal">
+
+                                                MV
+
+                                            </div>
+
+                                            <div>
+
+                                                <h4>
+
+                                                    Meera Varma
+
+                                                </h4>
+
+                                                <small>
+
+                                                    ID : MED-6623
+
+                                                </small>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+
+                                        Dr. Vikram Singh
+
+                                    </td>
+
+                                    <td>
+
+                                        11:45 AM
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="badge specialist">
+
+                                            Specialist
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status confirmed">
+
+                                            ● Confirmed
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <button class="icon-btn">
+
+                                            <span class="material-symbols-outlined">
+
+                                                more_horiz
+
+                                            </span>
+
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <!-- ===================================================
+                         PAGINATION
+                    ==================================================== -->
+
+                    <div class="table-footer">
+
+                        <p>
+
+                            Showing 1 - 4 of 42 appointments
+
+                        </p>
+
+                        <div class="pagination">
+
+                            <button>
+
+                                <span class="material-symbols-outlined">
+
+                                    chevron_left
+
+                                </span>
+
+                            </button>
+
+                            <button class="active">
+
+                                1
+
+                            </button>
+
+                            <button>
+
+                                2
+
+                            </button>
+
+                            <button>
+
+                                3
+
+                            </button>
+
+                            <button>
+
+                                <span class="material-symbols-outlined">
+
+                                    chevron_right
+
+                                </span>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ===================================================
+                 RIGHT PANEL STARTS
+            ==================================================== -->
+
+            <aside class="right-panel">
+                                <!-- ===================================================
+                     QUEUE OVERVIEW
+                ==================================================== -->
+
+                <div class="widget-card queue-card">
+
+                    <div class="widget-header">
+
+                        <h3>
+
+                            Queue Overview
+
+                        </h3>
+
+                        <span class="material-symbols-outlined">
+
+                            monitoring
+
+                        </span>
+
+                    </div>
+
+                    <h2>
+
+                        18 Patients
+
+                    </h2>
+
+                    <p>
+
+                        Currently waiting across all departments
+
+                    </p>
+
+                    <div class="queue-progress">
+
+                        <div class="queue-fill"></div>
+
+                    </div>
+
+                    <div class="queue-stats">
+
+                        <div>
+
+                            <strong>
+
+                                Avg Wait
+
+                            </strong>
+
+                            <span>
+
+                                14 mins
+
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+
+                                Peak
+
+                            </strong>
+
+                            <span>
+
+                                11:00 AM
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ===================================================
+                     QUICK ACTIONS
+                ==================================================== -->
+
+                <div class="widget-card">
+
+                    <div class="widget-header">
+
+                        <h3>
+
+                            Quick Actions
+
+                        </h3>
+
+                    </div>
+
+                    <div class="quick-actions">
+
+                        <button class="action-btn">
+
+                            <span class="material-symbols-outlined">
+
+                                add_circle
+
+                            </span>
+
+                            New Appointment
+
+                        </button>
+
+                        <button class="action-btn">
+
+                            <span class="material-symbols-outlined">
+
+                                person_add
+
+                            </span>
+
+                            Register Patient
+
+                        </button>
+
+                        <button class="action-btn">
+
+                            <span class="material-symbols-outlined">
+
+                                payments
+
+                            </span>
+
+                            Create Invoice
+
+                        </button>
+
+                        <button class="action-btn">
+
+                            <span class="material-symbols-outlined">
+
+                                print
+
+                            </span>
+
+                            Print Token
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- ===================================================
+                     DOCTOR STATUS
+                ==================================================== -->
+
+                <div class="widget-card">
+
+                    <div class="widget-header">
+
+                        <h3>
+
+                            Doctor Availability
+
+                        </h3>
+
+                    </div>
+
+                    <div class="doctor-list">
+
+                        <div class="doctor-item">
+
+                            <img src="https://i.pravatar.cc/60?img=12">
+
+                            <div>
+
+                                <h4>
+
+                                    Dr. Anjali Mehta
+
+                                </h4>
+
+                                <small>
+
+                                    Cardiology
+
+                                </small>
+
+                            </div>
+
+                            <span class="online">
+
+                                Available
+
+                            </span>
+
+                        </div>
+
+                        <div class="doctor-item">
+
+                            <img src="https://i.pravatar.cc/60?img=15">
+
+                            <div>
+
+                                <h4>
+
+                                    Dr. Vikram Singh
+
+                                </h4>
+
+                                <small>
+
+                                    Orthopedics
+
+                                </small>
+
+                            </div>
+
+                            <span class="busy">
+
+                                Busy
+
+                            </span>
+
+                        </div>
+
+                        <div class="doctor-item">
+
+                            <img src="https://i.pravatar.cc/60?img=20">
+
+                            <div>
+
+                                <h4>
+
+                                    Dr. Sneha Rao
+
+                                </h4>
+
+                                <small>
+
+                                    Pediatrics
+
+                                </small>
+
+                            </div>
+
+                            <span class="online">
+
+                                Available
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ===================================================
+                     TODAY'S REVENUE
+                ==================================================== -->
+
+                <div class="widget-card revenue-card">
+
+                    <div class="widget-header">
+
+                        <h3>
+
+                            Today's Revenue
+
+                        </h3>
+
+                        <span class="material-symbols-outlined">
+
+                            payments
+
+                        </span>
+
+                    </div>
+
+                    <h2>
+
+                        ₹24,500
+
+                    </h2>
+
+                    <p>
+
+                        Total collection for today
+
+                    </p>
+
+                    <div class="revenue-details">
+
+                        <div>
+
+                            <span>
+
+                                Consultation
+
+                            </span>
+
+                            <strong>
+
+                                ₹18,000
+
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+
+                                Lab
+
+                            </span>
+
+                            <strong>
+
+                                ₹4,500
+
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+
+                                Pharmacy
+
+                            </span>
+
+                            <strong>
+
+                                ₹2,000
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </section>
+                    <!-- ===================================================
+                 BOOK APPOINTMENT MODAL
+            ==================================================== -->
+
+            <div
+                class="modal"
+                id="appointmentModal">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+
+                        <h2>
+
+                            Book New Appointment
+
+                        </h2>
+
+                        <button
+                            class="close-modal"
+                            id="closeModal">
+
+                            <span class="material-symbols-outlined">
+
+                                close
+
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                    <form
+                        id="appointmentForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    Patient Name
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    placeholder="Enter patient name">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    Patient ID
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    placeholder="MED-0001">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    Doctor
+
+                                </label>
+
+                                <select>
+
+                                    <option>
+
+                                        Select Doctor
+
+                                    </option>
+
+                                    <option>
+
+                                        Dr. Anjali Mehta
+
+                                    </option>
+
+                                    <option>
+
+                                        Dr. Vikram Singh
+
+                                    </option>
+
+                                    <option>
+
+                                        Dr. Sneha Rao
+
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    Department
+
+                                </label>
+
+                                <select>
+
+                                    <option>
+
+                                        Cardiology
+
+                                    </option>
+
+                                    <option>
+
+                                        Orthopedics
+
+                                    </option>
+
+                                    <option>
+
+                                        Pediatrics
+
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    Appointment Date
+
+                                </label>
+
+                                <input
+                                    type="date">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    Time
+
+                                </label>
+
+                                <input
+                                    type="time">
+
+                            </div>
+
+                            <div class="form-group full-width">
+
+                                <label>
+
+                                    Notes
+
+                                </label>
+
+                                <textarea
+                                    rows="4"
+                                    placeholder="Additional notes..."></textarea>
+
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+
+                            <button
+                                type="button"
+                                class="outline-btn"
+                                id="cancelAppointment">
+
+                                Cancel
+
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="primary-btn">
+
+                                Save Appointment
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </main>
+
+</div>
+
+<script src="{{ url_for('static', path='js/receptionist_appointments.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,65 +1,261 @@
-/**
- * MedCore Clinical Records Platform Workspace Script
- */
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Client Search Filtering Engine Pipeline
-    const searchInput = document.getElementById('patientSearchInput');
-    
-    if (searchInput) {
-        searchInput.addEventListener('input', (event) => {
-            const query = event.target.value.toLowerCase().trim();
-            const dataRows = document.querySelectorAll('.clinical-table-row');
-            
-            dataRows.forEach(row => {
-                // Read text contents from target criteria within identity nodes
-                const textContent = row.innerText.toLowerCase();
-                
-                if (textContent.includes(query)) {
-                    // Reset to standard fallback visible state
-                    row.style.display = '';
-                } else {
-                    // Hide securely from user views
-                    row.style.display = 'none';
-                }
-            });
-        });
-    }
+    const API_URL = "http://127.0.0.1:8000";
+    let allPatients = [];
+    let currentPage = 1;
+    const recordsPerPage = 6;
+    async function loadPatientStats() {
 
-    // 2. Intercept and Dispatch Safe Notifications for Emergency Alerts
-    const alertButtons = document.querySelectorAll('.alert-trigger');
-    
-    alertButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            // Prevent standard parent table cell action triggers
-            event.stopPropagation();
-            
-            const targetRow = button.closest('tr');
-            let patientName = 'Patient Record';
-            
-            if (targetRow) {
-                const nameNode = targetRow.querySelector('.p-name');
-                if (nameNode) {
-                    patientName = nameNode.innerText.trim();
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/patient-stats`
+            );
+
+        const stats =
+            await response.json();
+
+        document.getElementById(
+            "totalPatients"
+        ).textContent =
+            stats.total_patients;
+
+        document.getElementById(
+            "criticalCare"
+        ).textContent =
+            stats.critical_care;
+
+        document.getElementById(
+            "pendingFollowups"
+        ).textContent =
+            stats.pending_followups;
+
+        document.getElementById(
+            "avgWaitTime"
+        ).textContent =
+            stats.avg_wait_time;
+
+    }
+    catch(error) {
+
+        console.error(
+            "Failed to load stats:",
+            error
+        );
+    }
+}
+    // =========================
+    // Load Dashboard Cards
+    // =========================
+    async function loadPatients() {
+
+    try {
+
+        const token =
+            localStorage.getItem(
+                "access_token"
+            );
+
+        const response =
+            await fetch(
+                `${API_URL}/patients`,
+                {
+                    headers: {
+                        Authorization:
+                            `Bearer ${token}`
+                    }
                 }
-            }
-            
-            // Dispatch window prompt context
-            alert(`CLINICAL ALERT: Immediate attention requested for ${patientName}. The Emergency Response Team has been notified.`);
-        });
+            );
+
+        if (!response.ok) {
+            throw new Error(
+                `HTTP Error: ${response.status}`
+            );
+        }
+
+        const patients =
+            await response.json();
+
+        allPatients = patients;
+
+        renderPatients();
+
+    }
+    catch(error) {
+
+        console.error(
+            "Failed to load patients:",
+            error
+        );
+    }
+}
+function renderPatients() {
+
+    const tableBody =
+        document.getElementById(
+            "patientsTableBody"
+        );
+
+    tableBody.innerHTML = "";
+
+    const start =
+        (currentPage - 1) *
+        recordsPerPage;
+
+    const end =
+        start +
+        recordsPerPage;
+
+    const pagePatients =
+        allPatients.slice(
+            start,
+            end
+        );
+
+    pagePatients.forEach(patient => {
+
+        tableBody.innerHTML += `
+            <tr class="clinical-table-row">
+
+                <td>
+                    <div class="patient-identity-cell">
+                        <div>
+
+                            <p class="p-name">
+                                ${patient.patient_name || "N/A"}
+                            </p>
+
+                            <p class="p-condition">
+                                ${patient.medical_condition || patient.gender || "N/A"}
+                            </p>
+
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="stack-cell">
+
+                        <p class="p-id">
+                            PID-${patient.patient_id}
+                        </p>
+
+                        <p class="p-age">
+                            ${patient.age || "N/A"} Years
+                        </p>
+
+                    </div>
+                </td>
+
+                <td>
+                    <div class="stack-cell">
+
+                        <p class="p-date">
+                            ${patient.last_visit_date || "No Visit"}
+                        </p>
+
+                    </div>
+                </td>
+
+                <td>
+
+                    <span class="status-badge stable">
+                        ${patient.clinical_status || "Active"}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <div class="row-actions">
+
+                        <button class="btn-view">
+                            View Records
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </tr>
+        `;
     });
 
-    // 3. Dynamic Rotation Simulation on Load Button Component Click
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', () => {
-            console.log("MedCore system fetching next patient register chunk...");
-        });
-    }
-});
-document.getElementById("patients-btn").addEventListener("click", function(e) {
-    e.preventDefault();
+    updatePaginationInfo();
+}
+function updatePaginationInfo() {
 
-    document.getElementById("dashboard-content").style.display = "none";
-    document.getElementById("patients-content").style.display = "block";
+    const start =
+        ((currentPage - 1) *
+        recordsPerPage) + 1;
+
+    const end =
+        Math.min(
+            currentPage *
+            recordsPerPage,
+            allPatients.length
+        );
+
+    const paginationInfo =
+        document.getElementById(
+            "paginationInfo"
+        );
+
+    if (paginationInfo) {
+
+        paginationInfo.textContent =
+            `Showing ${start}-${end} of ${allPatients.length} records`;
+    }
+}
+
+const prevBtn =
+    document.getElementById(
+        "prevBtn"
+    );
+
+if (prevBtn) {
+
+    prevBtn.addEventListener(
+        "click",
+        () => {
+
+            if(currentPage > 1){
+
+                currentPage--;
+
+                renderPatients();
+            }
+        }
+    );
+}
+
+const nextBtn =
+    document.getElementById(
+        "nextBtn"
+    );
+
+if (nextBtn) {
+
+    nextBtn.addEventListener(
+        "click",
+        () => {
+
+            const totalPages =
+                Math.ceil(
+                    allPatients.length /
+                    recordsPerPage
+                );
+
+            if(currentPage < totalPages){
+
+                currentPage++;
+
+                renderPatients();
+            }
+        }
+    );
+}
+loadPatientStats();
+loadPatients();
 });

@@ -108,37 +108,126 @@ function goToStep(stepNumber) {
 // =============================
 // FORM SUBMIT VALIDATION
 // =============================
-function handleFormSubmit(event) {
+async function handleFormSubmit(event) {
+
+    event.preventDefault();
+
+    const fullName =
+        document.getElementById("fullName").value;
+
+    const email =
+        document.getElementById("email").value;
+
+    const phone =
+        document.getElementById("phone").value;
+
+    const dateOfBirth =
+        document.getElementById("dateOfBirth").value;
+
+    const gender =
+        document.getElementById("gender").value;
+
+    const address =
+        document.getElementById("address").value;
+
+    const contactName =
+        document.getElementById("contactName").value;
+
+    const emergencyPhone =
+        document.getElementById("emergencyPhone").value;
 
     const password =
-        document.getElementById("password");
+        document.getElementById("password").value;
 
     const confirmPassword =
-        document.getElementById("confirmPassword");
+        document.getElementById("confirmPassword").value;
 
-    const regex =
+    const passwordRegex =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,8}$/;
 
-    if (!regex.test(password.value)) {
+    if (!passwordRegex.test(password)) {
 
         alert(
             "Password must be 6-8 characters with uppercase, lowercase, number and special character."
         );
 
-        event.preventDefault();
         return false;
     }
 
-    if (password.value !== confirmPassword.value) {
+    if (password !== confirmPassword) {
 
         alert("Passwords do not match!");
 
-        event.preventDefault();
         return false;
     }
 
-    alert("Registration Successful!");
-    return true;
+    const userData = {
+
+        name: fullName,
+        email: email,
+        password: password,
+
+        role: "patient",
+
+        phone: phone,
+
+        date_of_birth: dateOfBirth,
+        gender: gender,
+        address: address,
+
+        emergency_contact_name: contactName,
+        emergency_contact_phone: emergencyPhone
+    };
+
+    try {
+
+        const response = await fetch("/users", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(userData)
+        });
+
+        
+        let result = {};
+
+        try {
+            result = await response.json();
+        } catch {
+            result = {
+        message: "Unable to connect to server."
+    };
+}
+
+        if (response.ok) {
+
+            alert("Registration Successful!");
+
+            window.location.href = "/";
+        }
+        else {
+
+            alert(
+                result.message ||
+                "Registration failed."
+            );
+        }
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Unable to connect to server."
+        );
+    }
+
+    return false;
 }
 
 
@@ -418,3 +507,53 @@ if (password) {
         }
     });
 }
+
+function validatePhone(inputId, errorId) {
+    const input = document.getElementById(inputId);
+    const error = document.getElementById(errorId);
+
+    input.addEventListener("input", () => {
+        let value = input.value.replace(/\D/g, "");
+        input.value = value;
+
+        if (value.length === 0) {
+            error.textContent = "";
+            input.classList.remove("input-error");
+            return;
+        }
+
+        if (!/^[6-9]/.test(value)) {
+            error.textContent = "Enter a valid number (must start with 6, 7, 8, or 9)";
+            input.classList.add("input-error");
+        } else {
+            error.textContent = "";
+            input.classList.remove("input-error");
+        }
+    });
+}
+
+validatePhone("phone", "phoneError");
+validatePhone("emergencyPhone", "emergencyPhoneError");
+
+const phone = document.getElementById("phone");
+const emergencyPhone = document.getElementById("emergencyPhone");
+
+function validateMobile(input) {
+    const value = input.value.trim();
+
+    if (value === "") {
+        input.classList.remove("invalid", "valid");
+        return;
+    }
+
+    if (/^[6-9]\d{9}$/.test(value)) {
+        input.classList.remove("invalid");
+        input.classList.add("valid");
+    } else {
+        input.classList.remove("valid");
+        input.classList.add("invalid");
+    }
+}
+
+phone.addEventListener("input", () => validateMobile(phone));
+emergencyPhone.addEventListener("input", () => validateMobile(emergencyPhone));

@@ -18,27 +18,27 @@
         </div>
         
         <nav class="sidebar-nav">
-            <a class="nav-item active" href="#">
+            <a class="nav-item active" href="/patient-dashboard">
                 <span class="material-symbols-outlined">dashboard</span>
                 <span>Dashboard</span>
             </a>
-            <a class="nav-item" href="#">
+            <a class="nav-item" href="/patient-appointments">
                 <span class="material-symbols-outlined">calendar_today</span>
                 <span>Appointments</span>
             </a>
-            <a class="nav-item" href="#">
+            <a class="nav-item" href="/patient-reports">
                 <span class="material-symbols-outlined">description</span>
                 <span>Records</span>
             </a>
-            <a class="nav-item" href="#">
+            <a class="nav-item" href="/patient-lab">
                 <span class="material-symbols-outlined">biotech</span>
                 <span>Lab Results</span>
             </a>
-            <a class="nav-item" href="#">
+            <a class="nav-item" href="/patient-billings">
                 <span class="material-symbols-outlined">payments</span>
                 <span>Billing</span>
             </a>
-            <a class="nav-item" href="#">
+            <a class="nav-item" href="/patient-settings">
                 <span class="material-symbols-outlined">settings</span>
                 <span>Settings</span>
             </a>
@@ -46,11 +46,11 @@
 
         <div class="sidebar-footer">
             <button class="btn btn-book-appointment">Book Appointment</button>
-            <a class="nav-item nav-support" href="#">
+            <a class="nav-item nav-support" href="/patient-support">
                 <span class="material-symbols-outlined">contact_support</span>
                 <span>Support</span>
             </a>
-            <a class="nav-item nav-logout" href="#">
+            <a class="nav-item nav-logout" href="/logout">
                 <span class="material-symbols-outlined">logout</span>
                 <span>Logout</span>
             </a>
@@ -76,8 +76,13 @@
             <div class="divider"></div>
             <div class="profile-block">
                 <div class="profile-text">
-                    <p class="profile-name">Sarah Jenkins</p>
-                    <p class="profile-id">Patient ID: 8829-X</p>
+                    <p class="profile-name" id="patientName">
+    Sarah Jenkins
+</p>
+                    <p class="profile-id">
+    Patient ID:
+    <span id="patientId">8829-X</span>
+</p>
                 </div>
                 <img alt="Sarah Jenkins" class="profile-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXo0MwfCOENMKGKgQ9z4tcGe3bpsOmnlWrpPjnQikodR7xQRv1q7y5eHNd8WbO5O4WgR3tyLRYbphkjywJ4laQB9FddmBPOWpsbaybSFmNAIx_CpuUuQO8uNy23W4cT7dMJh03EYuiPRS0eQiWqMv9ghYZVlmHDOAS6OPoqbqVkLv8roTglLpSkiaHiDL5JiygcE8QkTgj9MYgXTt-VY4W-dZfl6g-1bJVEDJ6DSb_bvl9Roe00uvvGv7KpKrk1Fz7NbcfqzHLFI0b"/>
             </div>
@@ -89,7 +94,7 @@
             
             <section class="hero-banner">
                 <div class="hero-content">
-                    <h2>Good morning, Sarah.</h2>
+                    <h2 id="welcomeMessage"></h2>
                     <p>Your health data is up to date. You have one appointment scheduled for next week with Dr. Aris.</p>
                     <div class="hero-buttons">
                         <button class="btn btn-teal">
@@ -107,15 +112,27 @@
                         <span class="material-symbols-outlined text-teal">event</span>
                         <span class="stat-title">Next Appointment</span>
                     </div>
-                    <p class="stat-main-val">Oct 24, 2023</p>
-                    <p class="stat-sub-val">09:30 AM • Dr. Aris</p>
+                    <p
+    class="stat-main-val"
+    id="nextAppointment">
+    Oct 24, 2023
+</p>
+                    <p
+    class="stat-sub-val"
+    id="nextAppointmentInfo">
+    09:30 AM • Dr. Aris
+</p>
                 </div>
                 <div class="stat-card">
                     <div class="stat-title-row">
                         <span class="material-symbols-outlined text-teal">prescriptions</span>
                         <span class="stat-title">Active Prescriptions</span>
                     </div>
-                    <p class="stat-main-val">3 Orders</p>
+                    <p
+    class="stat-main-val"
+    id="activePrescriptions">
+    3 Orders
+</p>
                     <p class="stat-sub-val">2 refills available</p>
                 </div>
                 <div class="stat-card">
@@ -123,7 +140,11 @@
                         <span class="material-symbols-outlined text-teal">biotech</span>
                         <span class="stat-title">Recent Lab Result</span>
                     </div>
-                    <p class="stat-main-val">Normal</p>
+                    <p
+    class="stat-main-val"
+    id="recentLabResult">
+    Normal
+</p>
                     <p class="stat-sub-val">Complete Blood Count (CBC)</p>
                 </div>
                 <div class="stat-card">
@@ -131,7 +152,11 @@
                         <span class="material-symbols-outlined text-error">payments</span>
                         <span class="stat-title">Outstanding Balance</span>
                     </div>
-                    <p class="stat-main-val">$42.00</p>
+                    <p
+    class="stat-main-val"
+    id="outstandingBalance">
+    $42.00
+</p>
                     <button class="inline-link text-teal font-semibold">Pay Now</button>
                 </div>
             </section>
