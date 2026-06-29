@@ -1650,3 +1650,20 @@ margin-bottom:20px;
 display:none;
 
 }
+.brand-icon{
+    width:52px;
+    height:52px;
+    border-radius:12px;
+    background:#0f766e;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+    flex-shrink:0;
+}
+
+.brand-icon .material-symbols-outlined{
+    font-size:28px;
+}

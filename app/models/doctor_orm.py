@@ -18,11 +18,38 @@ class Doctor(Base):
     clinical_status = Column(String(20), default="Active")
     #profile_image = Column(String(255))
 # GET
-def get_all_doctors():
+def get_all_doctors(
+    page=1,
+    limit=10,
+    search="",
+    specialization=""
+):
     db = SessionLocal()
 
     try:
-        doctors = db.query(Doctor).all()
+
+        query = db.query(Doctor)
+
+        # Search
+        if search:
+            query = query.filter(
+                Doctor.doctor_name.ilike(f"%{search}%")
+            )
+
+        # Filter
+        if specialization:
+            query = query.filter(
+                Doctor.specialization.ilike(f"%{specialization}%")
+            )
+
+        total = query.count()
+
+        doctors = (
+            query
+            .offset((page - 1) * limit)
+            .limit(limit)
+            .all()
+        )
 
         doctor_list = []
 
@@ -33,17 +60,20 @@ def get_all_doctors():
                 "specialization": doctor.specialization,
                 "phone": doctor.phone,
                 "email": doctor.email,
-                "password": "********",
                 "experience_years": doctor.experience_years,
                 "clinical_status": doctor.clinical_status
             })
 
-        return doctor_list
+        return {
+            "data": doctor_list,
+            "page": page,
+            "limit": limit,
+            "total": total,
+            "pages": (total + limit - 1) // limit
+        }
 
     finally:
         db.close()
-
-
 # POST
 def create_doctor(
     name,
@@ -78,33 +108,55 @@ def create_doctor(
 
 
 # PUT
+# =====================================================
+# UPDATE DOCTOR
+# =====================================================
+
 def update_doctor(
     doctor_id,
-    specialization
+    doctor_name,
+    specialization,
+    phone,
+    email,
+    experience_years,
+    clinical_status
 ):
+
     db = SessionLocal()
 
     try:
+
         doctor = (
             db.query(Doctor)
-            .filter(
-                Doctor.doctor_id == doctor_id
-            )
+            .filter(Doctor.doctor_id == doctor_id)
             .first()
         )
 
         if not doctor:
-            return {"error": "Doctor not found"}
 
+            return {
+                "message": "Doctor not found"
+            }
+
+        doctor.doctor_name = doctor_name
         doctor.specialization = specialization
+        doctor.phone = phone
+        doctor.email = email
+        doctor.experience_years = experience_years
+        doctor.clinical_status = clinical_status
 
         db.commit()
 
+        db.refresh(doctor)
+
         return {
+
             "message": "Doctor updated successfully!"
+
         }
 
     finally:
+
         db.close()
 
 

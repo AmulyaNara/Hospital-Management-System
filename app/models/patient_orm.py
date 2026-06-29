@@ -286,7 +286,7 @@ def get_patient_dashboard(email):
             "patient_name": patient.patient_name,
 
             "patient_id": patient.patient_id,
-
+            
             "blood_group": patient.blood_group,
 
             "medical_condition": patient.medical_condition,
@@ -315,7 +315,8 @@ def get_patient_dashboard(email):
                 str(visit.visit_time)
                 if visit and visit.visit_time
                 else "",
-
+            "doctor_name": doctor_name,
+            
             "doctor_name":
                 doctor_name,
 
@@ -486,4 +487,82 @@ def get_patient_records(email):
 
     finally:
 
+        db.close()
+    
+# ==========================================
+# Patient Reminders
+# ==========================================
+
+def get_patient_reminders(email: str):
+
+    db = SessionLocal()
+
+    try:
+
+        patient = (
+            db.query(Patient)
+            .filter(Patient.email == email)
+            .first()
+        )
+
+        if not patient:
+
+            return []
+
+        reminders = []
+
+        reminders.append({
+
+            "title": "Annual Check-up Due",
+
+            "message":
+                "Your annual health check-up is due.",
+
+            "action": "Schedule Now",
+
+            "type": "warning"
+
+        })
+
+        reminders.append({
+
+            "title": "Flu Shot Available",
+
+            "message":
+                "Protect yourself this season.",
+
+            "action": "View Locations",
+
+            "type": "success"
+
+        })
+
+        return reminders
+
+    finally:
+
+        db.close()
+    
+def get_patient_profile(email):
+
+    db = SessionLocal()
+
+    try:
+
+        patient = (
+            db.query(Patient)
+            .filter(Patient.email == email)
+            .first()
+        )
+
+        if not patient:
+            return {"error": "Patient not found"}
+
+        return {
+            "patient_id": patient.patient_id,
+            "patient_name": patient.patient_name,
+            "phone": patient.phone
+        }
+
+    finally:
         db.close()

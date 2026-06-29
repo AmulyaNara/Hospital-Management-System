@@ -1153,3 +1153,77 @@ tbody tr:hover .arrow{
     border-radius:0 6px 6px 0;
 
 }
+.clinic-map{
+    position:relative;
+    width:100%;
+    overflow:hidden;
+    border-radius:18px;
+}
+
+.india-map{
+    width:100%;
+    display:block;
+    border-radius:18px;
+}
+
+.hospital-marker{
+    position:absolute;
+
+    /* Hyderabad area */
+    top:63%;
+    left:57%;
+
+    transform:translate(-50%,-50%);
+
+    color:#12b8a6;
+
+    font-size:48px;
+
+    animation:bounce 1.8s infinite;
+}
+
+@keyframes bounce{
+
+    0%,100%{
+        transform:translate(-50%,-50%);
+    }
+
+    50%{
+        transform:translate(-50%,-65%);
+    }
+
+}.status{
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.status.pending{
+
+    background:#FFF4D8;
+
+    color:#A46B00;
+
+}
+
+.status.completed{
+
+    background:#DFF8EA;
+
+    color:#18794E;
+
+}
+
+.status.cancelled{
+
+    background:#FFE5E5;
+
+    color:#C62828;
+
+}

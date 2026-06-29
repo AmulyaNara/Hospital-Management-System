@@ -294,20 +294,118 @@ document.addEventListener("DOMContentLoaded", () => {
        DEMO LIVE STATS
     ========================================================== */
 
-    setInterval(()=>{
+    async function loadPrescriptionStats() {
 
-        const cards=document.querySelectorAll(".stat-card h2");
+    try {
 
-        if(cards.length>=3){
+        const response =
+            await fetch("/prescription-stats");
 
-            cards[0].innerHTML=1240+Math.floor(Math.random()*15);
+        const data =
+            await response.json();
 
-            cards[1].innerHTML=40+Math.floor(Math.random()*8);
+        document.getElementById(
+            "totalPrescriptions"
+        ).textContent =
+            data.total_prescriptions;
 
-        }
+        document.getElementById(
+            "activePrescriptions"
+        ).textContent =
+            data.active_prescriptions;
 
-    },10000);
+        document.getElementById(
+            "completedPrescriptions"
+        ).textContent =
+            data.completed_prescriptions;
 
+        document.getElementById(
+            "todayPrescriptions"
+        ).textContent =
+            data.today_prescriptions;
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Prescription Stats Error:",
+            error
+        );
+
+    }
+
+}
+
+async function loadPrescriptionTable() {
+
+    try {
+
+        const response =
+            await fetch("/prescriptions");
+
+        const prescriptions =
+            await response.json();
+
+        const tbody =
+            document.querySelector(
+                "#prescriptionTable tbody"
+            );
+
+        tbody.innerHTML = "";
+
+        prescriptions.forEach(p => {
+
+            tbody.innerHTML += `
+
+            <tr>
+
+                <td>#PR-${p.prescription_id}</td>
+
+                <td>${p.patient_name || "-"}</td>
+
+                <td>${p.patient_code || "-"}</td>
+
+                <td>${p.medicine_name || "-"}</td>
+
+                <td>${p.dosage || "-"}</td>
+
+                <td>${p.frequency || "-"}</td>
+
+                <td>${p.duration || "-"}</td>
+
+                <td>
+                    <span class="status">
+                        ${p.prescription_status}
+                    </span>
+                </td>
+
+                <td>
+                    <button class="icon-btn">
+                        <span class="material-symbols-outlined">
+                            visibility
+                        </span>
+                    </button>
+                </td>
+
+            </tr>
+
+            `;
+
+        });
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Prescription Table Error:",
+            error
+        );
+
+    }
+
+}
     /* ==========================================================
        TOAST
     ========================================================== */

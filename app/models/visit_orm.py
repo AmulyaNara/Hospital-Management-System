@@ -5,12 +5,13 @@ from sqlalchemy import (
     Time,
     Text,
     TIMESTAMP,
-    String
+    String,
+    Numeric
 )
 
 from app.database.base import Base
 from app.database.session import SessionLocal
-
+from sqlalchemy import Numeric
 
 
 
@@ -26,6 +27,7 @@ class Visit(Base):
     created_at = Column(TIMESTAMP)
     visit_time = Column(Time)
     visit_status = Column(String(30))
+    consultation_fee = Column(Numeric(10,2), default=500)
 
 # GET
 def get_all_visits():
@@ -49,16 +51,16 @@ def get_all_visits():
 
         for visit, patient_name in visits:
             visit_list.append({
-                "visit_id": visit.visit_id,
-                "patient_id": visit.patient_id,
-                "doctor_id": visit.doctor_id,
-                "patient_name": patient_name,
-                "visit_date": str(visit.visit_date),
-                "chief_complaint": visit.chief_complaint,
-                "visit_number": visit.visit_number,
-                "visit_time": str(visit.visit_time),
-                "visit_status": visit.visit_status
-})
+        "visit_id": visit.visit_id,
+        "patient_id": visit.patient_id,
+        "doctor_id": visit.doctor_id,
+        "patient_name": patient_name,
+        "visit_date": str(visit.visit_date),
+        "reason": visit.chief_complaint,
+        "visit_number": visit.visit_number,
+        "visit_time": str(visit.visit_time),
+        "visit_status": visit.visit_status
+    })
 
         return visit_list
 
@@ -70,30 +72,49 @@ def get_all_visits():
 
 
 # POST
+# POST
 def create_visit(
-    patient_id,
+    email,
     doctor_id,
     visit_date,
     chief_complaint,
     visit_number,
-    visit_time,
     visit_status
 ):
+    from app.models.patient_orm import Patient
     db = SessionLocal()
 
     try:
+
+        # Find logged-in patient
+        patient = (
+            db.query(Patient)
+            .filter(
+                Patient.email == email
+            )
+            .first()
+        )
+
+        if not patient:
+            return {
+                "error": "Patient not found"
+            }
+
+        # Create visit
         new_visit = Visit(
-            patient_id=patient_id,
+            patient_id=patient.patient_id,
             doctor_id=doctor_id,
             visit_date=visit_date,
-            chief_complaint=chief_complaint,
+            reason=chief_complaint,
             visit_number=visit_number,
-            visit_time=visit_time,
+            visit_time=None,
             visit_status=visit_status
         )
 
         db.add(new_visit)
+
         db.commit()
+
         db.refresh(new_visit)
 
         return {
@@ -101,20 +122,26 @@ def create_visit(
         }
 
     except Exception as e:
+
         db.rollback()
-        return {"error": str(e)}
+
+        return {
+            "error": str(e)
+        }
 
     finally:
+
         db.close()
 
 
 
 def get_patient_appointments(email):
     from app.models.patient_orm import Patient
+    from app.models.doctor_orm import Doctor
+
     db = SessionLocal()
 
     try:
-
         patient = (
             db.query(Patient)
             .filter(Patient.email == email)
@@ -125,7 +152,15 @@ def get_patient_appointments(email):
             return []
 
         visits = (
-            db.query(Visit)
+            db.query(
+    Visit,
+    Doctor.doctor_name,
+    Doctor.specialization
+)
+            .join(
+                Doctor,
+                Visit.doctor_id == Doctor.doctor_id
+            )
             .filter(
                 Visit.patient_id == patient.patient_id
             )
@@ -137,30 +172,29 @@ def get_patient_appointments(email):
 
         visit_list = []
 
-        for visit in visits:
+        for visit, doctor_name,specialization in visits:
 
             visit_list.append({
-
-                "visit_id": visit.visit_id,
-
-                "visit_date": str(visit.visit_date),
-
-                "visit_time": str(visit.visit_time),
-
-               
-               #"doctor_name": visit.doctor_name,
-
-                "reason": visit.chief_complaint,
-                "status": visit.visit_status,
-
-            })
+    "visit_id": visit.visit_id,
+    "doctor_name": doctor_name,
+    "specialization": specialization,
+    "visit_date": str(visit.visit_date),
+    "visit_time": (
+        str(visit.visit_time)
+        if visit.visit_time
+        else "Time Not Available"
+    ),
+    "reason": visit.chief_complaint or "Not Available",
+    "status": visit.visit_status
+})
 
         return visit_list
 
-    finally:
+    except Exception as e:
+        return {"error": str(e)}
 
+    finally:
         db.close()
-        
 # PUT
 def update_visit(
     visit_id,
@@ -231,4 +265,69 @@ def delete_visit(
         return {"error": str(e)}
 
     finally:
+        db.close()
+        
+def get_visit_details(visit_id):
+
+    from app.models.patient_orm import Patient
+    from app.models.doctor_orm import Doctor
+
+    db = SessionLocal()
+
+    try:
+
+        visit = (
+            db.query(
+                Visit,
+                Patient.patient_name,
+                Doctor.doctor_name,
+                Doctor.specialization
+            )
+            .join(
+                Patient,
+                Visit.patient_id == Patient.patient_id
+            )
+            .join(
+                Doctor,
+                Visit.doctor_id == Doctor.doctor_id
+            )
+            .filter(
+                Visit.visit_id == visit_id
+            )
+            .first()
+        )
+
+        if not visit:
+            return {"error": "Visit not found"}
+
+        visit, patient_name, doctor_name, specialization = visit
+
+        return {
+
+            "visit_id": visit.visit_id,
+
+            "patient_name": patient_name,
+
+            "doctor_name": doctor_name,
+
+            "specialization": specialization,
+
+            "visit_date": str(visit.visit_date),
+
+            "visit_time": (
+                str(visit.visit_time)
+                if visit.visit_time
+                else "Time Not Available"
+            ),
+
+            "reason": visit.chief_complaint,
+
+            "status": visit.visit_status,
+
+            "consultation_fee": float(visit.consultation_fee)
+
+        }
+
+    finally:
+
         db.close()

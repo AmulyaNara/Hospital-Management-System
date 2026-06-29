@@ -179,7 +179,6 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    object-cover: cover;
     border: 2px solid #ffffff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
@@ -208,7 +207,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    min-w: 0;
+    min-width: 0;
 }
 
 /* Global Application Header TopBar */
@@ -218,7 +217,9 @@ body {
     right: 0;
     left: 256px;
     height: 64px;
-    background-color: rgba(247, 249, 25b, 0.8);
+    .app-topbar {
+    background-color: rgba(247, 249, 251, 0.8);
+}
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     display: flex;
@@ -783,10 +784,14 @@ body {
 }
 
 /* --- Responsiveness Layout Fluid System Breakpoints Configuration --- */
-@media (max-width: 1200px) {
-    .metrics-deck-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .item-col-span-8, .item-col-span-4 { grid-column: span 12 / span 12; }
-    .floor-plan-asymmetric-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width:1200px){
+
+    .item-col-span-8,
+    .item-col-span-6,
+    .item-col-span-4{
+        grid-column:span 12;
+    }
+
 }
 
 @media (max-width: 768px) {
@@ -797,4 +802,176 @@ body {
     .view-header-row { flex-direction: column; align-items: flex-start; gap: 16px; }
     .metrics-deck-grid { grid-template-columns: minmax(0, 1fr); }
     .floor-plan-asymmetric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.item-col-span-6{
+    grid-column: span 6 / span 6;
+}
+.dashboard-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    font-size:14px;
+}
+
+.dashboard-table thead{
+    background:#f8fafc;
+}
+
+.dashboard-table th{
+    padding:14px 18px;
+    text-align:left;
+    color:#006a61;
+    font-weight:700;
+    border-bottom:2px solid #e5e7eb;
+}
+
+.dashboard-table td{
+    padding:14px 18px;
+    border-bottom:1px solid #ececec;
+    color:#374151;
+}
+
+.dashboard-table tbody tr:hover{
+    background:#f7fdfd;
+}
+
+.dashboard-table tbody tr:last-child td{
+    border-bottom:none;
+}
+/* ==========================================
+   HEADER ACTION BUTTONS
+========================================== */
+
+.header-action-button-group{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+/* ==========================================
+   EXPORT BUTTON
+========================================== */
+
+.secondary-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    height:50px;
+
+    padding:0 24px;
+
+    border:1px solid #D1D5DB;
+
+    border-radius:12px;
+
+    background:#FFFFFF;
+
+    color:#1F2937;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.secondary-btn:hover{
+
+    background:#F3F4F6;
+
+    transform:translateY(-2px);
+
+}
+
+.secondary-btn .material-symbols-outlined{
+
+    font-size:22px;
+
+}
+
+/* ==========================================
+   NEW ADMISSION BUTTON
+========================================== */
+
+.primary-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    height:50px;
+
+    padding:0 24px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#000000;
+
+    color:#FFFFFF;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.primary-btn:hover{
+
+    background:#1F2937;
+
+    transform:translateY(-2px);
+
+}
+
+.primary-btn .material-symbols-outlined{
+
+    font-size:22px;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:768px){
+
+    .header-action-button-group{
+
+        flex-direction:column;
+
+        width:100%;
+
+    }
+
+    .primary-btn,
+
+    .secondary-btn{
+
+        width:100%;
+
+    }
+
 }

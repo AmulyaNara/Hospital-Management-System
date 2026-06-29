@@ -19,27 +19,26 @@ router = APIRouter()
 
 
 # GET
+from fastapi import Query
+
 @router.get("/diagnosis")
 def get_diagnosis(
-    current_user=Depends(get_current_user)
+
+    search: str = "",
+    status: str = "",
+    severity: str = ""
+
 ):
 
-    require_role(
-        current_user,
-        ["admin", "doctor", "patient"]
+    return get_all_diagnosis(
+        search,
+        status,
+        severity
     )
 
-    return get_all_diagnosis()
 
 @router.get("/diagnosis-stats")
-def get_diagnosis_stats(
-    current_user=Depends(get_current_user)
-):
-
-    require_role(
-        current_user,
-        ["admin", "doctor"]
-    )
+def get_diagnosis_stats():
 
     db = SessionLocal()
 
@@ -74,7 +73,38 @@ def get_diagnosis_stats(
 
     finally:
         db.close()
+@router.get("/diagnosis/{diagnosis_id}")
+def get_diagnosis_by_id(diagnosis_id: int):
 
+    db = SessionLocal()
+
+    try:
+
+        diagnosis = (
+            db.query(Diagnosis)
+            .filter(Diagnosis.diagnosis_id == diagnosis_id)
+            .first()
+        )
+
+        if not diagnosis:
+            return {
+                "error": "Diagnosis not found"
+            }
+
+        return {
+            "diagnosis_id": diagnosis.diagnosis_id,
+            "patient_name": diagnosis.patient_name,
+            "patient_code": diagnosis.patient_code,
+            "disease": diagnosis.disease,
+            "symptoms": diagnosis.symptoms,
+            "doctor_notes": diagnosis.doctor_notes,
+            "severity": diagnosis.severity,
+            "diagnosis_status": diagnosis.diagnosis_status,
+            "icd_code": diagnosis.icd_code
+        }
+
+    finally:
+        db.close()
 # POST
 @router.post("/diagnosis")
 def add_diagnosis(
@@ -134,3 +164,4 @@ def remove_diagnosis(
     return delete_diagnosis(
         diagnosis_id
     )
+    

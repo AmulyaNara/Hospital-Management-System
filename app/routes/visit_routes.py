@@ -10,18 +10,14 @@ from app.models.visit_orm import (
     get_all_visits,
     create_visit,
     update_visit,
-    delete_visit
+    delete_visit,
+    get_visit_details
 )
 
 from app.schemas.visit_schema import VisitCreate
 
-from app.security.oauth2 import get_current_user
-from app.security.role_checker import require_role
-
 router = APIRouter()
 
-
-# GET
 @router.get("/visits")
 def get_visits(
     current_user=Depends(get_current_user)
@@ -29,10 +25,31 @@ def get_visits(
 
     require_role(
         current_user,
-        ["admin", "doctor", "receptionist", "patient"]
+        ["admin", "doctor", "receptionist"]
     )
 
     return get_all_visits()
+# GET
+@router.post("/visits")
+def add_visit(
+    visit: VisitCreate,
+    current_user=Depends(get_current_user)
+):
+
+    require_role(
+        current_user,
+        ["admin", "receptionist", "patient"]
+    )
+
+    return create_visit(
+    current_user["email"],
+    visit.doctor_id,
+    visit.visit_date,
+    visit.chief_complaint,
+    visit.visit_number,
+    visit.visit_status
+)
+
 
 @router.get("/visit-stats")
 def get_visit_stats():
@@ -95,26 +112,6 @@ def patient_appointments_api(
     )
     
 # POST
-@router.post("/visits")
-def add_visit(
-    visit: VisitCreate,
-    current_user=Depends(get_current_user)
-):
-
-    require_role(
-        current_user,
-        ["admin", "receptionist"]
-    )
-
-    return create_visit(
-        visit.patient_id,
-        visit.doctor_id,
-        visit.visit_date,
-        visit.chief_complaint,
-        visit.visit_number,
-        visit.visit_time,
-        visit.visit_status
-    )
 
 
 # PUT
@@ -151,3 +148,16 @@ def remove_visit(
     return delete_visit(
         visit_id
     )
+    
+@router.get("/api/visit/{visit_id}")
+def get_visit(
+    visit_id: int,
+    current_user=Depends(get_current_user)
+):
+    require_role(
+        current_user,
+        ["patient", "doctor", "admin", "receptionist"]
+    )
+
+    return get_visit_details(visit_id)
+

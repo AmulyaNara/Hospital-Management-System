@@ -25,8 +25,14 @@ router = APIRouter()
 
 
 # GET -> Read all doctors
+from fastapi import Query
+
 @router.get("/doctors")
 def get_doctors(
+    page: int = Query(1, ge=1),
+    limit: int = Query(10, ge=1),
+    search: str = "",
+    specialization: str = "",
     current_user=Depends(get_current_user)
 ):
 
@@ -35,7 +41,12 @@ def get_doctors(
         ["admin", "doctor", "receptionist"]
     )
 
-    return get_all_doctors()
+    return get_all_doctors(
+        page=page,
+        limit=limit,
+        search=search,
+        specialization=specialization
+    )
 
 @router.get("/doctor-stats")
 def get_doctor_stats():
@@ -117,19 +128,23 @@ def add_doctor(
 @router.put("/doctors/{doctor_id}")
 def edit_doctor(
     doctor_id: int,
-    specialization: str,
+    doctor: DoctorCreate,
     current_user=Depends(get_current_user)
 ):
 
-    require_role(
-        current_user,
-        ["admin"]
-    )
+    require_role(current_user, ["admin"])
 
     return update_doctor(
         doctor_id,
-        specialization
+        doctor.doctor_name,
+        doctor.specialization,
+        doctor.phone,
+        doctor.email,
+        doctor.experience_years,
+        doctor.clinical_status
     )
+
+    
 
 
 # DELETE -> Remove a doctor

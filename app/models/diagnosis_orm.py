@@ -17,43 +17,69 @@ class Diagnosis(Base):
     severity = Column(String(30))
     diagnosis_status = Column(String(30))
     icd_code = Column(String(30))
+    consult_fee = Column(Integer)
 
 
 # GET
-def get_all_diagnosis():
+def get_all_diagnosis(
+    search="",
+    status="",
+    severity=""
+):
     db = SessionLocal()
 
     try:
-        diagnoses = db.query(Diagnosis).all()
+
+        query = db.query(Diagnosis)
+
+        # Search
+        if search:
+            query = query.filter(
+                (Diagnosis.patient_name.ilike(f"%{search}%")) |
+                (Diagnosis.disease.ilike(f"%{search}%")) |
+                (Diagnosis.patient_code.ilike(f"%{search}%"))
+            )
+
+        # Status Filter
+        if status:
+            query = query.filter(
+                Diagnosis.diagnosis_status == status
+            )
+
+        # Severity Filter
+        if severity:
+            query = query.filter(
+                Diagnosis.severity == severity
+            )
+
+        diagnoses = query.all()
 
         diagnosis_list = []
 
         for diagnosis in diagnoses:
+
             diagnosis_list.append({
+
                 "diagnosis_id": diagnosis.diagnosis_id,
                 "visit_id": diagnosis.visit_id,
                 "disease": diagnosis.disease,
                 "symptoms": diagnosis.symptoms,
                 "doctor_notes": diagnosis.doctor_notes,
-                "diagnosis_date":(                                    str(diagnosis.diagnosis_date)
-                                    if diagnosis.diagnosis_date
-                                    else "Not Available" ),
+                "diagnosis_date": str(diagnosis.diagnosis_date),
                 "patient_name": diagnosis.patient_name,
                 "patient_code": diagnosis.patient_code,
                 "severity": diagnosis.severity,
                 "diagnosis_status": diagnosis.diagnosis_status,
                 "icd_code": diagnosis.icd_code,
+                "consult_fee": diagnosis.consult_fee
 
             })
 
         return diagnosis_list
 
-    except Exception as e:
-        return {"error": str(e)}
-
     finally:
-        db.close()
 
+        db.close()
 
 # POST
 def create_diagnosis(

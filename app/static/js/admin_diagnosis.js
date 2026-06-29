@@ -1,367 +1,407 @@
+/* ==========================================================
+   MEDCORE HMS - DIAGNOSIS MODULE
+   Part 1
+========================================================== */
+
+const API = {
+    diagnosis: "/diagnosis",
+    stats: "/diagnosis-stats"
+};
+
+let diagnoses = [];
+let filteredDiagnoses = [];
+
+const searchInput = document.getElementById("searchDiagnosis");
+const statusFilter = document.getElementById("statusFilter");
+const tableBody = document.getElementById("diagnosisTableBody");
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ==========================================================
-       SEARCH
-    ========================================================== */
+    loadDashboard();
 
-    const searchInput =
-        document.querySelector(".search-box input");
+    loadDiagnoses();
 
-    if (searchInput) {
+    initializeSearch();
 
-        searchInput.addEventListener("keyup", () => {
+    initializeFilters();
 
-            const value =
-                searchInput.value.toLowerCase();
+});
 
-            document.querySelectorAll("tbody tr")
-            .forEach(row => {
+/* ==========================================================
+   DASHBOARD
+========================================================== */
 
-                row.style.display =
-                    row.innerText.toLowerCase()
-                    .includes(value)
-                    ? ""
-                    : "none";
+async function loadDashboard(){
 
-            });
+    try{
 
-        });
+        const response = await fetch(API.stats);
 
-    }
+        const data = await response.json();
 
-    /* ==========================================================
-       FILTER
-    ========================================================== */
+        document.getElementById("totalDiagnoses").textContent =
+            data.total_diagnosis;
 
-    const filterBtn =
-        document.querySelector(".outline-btn");
+        document.getElementById("criticalCases").textContent =
+            data.high_severity;
 
-    if (filterBtn) {
+        document.getElementById("pendingReviews").textContent =
+            data.active_diagnosis;
 
-        filterBtn.addEventListener("click", () => {
-
-            showToast(
-                "Filter feature coming soon."
-            );
-
-        });
+        document.getElementById("avgBilling").textContent =
+            data.completed_diagnosis;
 
     }
 
-    /* ==========================================================
-       EXPORT
-    ========================================================== */
+    catch(error){
 
-    const exportBtn =
-        document.getElementById("exportBtn");
-
-    if (exportBtn) {
-
-        exportBtn.addEventListener("click", () => {
-
-            showToast("Export started...");
-
-            setTimeout(() => {
-
-                window.location.href =
-                    "/admin-diagnosis/export";
-
-            }, 800);
-
-        });
+        console.error(error);
 
     }
 
-    /* ==========================================================
-       ADD DIAGNOSIS
-    ========================================================== */
+}
 
-    const addDiagnosisBtn =
-        document.getElementById("addDiagnosisBtn");
+/* ==========================================================
+   LOAD TABLE
+========================================================== */
 
-    if (addDiagnosisBtn) {
+async function loadDiagnoses(){
 
-        addDiagnosisBtn.addEventListener("click", () => {
+    try{
 
-            window.location.href =
-                "/admin-diagnosis/new";
+        const response = await fetch(API.diagnosis);
 
-        });
+        diagnoses = await response.json();
 
-    }
+        filteredDiagnoses = [...diagnoses];
 
-    /* ==========================================================
-       NEW DIAGNOSIS
-    ========================================================== */
-
-    const newDiagnosisBtn =
-        document.getElementById("newDiagnosisBtn");
-
-    if (newDiagnosisBtn) {
-
-        newDiagnosisBtn.addEventListener("click", () => {
-
-            window.location.href =
-                "/admin-diagnosis/new";
-
-        });
+        renderTable();
 
     }
 
-    /* ==========================================================
-       VIEW SYSTEM LOGS
-    ========================================================== */
+    catch(error){
 
-    const logsBtn =
-        document.getElementById("viewLogsBtn");
-
-    if (logsBtn) {
-
-        logsBtn.addEventListener("click", () => {
-
-            window.location.href =
-                "/admin-logs";
-
-        });
+        console.error(error);
 
     }
 
-    /* ==========================================================
-       TABLE ACTIONS
-    ========================================================== */
+}
 
-    document.querySelectorAll(".icon-btn")
-    .forEach((button, index) => {
+/* ==========================================================
+   RENDER TABLE
+========================================================== */
 
-        button.addEventListener("click", () => {
+function renderTable(){
 
-            showToast(
-                "Opening Diagnosis #" + (index + 1)
-            );
+    if(!tableBody) return;
 
-            setTimeout(() => {
+    tableBody.innerHTML = "";
 
-                window.location.href =
-                    "/admin-diagnosis/view/" +
-                    (index + 1);
+    filteredDiagnoses.forEach(diagnosis=>{
 
-            }, 500);
+        tableBody.innerHTML += `
 
-        });
+<tr>
+
+<td>#DX-${diagnosis.diagnosis_id}</td>
+
+<td>
+
+<div class="patient-info">
+
+<div class="avatar green">
+
+${(diagnosis.patient_name || "NA").substring(0,2).toUpperCase()}
+
+</div>
+
+<div>
+
+<strong>
+
+${diagnosis.patient_name}
+
+</strong>
+
+<small>
+
+${diagnosis.patient_code}
+
+</small>
+
+</div>
+
+</div>
+
+</td>
+
+<td>
+
+${diagnosis.disease}
+
+</td>
+
+<td>
+
+${diagnosis.diagnosis_date}
+
+</td>
+
+<td>
+
+<span class="badge">
+
+${diagnosis.severity}
+
+</span>
+
+</td>
+
+<td>
+
+<span class="status confirmed">
+
+${diagnosis.diagnosis_status}
+
+</span>
+
+</td>
+
+<td>
+
+₹${diagnosis.consult_fee}
+
+</td>
+
+<td>
+
+<button
+class="icon-btn view-btn"
+data-id="${diagnosis.diagnosis_id}">
+
+<span class="material-symbols-outlined">
+
+visibility
+
+</span>
+
+</button>
+
+<button
+class="icon-btn edit-btn"
+data-id="${diagnosis.diagnosis_id}">
+
+<span class="material-symbols-outlined">
+
+edit
+
+</span>
+
+</button>
+
+<button
+class="icon-btn delete-btn"
+data-id="${diagnosis.diagnosis_id}">
+
+<span class="material-symbols-outlined">
+
+delete
+
+</span>
+
+</button>
+
+</td>
+
+</tr>
+
+`;
 
     });
 
-    /* ==========================================================
-       PAGINATION
-    ========================================================== */
+}
 
-    document.querySelectorAll(".pagination button")
-    .forEach(button => {
+/* ==========================================================
+   SEARCH
+========================================================== */
 
-        button.addEventListener("click", () => {
+function initializeSearch(){
 
-            document
-            .querySelectorAll(".pagination button")
-            .forEach(btn => {
+    if(!searchInput) return;
 
-                btn.classList.remove("active");
+    searchInput.addEventListener("keyup",()=>{
 
-            });
+        const value =
+            searchInput.value.toLowerCase();
 
-            if (
-                !button.innerText.includes("Previous")
-                &&
-                !button.innerText.includes("Next")
-                &&
-                button.innerText !== "..."
-            ) {
+        filteredDiagnoses = diagnoses.filter(item=>
 
-                button.classList.add("active");
+            (item.patient_name || "").toLowerCase().includes(value)
+
+            ||
+
+            (item.disease || "").toLowerCase().includes(value)
+
+            ||
+
+            (item.patient_code || "").toLowerCase().includes(value)
+
+        );
+
+        renderTable();
+
+    });
+
+}
+
+/* ==========================================================
+   FILTER
+========================================================== */
+
+function initializeFilters(){
+
+    if(!statusFilter) return;
+
+    statusFilter.addEventListener("change",()=>{
+
+        const status = statusFilter.value;
+
+        if(status==="All Statuses"){
+
+    filteredDiagnoses=[...diagnoses];
+
+}
+
+        else{
+
+            filteredDiagnoses = diagnoses.filter(
+
+                diagnosis=>
+
+                diagnosis.diagnosis_status===status
+
+            );
+
+        }
+
+        renderTable();
+
+    });
+
+}
+/* ==========================================================
+   VIEW DIAGNOSIS
+========================================================== */
+
+document.addEventListener("click", async (e) => {
+
+    const viewBtn = e.target.closest(".view-btn");
+
+    if (!viewBtn) return;
+
+    try {
+
+        const response = await fetch(
+            `${API.diagnosis}/${viewBtn.dataset.id}`
+        );
+
+        const diagnosis = await response.json();
+
+        if (diagnosis.error) {
+            alert(diagnosis.error);
+            return;
+        }
+
+        document.getElementById("viewDiagnosisId").textContent =
+            diagnosis.diagnosis_id;
+
+        document.getElementById("viewPatientName").textContent =
+            diagnosis.patient_name;
+
+        document.getElementById("viewPatientCode").textContent =
+            diagnosis.patient_code;
+
+        document.getElementById("viewDisease").textContent =
+            diagnosis.disease;
+
+        document.getElementById("viewSymptoms").textContent =
+            diagnosis.symptoms;
+
+        document.getElementById("viewDoctorNotes").textContent =
+            diagnosis.doctor_notes;
+
+        document.getElementById("viewSeverity").textContent =
+            diagnosis.severity;
+
+        document.getElementById("viewStatus").textContent =
+            diagnosis.diagnosis_status;
+
+        document.getElementById("viewICDCode").textContent =
+            diagnosis.icd_code;
+
+        document
+            .getElementById("diagnosisDrawer")
+            .classList.add("active");
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+});
+
+/* ==========================================================
+   CLOSE DRAWER
+========================================================== */
+
+document
+.getElementById("closeDrawer")
+?.addEventListener("click", () => {
+
+    document
+        .getElementById("diagnosisDrawer")
+        .classList.remove("active");
+
+});
+
+/* ==========================================================
+   DELETE
+========================================================== */
+
+document.addEventListener("click", async (e) => {
+
+    const deleteBtn = e.target.closest(".delete-btn");
+
+    if (!deleteBtn) return;
+
+    if (!confirm("Delete this diagnosis?"))
+        return;
+
+    try {
+
+        await fetch(
+
+            `${API.diagnosis}/${deleteBtn.dataset.id}`,
+
+            {
+
+                method: "DELETE"
 
             }
 
-        });
-
-    });
-
-    /* ==========================================================
-       CARD ANIMATION
-    ========================================================== */
-
-    const cards =
-        document.querySelectorAll(
-            ".stat-card,.table-card,.system-card,.security-card"
         );
 
-    cards.forEach((card, index) => {
-
-        card.style.opacity = "0";
-
-        card.style.transform = "translateY(25px)";
-
-        setTimeout(() => {
-
-            card.style.transition = ".5s";
-
-            card.style.opacity = "1";
-
-            card.style.transform = "translateY(0)";
-
-        }, index * 120);
-
-    });
-
-    /* ==========================================================
-       BUTTON HOVER
-    ========================================================== */
-
-    document.querySelectorAll("button")
-    .forEach(button => {
-
-        button.addEventListener("mouseenter", () => {
-
-            button.style.transition = ".25s";
-
-        });
-
-    });
-
-    /* ==========================================================
-       RIPPLE EFFECT
-    ========================================================== */
-
-    document.querySelectorAll("button")
-    .forEach(button => {
-
-        button.addEventListener("click", function (e) {
-
-            const ripple =
-                document.createElement("span");
-
-            ripple.className = "ripple";
-
-            const rect =
-                button.getBoundingClientRect();
-
-            ripple.style.left =
-                `${e.clientX - rect.left}px`;
-
-            ripple.style.top =
-                `${e.clientY - rect.top}px`;
-
-            button.appendChild(ripple);
-
-            setTimeout(() => {
-
-                ripple.remove();
-
-            }, 600);
-
-        });
-
-    });
-
-    /* ==========================================================
-       NETWORK STATUS
-    ========================================================== */
-
-    window.addEventListener("offline", () => {
-
-        showToast(
-            "Internet connection lost.",
-            "error"
-        );
-
-    });
-
-    window.addEventListener("online", () => {
-
-        showToast(
-            "Internet connection restored."
-        );
-
-    });
-
-    /* ==========================================================
-       LIVE CLOCK
-    ========================================================== */
-
-    function updateClock() {
-
-        const clock =
-            document.getElementById("liveClock");
-
-        if (!clock) return;
-
-        clock.innerHTML =
-            new Date().toLocaleTimeString();
+        loadDiagnoses();
 
     }
 
-    setInterval(updateClock, 1000);
+    catch (error) {
 
-    updateClock();
-
-    /* ==========================================================
-       TOAST
-    ========================================================== */
-
-    function showToast(
-        message,
-        type = "success"
-    ) {
-
-        const old =
-            document.querySelector(".toast");
-
-        if (old) {
-
-            old.remove();
-
-        }
-
-        const toast =
-            document.createElement("div");
-
-        toast.className = "toast";
-
-        toast.innerHTML = message;
-
-        if (type === "error") {
-
-            toast.style.background =
-                "#DC2626";
-
-        }
-
-        document.body.appendChild(toast);
-
-        setTimeout(() => {
-
-            toast.classList.add("show");
-
-        }, 100);
-
-        setTimeout(() => {
-
-            toast.classList.remove("show");
-
-            setTimeout(() => {
-
-                toast.remove();
-
-            }, 400);
-
-        }, 3000);
+        console.error(error);
 
     }
-
-    /* ==========================================================
-       READY
-    ========================================================== */
-
-    console.log(
-        "Admin Diagnosis Loaded Successfully."
-    );
 
 });

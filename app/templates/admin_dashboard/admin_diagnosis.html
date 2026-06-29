@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>MedCore | Diagnosis Registry</title>
+    <title>MediAdmin| Diagnosis Registry</title>
 
     <link rel="stylesheet"
           href="/static/css/admin_diagnosis.css">
@@ -132,18 +132,6 @@
 
                 </a>
 
-                <a href="/admin-logs"
-                   class="nav-item">
-
-                    <span class="material-symbols-outlined">
-
-                        history
-
-                    </span>
-
-                    System Logs
-
-                </a>
 
                 <a href="/admin-settings"
                    class="nav-item">
@@ -159,9 +147,9 @@
                 </a>
 
             </nav>
+            
 
         </div>
-
         <div class="sidebar-footer">
 
             <button
@@ -193,6 +181,7 @@
 
         </div>
 
+        
     </aside>
 
     <!-- ===========================================
@@ -214,9 +203,9 @@
                 </span>
 
                 <input
-                    type="text"
-                    placeholder="Search diagnosis, patient or doctor...">
-
+    id="searchDiagnosis"
+    type="text"
+    placeholder="Search diagnosis, patient or doctor...">
             </div>
 
             <div class="top-actions">
@@ -247,7 +236,7 @@
 
                         <h4>
 
-                            Dr. Ananya Iyer
+                            Dr. Aris
 
                         </h4>
 
@@ -259,7 +248,7 @@
 
                     </div>
 
-                    <img src="https://i.pravatar.cc/80?img=45">
+                    <img alt="Dr. Aris Thorne Avatar" class="profile-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7FMDkBKJ4wqfWvGXWsWqU4bz0YCWdmZRpT28wdSh8fHqSvaMN_MoSYa8pMPwS5aihzGsbWs9nkyHbnB4xPI56VYPfTuicGBsVMiE4uhGQgzS8fwgTpg3ZRZOKmi8qR0Y-roW0PeJGuEaMiINptOthSSRirE1VitAYn6SCwvZRb_SrwDzEbPn5gvM7k5tEgDJdl9prguYM0zdwycq1gTodQ3VFFih1RJLzQzT9g_9-C72r-h6pwU-v7OrH1p0m-pU9qKE2JD5ZE8m1"/>
 
                 </div>
 
@@ -345,7 +334,7 @@
 
                     <h5>Total Diagnoses</h5>
 
-                    <h2>12,482</h2>
+                    <h2 id="totalDiagnoses">0</h2>
 
                     <span class="success">
 
@@ -359,7 +348,7 @@
 
                     <h5>Critical Cases</h5>
 
-                    <h2>142</h2>
+                    <h2 id="criticalCases">0</h2>
 
                     <span class="danger">
 
@@ -373,7 +362,7 @@
 
                     <h5>Pending Reviews</h5>
 
-                    <h2>58</h2>
+                    <h2 id="pendingReviews">0</h2>
 
                     <span>
 
@@ -387,7 +376,7 @@
 
                     <h5>Avg Billing</h5>
 
-                    <h2>₹4,250</h2>
+                    <h2 id="avgBilling">0</h2>
 
                     <span>
 
@@ -419,7 +408,7 @@
 
                     </button>
 
-                    <select>
+                    <select id="statusFilter">
 
                         <option>
 
@@ -431,8 +420,7 @@
 
                             Confirmed
 
-                        </option>
-
+                        </option>   
                         <option>
 
                             Under Review
@@ -481,348 +469,8 @@
 
                     </thead>
 
-                    <tbody>
-                                                <tr>
-
-                            <td>#DX-89210</td>
-
-                            <td>
-
-                                <div class="patient-info">
-
-                                    <div class="avatar green">
-
-                                        RS
-
-                                    </div>
-
-                                    <div>
-
-                                        <strong>Rajesh Sharma</strong>
-
-                                        <small>M, 54 Yrs</small>
-
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>Dr. Priya Iyer</td>
-
-                            <td>24 Oct 2023</td>
-
-                            <td>
-
-                                <span class="badge danger">
-
-                                    Acute
-
-                                </span>
-
-                            </td>
-
-                            <td>
-
-                                <span class="status confirmed">
-
-                                    ● Confirmed
-
-                                </span>
-
-                            </td>
-
-                            <td>₹2,500</td>
-
-                            <td>
-
-                                <button class="icon-btn">
-
-                                    <span class="material-symbols-outlined">
-
-                                        visibility
-
-                                    </span>
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>#DX-89209</td>
-
-                            <td>
-
-                                <div class="patient-info">
-
-                                    <div class="avatar blue">
-
-                                        AM
-
-                                    </div>
-
-                                    <div>
-
-                                        <strong>Amanya Misra</strong>
-
-                                        <small>F, 25 Yrs</small>
-
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>Dr. Amit Khurana</td>
-
-                            <td>23 Oct 2023</td>
-
-                            <td>
-
-                                <span class="badge info">
-
-                                    Chronic
-
-                                </span>
-
-                            </td>
-
-                            <td>
-
-                                <span class="status review">
-
-                                    ● Under Review
-
-                                </span>
-
-                            </td>
-
-                            <td>₹1,800</td>
-
-                            <td>
-
-                                <button class="icon-btn">
-
-                                    <span class="material-symbols-outlined">
-
-                                        visibility
-
-                                    </span>
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>#DX-89208</td>
-
-                            <td>
-
-                                <div class="patient-info">
-
-                                    <div class="avatar green">
-
-                                        VS
-
-                                    </div>
-
-                                    <div>
-
-                                        <strong>Vikram Singh</strong>
-
-                                        <small>M, 61 Yrs</small>
-
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>Dr. Sameer Reddy</td>
-
-                            <td>23 Oct 2023</td>
-
-                            <td>
-
-                                <span class="badge danger">
-
-                                    Acute
-
-                                </span>
-
-                            </td>
-
-                            <td>
-
-                                <span class="status confirmed">
-
-                                    ● Confirmed
-
-                                </span>
-
-                            </td>
-
-                            <td>₹5,500</td>
-
-                            <td>
-
-                                <button class="icon-btn">
-
-                                    <span class="material-symbols-outlined">
-
-                                        visibility
-
-                                    </span>
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>#DX-89207</td>
-
-                            <td>
-
-                                <div class="patient-info">
-
-                                    <div class="avatar blue">
-
-                                        SD
-
-                                    </div>
-
-                                    <div>
-
-                                        <strong>Sunita Devi</strong>
-
-                                        <small>F, 42 Yrs</small>
-
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>Dr. Arnab Goswami</td>
-
-                            <td>22 Oct 2023</td>
-
-                            <td>
-
-                                <span class="badge">
-
-                                    Observation
-
-                                </span>
-
-                            </td>
-
-                            <td>
-
-                                <span class="status priority">
-
-                                    ● Priority
-
-                                </span>
-
-                            </td>
-
-                            <td>₹950</td>
-
-                            <td>
-
-                                <button class="icon-btn">
-
-                                    <span class="material-symbols-outlined">
-
-                                        visibility
-
-                                    </span>
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>#DX-89206</td>
-
-                            <td>
-
-                                <div class="patient-info">
-
-                                    <div class="avatar green">
-
-                                        KN
-
-                                    </div>
-
-                                    <div>
-
-                                        <strong>Karan Nair</strong>
-
-                                        <small>M, 19 Yrs</small>
-
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>Dr. Priya Iyer</td>
-
-                            <td>22 Oct 2023</td>
-
-                            <td>
-
-                                <span class="badge info">
-
-                                    Chronic
-
-                                </span>
-
-                            </td>
-
-                            <td>
-
-                                <span class="status confirmed">
-
-                                    ● Confirmed
-
-                                </span>
-
-                            </td>
-
-                            <td>₹3,200</td>
-
-                            <td>
-
-                                <button class="icon-btn">
-
-                                    <span class="material-symbols-outlined">
-
-                                        visibility
-
-                                    </span>
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                    </tbody>
+                 <tbody id="diagnosisTableBody">
+</tbody>  
 
                 </table>
 
@@ -832,47 +480,14 @@
 
             <div class="pagination">
 
-                <button>
+                <button id="previousPage">
+    Previous
+</button>
 
-                    Previous
 
-                </button>
-
-                <button class="active">
-
-                    1
-
-                </button>
-
-                <button>
-
-                    2
-
-                </button>
-
-                <button>
-
-                    3
-
-                </button>
-
-                <button>
-
-                    ...
-
-                </button>
-
-                <button>
-
-                    48
-
-                </button>
-
-                <button>
-
-                    Next
-
-                </button>
+                <button id="nextPage">
+    Next
+</button>
 
             </div>
 
@@ -880,29 +495,8 @@
 
             <div class="bottom-grid">
 
-                <div class="system-card">
+                
 
-                    <h3>
-
-                        System Logs
-
-                    </h3>
-
-                    <p>
-
-                        View complete diagnosis activity logs and audit history.
-
-                    </p>
-
-                    <button
-                        id="viewLogsBtn"
-                        class="primary-btn">
-
-                        View System Logs
-
-                    </button>
-
-                </div>
 
                 <div class="security-card">
 
@@ -973,7 +567,33 @@
     </main>
 
 </div>
+<div id="diagnosisDrawer" class="drawer">
 
+    <button id="closeDrawer">✕
+
+    </button>
+
+    <h2>Diagnosis Details</h2>
+
+    <p><strong>ID :</strong> <span id="viewDiagnosisId"></span></p>
+
+    <p><strong>Patient :</strong> <span id="viewPatientName"></span></p>
+
+    <p><strong>Patient Code :</strong> <span id="viewPatientCode"></span></p>
+
+    <p><strong>Disease :</strong> <span id="viewDisease"></span></p>
+
+    <p><strong>Symptoms :</strong> <span id="viewSymptoms"></span></p>
+
+    <p><strong>Doctor Notes :</strong> <span id="viewDoctorNotes"></span></p>
+
+    <p><strong>Severity :</strong> <span id="viewSeverity"></span></p>
+
+    <p><strong>Status :</strong> <span id="viewStatus"></span></p>
+
+    <p><strong>ICD :</strong> <span id="viewICDCode"></span></p>
+
+</div>
 <script src="/static/js/admin_diagnosis.js"></script>
 
 </body>

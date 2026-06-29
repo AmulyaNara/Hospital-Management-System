@@ -31,93 +31,81 @@
 
     <aside class="sidebar">
 
+    <div class="sidebar-brand">
+
+        <div class="brand-icon">
+            <span class="material-symbols-outlined">
+                medical_services
+            </span>
+        </div>
+
         <div>
+            <h2>MedCore</h2>
+            <p>Clinical Systems</p>
+        </div>
 
-            <div class="logo">
+    </div>
 
-                <h1>MedCore</h1>
+    <nav class="sidebar-nav">
 
-                <p>Admin Portal</p>
+        <a href="/admin-home" class="nav-item">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Dashboard</span>
+        </a>
 
+        <a href="/admin-doctors" class="nav-item">
+            <span class="material-symbols-outlined">medical_services</span>
+            <span>Doctors</span>
+        </a>
+
+        <a href="/admin-patients" class="nav-item active">
+            <span class="material-symbols-outlined">groups</span>
+            <span>Patients</span>
+        </a>
+
+        <a href="/admin-diagnosis" class="nav-item">
+            <span class="material-symbols-outlined">diagnosis</span>
+            <span>Diagnosis</span>
+        </a>
+
+        <a href="/admin-prescriptions" class="nav-item">
+            <span class="material-symbols-outlined">description</span>
+            <span>Prescriptions</span>
+        </a>
+
+        <a href="/admin-receptionists" class="nav-item">
+            <span class="material-symbols-outlined">badge</span>
+            <span>Receptionists</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+
+        <a href="/admin-settings" class="nav-item">
+            <span class="material-symbols-outlined">settings</span>
+            <span>Settings</span>
+        </a>
+
+        <a href="/logout" class="nav-item logout">
+            <span class="material-symbols-outlined">logout</span>
+            <span>Logout</span>
+        </a>
+
+        <div class="admin-profile">
+
+            
+
+            <div>
+                <h4>Dr. Aris</h4>
+                <p>Chief Administrator</p>
             </div>
 
-            <nav class="sidebar-nav">
-
-                <a href="/admin-home"
-                   class="nav-item">
-
-                    <span class="material-symbols-outlined">
-                        dashboard
-                    </span>
-
-                    Dashboard
-
-                </a>
-
-                <a href="/admin-patients"
-                   class="nav-item active">
-
-                    <span class="material-symbols-outlined">
-                        groups
-                    </span>
-
-                    Patients
-
-                </a>
-
-                <a href="/admin-doctors"
-                   class="nav-item">
-
-                    <span class="material-symbols-outlined">
-                        medical_services
-                    </span>
-
-                    Doctors
-
-                </a>
-
-                <a href="#"
-                   class="nav-item">
-
-                    <span class="material-symbols-outlined">
-                        assignment
-                    </span>
-
-                    Reports
-
-                </a>
-
-            </nav>
-
         </div>
 
-        <div class="sidebar-footer">
+    </div>
 
-            <button class="book-btn"
-                    id="newPatientBtn">
-
-                <span class="material-symbols-outlined">
-                    person_add
-                </span>
-
-                Register Patient
-
-            </button>
-
-            <a href="/logout"
-               class="nav-item logout">
-
-                <span class="material-symbols-outlined">
-                    logout
-                </span>
-
-                Logout
-
-            </a>
-
-        </div>
-
-    </aside>
+</aside>
 
     <!-- ===========================
             MAIN CONTENT
@@ -176,12 +164,12 @@
                 </button>
 
                 <div class="profile">
-
+                    
                     <div class="profile-info">
 
                         <h4>
 
-                            Dr. Ananya Iyer
+                            Dr. Aris
 
                         </h4>
 
@@ -193,8 +181,7 @@
 
                     </div>
 
-                    <img src="/static/images/profile.jpg"
-                         alt="Admin">
+                    <img alt="Dr. Aris Thorne Avatar" class="profile-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7FMDkBKJ4wqfWvGXWsWqU4bz0YCWdmZRpT28wdSh8fHqSvaMN_MoSYa8pMPwS5aihzGsbWs9nkyHbnB4xPI56VYPfTuicGBsVMiE4uhGQgzS8fwgTpg3ZRZOKmi8qR0Y-roW0PeJGuEaMiINptOthSSRirE1VitAYn6SCwvZRb_SrwDzEbPn5gvM7k5tEgDJdl9prguYM0zdwycq1gTodQ3VFFih1RJLzQzT9g_9-C72r-h6pwU-v7OrH1p0m-pU9qKE2JD5ZE8m1"/>
 
                 </div>
 
@@ -269,7 +256,7 @@
 
                             <p>Total Patients</p>
 
-                            <h2>12,482</h2>
+                            <h2 id="totalPatients">0</h2>
 
                         </div>
 
@@ -293,7 +280,7 @@
 
                             <p>Admitted Today</p>
 
-                            <h2>156</h2>
+                            <h2 id="criticalCare">0</h2>
 
                         </div>
 
@@ -317,7 +304,7 @@
 
                             <p>Pending Bills</p>
 
-                            <h2>₹4.2L</h2>
+                            <h2 id="pendingFollowups">0</h2>
 
                         </div>
 
@@ -341,7 +328,7 @@
 
                             <p>Discharged</p>
 
-                            <h2>84</h2>
+                            <h2 id="avgWaitTime">0</h2>
 
                         </div>
 
@@ -358,7 +345,7 @@
                 </div>
 
             </section>
-                            <!-- ==========================================
+            <!-- ==========================================
                     PATIENT REGISTRY
             =========================================== -->
 
@@ -430,325 +417,7 @@
 
                         <tbody id="patientTable">
 
-                            <tr>
-
-                                <td>PID-2024-001</td>
-
-                                <td>
-
-                                    <div class="patient-info">
-
-                                        <div class="avatar green">
-
-                                            AS
-
-                                        </div>
-
-                                        <div>
-
-                                            <h4>
-
-                                                Arjun Sharma
-
-                                            </h4>
-
-                                            <small>
-
-                                                Male • 42 yrs
-
-                                            </small>
-
-                                        </div>
-
-                                    </div>
-
-                                </td>
-
-                                <td>
-
-                                    arjun@gmail.com
-
-                                    <br>
-
-                                    <small>
-
-                                        +91 9876543210
-
-                                    </small>
-
-                                </td>
-
-                                <td>
-
-                                    Oct 12, 2023
-
-                                </td>
-
-                                <td>
-
-                                    ₹0
-
-                                </td>
-
-                                <td>
-
-                                    <span class="status stable">
-
-                                        Stable
-
-                                    </span>
-
-                                </td>
-
-                                <td>
-
-                                    <button class="icon-btn">
-
-                                        <span class="material-symbols-outlined">
-
-                                            visibility
-
-                                        </span>
-
-                                    </button>
-
-                                    <button class="icon-btn">
-
-                                        <span class="material-symbols-outlined">
-
-                                            edit
-
-                                        </span>
-
-                                    </button>
-
-                                    <button class="icon-btn delete">
-
-                                        <span class="material-symbols-outlined">
-
-                                            delete
-
-                                        </span>
-
-                                    </button>
-
-                                </td>
-
-                            </tr>
-
-                            <tr>
-
-                                <td>PID-2024-042</td>
-
-                                <td>
-
-                                    <div class="patient-info">
-
-                                        <div class="avatar blue">
-
-                                            PK
-
-                                        </div>
-
-                                        <div>
-
-                                            <h4>
-
-                                                Priya Kapoor
-
-                                            </h4>
-
-                                            <small>
-
-                                                Female • 29 yrs
-
-                                            </small>
-
-                                        </div>
-
-                                    </div>
-
-                                </td>
-
-                                <td>
-
-                                    priya@gmail.com
-
-                                    <br>
-
-                                    <small>
-
-                                        +91 9812345678
-
-                                    </small>
-
-                                </td>
-
-                                <td>
-
-                                    Today
-
-                                </td>
-
-                                <td>
-
-                                    ₹1,250
-
-                                </td>
-
-                                <td>
-
-                                    <span class="status critical">
-
-                                        Critical
-
-                                    </span>
-
-                                </td>
-
-                                <td>
-
-                                    <button class="icon-btn">
-
-                                        <span class="material-symbols-outlined">
-
-                                            visibility
-
-                                        </span>
-
-                                    </button>
-
-                                    <button class="icon-btn">
-
-                                        <span class="material-symbols-outlined">
-
-                                            edit
-
-                                        </span>
-
-                                    </button>
-
-                                    <button class="icon-btn delete">
-
-                                        <span class="material-symbols-outlined">
-
-                                            delete
-
-                                        </span>
-
-                                    </button>
-
-                                </td>
-
-                            </tr>
-
-                            <tr>
-
-                                <td>PID-2024-118</td>
-
-                                <td>
-
-                                    <div class="patient-info">
-
-                                        <div class="avatar gray">
-
-                                            RK
-
-                                        </div>
-
-                                        <div>
-
-                                            <h4>
-
-                                                Rajesh Kumar
-
-                                            </h4>
-
-                                            <small>
-
-                                                Male • 65 yrs
-
-                                            </small>
-
-                                        </div>
-
-                                    </div>
-
-                                </td>
-
-                                <td>
-
-                                    rkumar@gmail.com
-
-                                    <br>
-
-                                    <small>
-
-                                        +91 9900122334
-
-                                    </small>
-
-                                </td>
-
-                                <td>
-
-                                    Oct 05, 2023
-
-                                </td>
-
-                                <td>
-
-                                    ₹0
-
-                                </td>
-
-                                <td>
-
-                                    <span class="status discharged">
-
-                                        Discharged
-
-                                    </span>
-
-                                </td>
-
-                                <td>
-
-                                    <button class="icon-btn">
-
-                                        <span class="material-symbols-outlined">
-
-                                            visibility
-
-                                        </span>
-
-                                    </button>
-
-                                    <button class="icon-btn">
-
-                                        <span class="material-symbols-outlined">
-
-                                            edit
-
-                                        </span>
-
-                                    </button>
-
-                                    <button class="icon-btn delete">
-
-                                        <span class="material-symbols-outlined">
-
-                                            delete
-
-                                        </span>
-
-                                    </button>
-
-                                </td>
-
-                            </tr>
-
-                        </tbody>
+</tbody>
 
                     </table>
 

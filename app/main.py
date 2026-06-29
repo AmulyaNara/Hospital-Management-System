@@ -264,6 +264,7 @@ def patient_support(request: Request):
         name="patient_dashboard/patient_support.html"
     )
     
+
 # =========================
 # Patient Support
 # =========================
@@ -274,14 +275,6 @@ def patient_support(request: Request):
         name="patient_dashboard/patient_support.html"
     )
   
-@app.get("/patient-settings")
-def patient_settings(request: Request):
-
-    return templates.TemplateResponse(
-        request=request,
-        name="patient_dashboard/patient_settings.html"
-    )
-    
 @app.get("/receptionist-appointments")
 def receptionist_appointments(request: Request):
     return templates.TemplateResponse(
@@ -324,4 +317,49 @@ def admin_settings(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="admin_dashboard/admin_settings.html"
+    )
+      
+
+
+
+# =========================
+# Appointment History
+# =========================
+@app.get("/appointment-history")
+def appointment_history(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="patient_dashboard/appointment_history.html"
+    )
+
+
+@app.get("/book-appointment")
+def book_appointment(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="patient_dashboard/book_appointment.html"
+    )
+
+
+# =========================
+# Appointment History
+# =========================
+@app.get("/appointment-history")
+def appointment_history(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="patient_dashboard/appointment_history.html"
+    )
+
+
+
+@app.get("/admin-patients", response_class=HTMLResponse)
+def admin_patients(request: Request):
+
+    return templates.TemplateResponse(
+        "admin_patients.html",
+        {"request": request}
     )

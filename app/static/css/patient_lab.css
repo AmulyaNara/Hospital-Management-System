@@ -1220,3 +1220,44 @@ table{
 }
 
 }
+.hidden{
+    display:none;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.modal.hidden{
+    display:none;
+}
+
+.modal-content{
+    width:700px;
+    max-width:90%;
+    background:#fff;
+    border-radius:14px;
+    padding:24px;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.modal-body{
+    margin-top:20px;
+}
+
+.empty-state{
+    text-align:center;
+    padding:40px;
+    color:#666;
+}

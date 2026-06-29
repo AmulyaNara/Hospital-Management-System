@@ -117,15 +117,11 @@
 
         <div class="sidebar-footer">
 
-            <button class="book-btn">
-
-                <span class="material-symbols-outlined">
-                    add
-                </span>
-
-                Book Appointment
-
-            </button>
+            <button
+    id="bookAppointmentBtn"
+    class="book-btn">
+    Book Appointment
+</button>
 
 
             <a href="/patient-support" class="menu-item">
@@ -229,9 +225,7 @@
 
                     </div>
 
-                    <img
-                        src="https://i.pravatar.cc/100?img=67"
-                        alt="Profile">
+                     <img alt="Sarah Jenkins" class="profile-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXo0MwfCOENMKGKgQ9z4tcGe3bpsOmnlWrpPjnQikodR7xQRv1q7y5eHNd8WbO5O4WgR3tyLRYbphkjywJ4laQB9FddmBPOWpsbaybSFmNAIx_CpuUuQO8uNy23W4cT7dMJh03EYuiPRS0eQiWqMv9ghYZVlmHDOAS6OPoqbqVkLv8roTglLpSkiaHiDL5JiygcE8QkTgj9MYgXTt-VY4W-dZfl6g-1bJVEDJ6DSb_bvl9Roe00uvvGv7KpKrk1Fz7NbcfqzHLFI0b"/>
 
                 </div>
 
@@ -258,37 +252,31 @@
                     </span>
 
                     <input
-                        type="text"
-                        placeholder="Search by document name or physician..."
-                    >
+    id="recordSearch"
+    type="text"
+    placeholder="Search by document name or physician...">
 
                 </div>
 
                 <div class="toolbar-buttons">
 
-                    <button>
+                    <select id="categoryFilter">
 
-                        <span class="material-symbols-outlined">
+    <option value="">All Categories</option>
 
-                            filter_list
+    <option>Diagnosis</option>
 
-                        </span>
+    <option>Prescription</option>
 
-                        Filter by Category
+    <option>Lab Report</option>
 
-                    </button>
+    <option>Billing</option>
 
-                    <button>
+</select>
 
-                        <span class="material-symbols-outlined">
-
-                            event
-
-                        </span>
-
-                        Filter by Date
-
-                    </button>
+                    <input
+    id="dateFilter"
+    type="date">
 
                 </div>
 
@@ -303,11 +291,13 @@
 
     <h3>All Documents</h3>
 
-    <span class="record-count">
+    <span
+    id="totalItems"
+    class="record-count">
 
-        32 Total Items
+0 Total Items
 
-    </span>
+</span>
 
 </div>
 
@@ -343,49 +333,13 @@
 
 
 
-<div class="pagination">
-
-<button disabled>
-
-Previous
-
-</button>
-
-<div class="pages">
-
-<button class="active">
-
-1
-
-</button>
-
-<button>
-
-2
-
-</button>
-
-<button>
-
-3
-
-</button>
-
-<span>...</span>
-
-<button>
-
-7
-
-</button>
+<div
+    id="paginationContainer"
+    class="pagination">
 
 </div>
 
-<button>
 
-Next
-
-</button>
 
 </div>
 

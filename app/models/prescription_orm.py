@@ -74,6 +74,46 @@ def get_all_prescriptions():
     finally:
         db.close()
 
+def get_prescription_stats():
+    db = SessionLocal()
+
+    try:
+        total = db.query(Prescription).count()
+
+        active = (
+            db.query(Prescription)
+            .filter(
+                Prescription.prescription_status == "Active"
+            )
+            .count()
+        )
+
+        completed = (
+            db.query(Prescription)
+            .filter(
+                Prescription.prescription_status == "Completed"
+            )
+            .count()
+        )
+
+        doctors = (
+            db.query(Prescription.doctor_name)
+            .distinct()
+            .count()
+        )
+
+        return {
+            "total_prescriptions": total,
+            "active_prescriptions": active,
+            "completed_prescriptions": completed,
+            "doctor_count": doctors
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+    finally:
+        db.close()
 
 # POST
 def create_prescription(

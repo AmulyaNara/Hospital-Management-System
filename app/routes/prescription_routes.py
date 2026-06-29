@@ -4,7 +4,8 @@ from app.models.prescription_orm import (
     create_prescription,
     get_all_prescriptions,
     update_prescription,
-    delete_prescription
+    delete_prescription,
+    
 )
 
 from app.schemas.prescription_schema import PrescriptionCreate
@@ -18,24 +19,12 @@ router = APIRouter()
 
 # GET
 @router.get("/prescriptions")
-def get_prescriptions(
-    current_user=Depends(get_current_user)
-):
-
-    require_role(
-        current_user,
-        ["admin", "doctor", "patient"]
-    )
+def get_prescriptions():
 
     return get_all_prescriptions()
 
 @router.get("/prescription-stats")
-def get_prescription_stats(
-    current_user=Depends(get_current_user)
-):
-    print("INSIDE PRESCRIPTION STATS")
-
-    require_role(current_user, ["admin", "doctor"])
+def get_prescription_stats():
 
     db = SessionLocal()
 

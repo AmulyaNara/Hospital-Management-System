@@ -879,3 +879,12 @@ tbody td{
 }
 
 }
+.pagination button.active{
+
+    background:#0f766e;
+
+    color:white;
+
+    border-color:#0f766e;
+
+}

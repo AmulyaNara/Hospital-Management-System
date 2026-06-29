@@ -84,12 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
             }
 
-            const visits =
-                await response.json();
+            const result = await response.json();
 
-            allVisits = visits;
+allVisits = result;
 
-            renderVisits();
+renderVisits();
 
         }
         catch(error) {

@@ -146,18 +146,57 @@ document.addEventListener("DOMContentLoaded", () => {
        VIEW BUTTON
     ========================================================== */
 
-    document.querySelectorAll(".icon-btn").forEach(button => {
+    document.addEventListener("click", async (e) => {
 
-        button.addEventListener("click", () => {
+    const button = e.target.closest(".view-btn");
 
-            if (button.classList.contains("delete")) return;
+    if (!button) return;
 
-            showToast("Feature coming soon.");
+    const id = button.dataset.id;
+
+    const token = localStorage.getItem("access_token");
+
+    try {
+
+        const response = await fetch(`/patients/${id}`, {
+
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
 
         });
 
-    });
+        const patient = await response.json();
 
+        alert(
+
+`Patient ID : ${patient.patient_id}
+
+Patient Name : ${patient.patient_name}
+
+Age : ${patient.age}
+
+Gender : ${patient.gender}
+
+Phone : ${patient.phone}
+
+Blood Group : ${patient.blood_group}
+
+Email : ${patient.email}
+
+Status : ${patient.clinical_status}`
+
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+});
     /* ==========================================================
        DELETE BUTTON
     ========================================================== */
@@ -325,3 +364,312 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+async function loadPatients() {
+
+    try {
+
+        const token =
+            localStorage.getItem("access_token");
+
+        const response =
+            await fetch("/patients", {
+
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+
+            });
+
+        const patients =
+            await response.json();
+
+        const tbody =
+            document.getElementById("patientTable");
+
+        if (!tbody) return;
+
+        tbody.innerHTML = "";
+
+        patients.forEach(patient => {
+
+            tbody.innerHTML += `
+
+            <tr>
+
+                <td>${patient.patient_id}</td>
+
+                <td>${patient.patient_name}</td>
+
+                <td>${patient.phone}</td>
+
+                <td>${patient.last_visit_date || "-"}</td>
+
+                <td>₹0</td>
+
+                <td>${patient.clinical_status || "Stable"}</td>
+
+                <td>
+
+                    <button
+class="icon-btn view-btn"
+data-id="${patient.patient_id}">
+                        <span class="material-symbols-outlined">
+                            visibility
+                        </span>
+                    </button>
+                 <button
+        class="icon-btn download-btn"
+        data-id="${patient.patient_id}">
+
+        <span class="material-symbols-outlined">
+            download
+        </span>
+
+    </button>
+                </td>
+
+            </tr>
+
+            `;
+
+        });
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Patients Load Error:",
+            error
+        );
+
+    }
+
+}
+document.addEventListener("click", async (e)=>{
+
+    const button = e.target.closest(".view-btn");
+
+    if(!button) return;
+
+    const id = button.dataset.id;
+
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(
+
+        `/patients/${id}`,
+
+        {
+
+            headers:{
+
+                Authorization:`Bearer ${token}`
+
+            }
+
+        }
+
+    );
+
+    const patient = await response.json();
+
+    alert(
+
+`Patient ID : ${patient.patient_id}
+
+Name : ${patient.patient_name}
+
+Age : ${patient.age}
+
+Gender : ${patient.gender}
+
+Phone : ${patient.phone}
+
+Blood Group : ${patient.blood_group}
+
+Email : ${patient.email}
+
+Status : ${patient.clinical_status}`
+
+    );
+
+});
+async function loadPatientStats() {
+
+    try {
+
+        const token =
+            localStorage.getItem("access_token");
+
+        const response =
+            await fetch("/patient-stats", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+        const data = await response.json();
+
+        document.getElementById("totalPatients").textContent =
+            data.total_patients;
+
+        document.getElementById("criticalCare").textContent =
+            data.critical_care;
+
+        document.getElementById("pendingFollowups").textContent =
+            data.pending_followups;
+
+        document.getElementById("avgWaitTime").textContent =
+            data.avg_wait_time;
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Patient Stats Error:",
+            error
+        );
+
+    }
+
+}
+
+async function loadPatientStats() {
+
+    try {
+
+        const token =
+            localStorage.getItem("access_token");
+
+        const response =
+            await fetch("/patient-stats", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+        const data = await response.json();
+
+        document.getElementById("totalPatients").textContent =
+            data.total_patients;
+
+        document.getElementById("criticalCare").textContent =
+            data.critical_care;
+
+        document.getElementById("pendingFollowups").textContent =
+            data.pending_followups;
+
+        document.getElementById("avgWaitTime").textContent =
+            data.avg_wait_time;
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Patient Stats Error:",
+            error
+        );
+
+    }
+
+}
+async function loadPatientStats() {
+
+    try {
+
+        const token =
+            localStorage.getItem("access_token");
+
+        const response =
+            await fetch("/patient-stats", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+        const data = await response.json();
+
+        document.getElementById("totalPatients").textContent =
+            data.total_patients;
+
+        document.getElementById("criticalCare").textContent =
+            data.critical_care;
+
+        document.getElementById("pendingFollowups").textContent =
+            data.pending_followups;
+
+        document.getElementById("avgWaitTime").textContent =
+            data.avg_wait_time;
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Patient Stats Error:",
+            error
+        );
+
+    }
+
+}
+
+async function loadPatientStats() {
+
+    try {
+
+        const token =
+            localStorage.getItem("access_token");
+
+        const response =
+            await fetch("/patient-stats", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+        const data = await response.json();
+
+        document.getElementById("totalPatients").textContent =
+            data.total_patients;
+
+        document.getElementById("criticalCare").textContent =
+            data.critical_care;
+
+        document.getElementById("pendingFollowups").textContent =
+            data.pending_followups;
+
+        document.getElementById("avgWaitTime").textContent =
+            data.avg_wait_time;
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Patient Stats Error:",
+            error
+        );
+
+    }
+
+}
+document.addEventListener("click", (e) => {
+
+    const button = e.target.closest(".download-btn");
+
+    if (!button) return;
+
+    const id = button.dataset.id;
+
+    window.open(`/api/record/${id}/download`, "_blank");
+
+});
+
+
+loadPatientStats();
+
+loadPatients();

@@ -7,3 +7,4 @@ class DoctorCreate(BaseModel):
     email: str
     password: str
     experience_years: int
+    clinical_status: str

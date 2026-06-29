@@ -45,7 +45,9 @@
         </nav>
 
         <div class="sidebar-footer">
-            <button class="btn btn-book-appointment">Book Appointment</button>
+            <button
+    id="sidebarBookAppointmentBtn"
+    class="btn btn-book-appointment">Book Appointment</button>
             <a class="nav-item nav-support" href="/patient-support">
                 <span class="material-symbols-outlined">contact_support</span>
                 <span>Support</span>
@@ -59,9 +61,17 @@
 
     <header class="topbar">
         <div class="search-container">
-            <span class="material-symbols-outlined search-icon">search</span>
-            <input class="search-input" placeholder="Search clinic locations or doctors..." type="text"/>
-        </div>
+    <span class="material-symbols-outlined search-icon">
+        search
+    </span>
+
+    <input
+        type="text"
+        class="search-input"
+        id="dashboardSearch"
+        placeholder="Search appointments, doctors, records..."
+        autocomplete="off">
+</div>
         
         <div class="topbar-actions">
             <div class="action-icons">
@@ -97,11 +107,13 @@
                     <h2 id="welcomeMessage"></h2>
                     <p>Your health data is up to date. You have one appointment scheduled for next week with Dr. Aris.</p>
                     <div class="hero-buttons">
-                        <button class="btn btn-teal">
+                        <button
+    id="bookAppointmentBtn"
+    class="btn btn-teal">
                             <span class="material-symbols-outlined">calendar_add_on</span>
                             Book New Appointment
                         </button>
-                        <button class="btn btn-translucent">View All Records</button>
+                        
                     </div>
                 </div>
             </section>
@@ -115,12 +127,12 @@
                     <p
     class="stat-main-val"
     id="nextAppointment">
-    Oct 24, 2023
+    july 07,2026
 </p>
                     <p
     class="stat-sub-val"
     id="nextAppointmentInfo">
-    09:30 AM • Dr. Aris
+    09:30 AM • Dr. Ravi
 </p>
                 </div>
                 <div class="stat-card">
@@ -168,9 +180,13 @@
                     <div class="card-box">
                         <div class="card-box-header">
                             <h3>Upcoming Appointments</h3>
-                            <button class="inline-link text-teal font-semibold align-center-gap">
-                                View History <span class="material-symbols-outlined font-sm">arrow_forward</span>
-                            </button>
+                            <a href="/appointment-history"
+   class="inline-link text-teal font-semibold align-center-gap">
+    View History
+    <span class="material-symbols-outlined font-sm">
+        arrow_forward
+    </span>
+</a>
                         </div>
                         <div class="table-container">
                             <table class="dashboard-table">
@@ -183,129 +199,30 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="doctor-profile-cell">
-                                            <img alt="Dr. Aris" class="doctor-thumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1Y8uVerYIj5-c1pJEjUDlgkqPUdO6k0LVX875tsNBPJfk31i9d5qevvw1G9W_UOZmjMYJmKv9BNGkxbHgx2XpVFk7AGi9h7-avydpJdouT1kPlJv7UaLiKm90T72mWVmfuy-xRxax60RRv5OjadPZwUspLahJL3K7whJkjBRtyuNen6MDZj2TbmC955PzKBHySUgZ3GjxZ8ZjosZ7g7kvW3gkR75wWdnwy80db7mtwnWq_GsZ0PtB-Otn-DnC1eRg8Z8w_XL6TD87"/>
-                                            <span class="doctor-name">Dr. Julian Aris</span>
-                                        </td>
-                                        <td>Cardiology</td>
-                                        <td>
-                                            <div>Oct 24, 2023</div>
-                                            <div class="text-muted text-xs">09:30 AM</div>
-                                        </td>
-                                        <td>
-                                            <span class="status-badge badge-teal">Confirmed</span>
-                                        </td>
-                                        <td>
-                                            <button class="action-menu-btn"><span class="material-symbols-outlined">more_vert</span></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="doctor-profile-cell">
-                                            <img alt="Dr. Sarah Lee" class="doctor-thumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkkwwJKQurCHrQpOSrqKehN6BS4CErATRZdrRbnSZ7mxPAu6_F_reWscl7AN9sbQPfhazSSmlelPeOKu5AiID3dR5B37RDdK_1vQsveOm52pVyYxKDmytrYZp5nsOeDdI16PhvBntGo5-bseGoDkxIzwCZ0JKBx9v92D76ulSTaDkBwE6tR92MMprnv3-_5F-l2SBhPLU_qW2CsbT322kxYKMCa3VSIyl-6Cy1YY9MSgI6lk9KN9ZmfTdnR7CyQtJ_f4wnVyDx0qUq"/>
-                                            <span class="doctor-name">Dr. Sarah Lee</span>
-                                        </td>
-                                        <td>General Medicine</td>
-                                        <td>
-                                            <div>Nov 12, 2023</div>
-                                            <div class="text-muted text-xs">02:15 PM</div>
-                                        </td>
-                                        <td>
-                                            <span class="status-badge badge-muted">Pending</span>
-                                        </td>
-                                        <td>
-                                            <button class="action-menu-btn"><span class="material-symbols-outlined">more_vert</span></button>
-                                        </td>
-                                    </tr>
+                                <tbody id="appointmentsTable">
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
-                    <div class="records-wrapper-block">
-                        <h3>Recent Records</h3>
-                        <div class="records-card-grid">
-                            
-                            <div class="record-item-card transition-card">
-                                <div class="record-meta-wrap">
-                                    <div class="record-icon-box bg-light-teal">
-                                        <span class="material-symbols-outlined text-teal">description</span>
-                                    </div>
-                                    <div>
-                                        <p class="record-heading">Blood Test Results</p>
-                                        <p class="record-date-stamp">Uploaded: Sep 12, 2023</p>
-                                    </div>
-                                </div>
-                                <button class="record-download-btn"><span class="material-symbols-outlined">download</span></button>
-                            </div>
+                    <div id="recordsContainer">
 
-                            <div class="record-item-card transition-card">
-                                <div class="record-meta-wrap">
-                                    <div class="record-icon-box bg-light-teal">
-                                        <span class="material-symbols-outlined text-teal">radiology</span>
-                                    </div>
-                                    <div>
-                                        <p class="record-heading">X-Ray Report (Chest)</p>
-                                        <p class="record-date-stamp">Uploaded: Aug 05, 2023</p>
-                                    </div>
-                                </div>
-                                <button class="record-download-btn"><span class="material-symbols-outlined">download</span></button>
-                            </div>
-
-                        </div>
-                    </div>
+</div>
                 </div>
 
                 <div class="secondary-panel-column">
                     
-                    <div class="card-box dynamic-reminder-box">
-                        <h3 class="panel-heading text-primary">
-                            <span class="material-symbols-outlined text-teal">notifications_active</span>
-                            Reminders
-                        </h3>
-                        <div class="alert-stack">
-                            
-                            <div class="alert-card warning-alert">
-                                <span class="material-symbols-outlined text-error">priority_high</span>
-                                <div class="alert-content-body">
-                                    <p class="alert-title-text">Annual Check-up due</p>
-                                    <p class="alert-desc-text">Your last physical exam was over 12 months ago.</p>
-                                    <button class="alert-btn-action text-error">Schedule Now</button>
-                                </div>
-                            </div>
-
-                            <div class="alert-card info-alert">
-                                <span class="material-symbols-outlined text-teal">vaccines</span>
-                                <div class="alert-content-body">
-                                    <p class="alert-title-text">Flu Shot available</p>
-                                    <p class="alert-desc-text">Protect yourself this season. Book a walk-in at any clinic location.</p>
-                                    <button class="alert-btn-action text-teal">View Locations</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                    <div id="remindersContainer"></div>
 
                     <div class="cta-banner-box">
                         <h4>Need Help?</h4>
                         <p>Message your healthcare team directly through our secure patient portal.</p>
-                        <button class="btn btn-dark-filled">Start New Message</button>
+                        <a href="#" id="startMessageBtn" class="primary-btn">
+    Start New Message
+</a>
                     </div>
 
-                    <div class="card-box outline-gray-border">
-                        <h4 class="resource-title-heading">Patient Education</h4>
-                        <div class="resource-links-stack">
-                            <div class="resource-item-row transition-row">
-                                <span>Managing Hypertension</span>
-                                <span class="material-symbols-outlined item-link-arrow">open_in_new</span>
-                            </div>
-                            <div class="resource-item-row transition-row">
-                                <span>Diet & Heart Health</span>
-                                <span class="material-symbols-outlined item-link-arrow">open_in_new</span>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                 </div>
             </div>

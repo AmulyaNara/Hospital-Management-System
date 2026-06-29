@@ -324,3 +324,88 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 10000);
 
 });
+const token = localStorage.getItem("access_token");
+
+const authHeaders = {
+    Authorization: `Bearer ${token}`
+};
+
+async function loadPatientHeader() {
+
+    const response = await fetch(
+        "/api/patient-dashboard",
+        {
+            headers: authHeaders
+        }
+    );
+
+    const patient = await response.json();
+
+    document.getElementById("patientName").textContent =
+        patient.patient_name;
+
+    document.getElementById("patientId").textContent =
+        patient.patient_id;
+}
+async function loadAppointments() {
+
+    const response = await fetch(
+        "/api/patient-appointments",
+        {
+            headers: authHeaders
+        }
+    );
+
+    const appointments = await response.json();
+
+    console.log(appointments);
+
+    const table =
+        document.getElementById("appointmentsTable");
+
+    table.innerHTML = "";
+
+    appointments.forEach(app => {
+
+        table.innerHTML += `
+
+        <tr>
+
+            <td>
+                ${app.visit_date}<br>
+                ${app.visit_time ?? "To be scheduled"}
+            </td>
+
+            <td>
+                ${app.doctor_name}
+            </td>
+
+            <td>
+                General Physician
+            </td>
+
+            <td>
+                Main Hospital
+            </td>
+
+            <td>
+                <span class="status">
+                    ${app.status}
+                </span>
+            </td>
+
+            <td>
+                <button class="icon-btn">
+                    View
+                </button>
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+   
+}
+ loadPatientHeader();
+loadAppointments();

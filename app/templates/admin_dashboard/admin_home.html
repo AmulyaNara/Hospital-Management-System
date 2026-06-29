@@ -20,7 +20,7 @@
                 <span class="material-symbols-outlined">health_metrics</span>
             </div>
             <div>
-                <h2>MediAdmin</h2>
+                <h2>MedCore</h2>
                 <p>Clinical Systems</p>
             </div>
         </div>
@@ -57,10 +57,7 @@
         <span>Receptionists</span>
     </a>
 
-    <a class="nav-anchor" href="/admin-logs">
-        <span class="material-symbols-outlined">history</span>
-        <span>System Logs</span>
-    </a>
+    
 
     <a class="nav-anchor" href="/admin-settings">
         <span class="material-symbols-outlined">settings</span>
@@ -68,6 +65,11 @@
     </a>
 
 </nav>
+
+        <a class="nav-anchor" href="/logout">
+        <span class="material-symbols-outlined">logout</span>
+        <span>logout</span>
+    </a>
 
         <div class="admin-profile-footer">
             <div class="profile-meta-block">
@@ -119,15 +121,36 @@
                         <p class="dashboard-subtitle-text">Real-time facility oversight and administrative controls.</p>
                     </div>
                     <div class="header-action-button-group">
-                        <button class="action-btn btn-secondary-gray">
-                            <span class="material-symbols-outlined">file_download</span>
-                            <span>Export Report</span>
-                        </button>
-                        <button class="action-btn btn-primary-dark">
-                            <span class="material-symbols-outlined">add</span>
-                            <span>New Admission</span>
-                        </button>
-                    </div>
+
+    <!-- Export Button -->
+
+    <button
+        id="exportBtn"
+        class="secondary-btn">
+
+        <span class="material-symbols-outlined">
+            download
+        </span>
+
+        <span>Export Report</span>
+
+    </button>
+
+    <!-- New Admission Button -->
+
+    <button
+        id="newAdmissionBtn"
+        class="primary-btn">
+
+        <span class="material-symbols-outlined">
+            person_add
+        </span>
+
+        <span>New Admission</span>
+
+    </button>
+
+</div>
                 </section>
 
                 <!-- Facility Quick Insights Cards Grid Deck Block -->
@@ -142,7 +165,11 @@
                             <span class="delta-tag color-teal">+3 this week</span>
                         </div>
                         <p class="metric-label-title">Total Doctors</p>
-                        <h4 class="metric-numerical-display">142</h4>
+                        <h4
+    class="metric-numerical-display"
+    id="totalDoctors">
+    0
+</h4>
                     </div>
 
                     <!-- Insight Box Component Card -->
@@ -154,7 +181,11 @@
                             <span class="delta-tag color-teal">Active Now</span>
                         </div>
                         <p class="metric-label-title">Total Patients</p>
-                        <h4 class="metric-numerical-display">1,284</h4>
+                        <h4
+    class="metric-numerical-display"
+    id="totalPatients">
+    0
+</h4>
                     </div>
 
                     <!-- Insight Box Component Card -->
@@ -165,8 +196,14 @@
                             </div>
                             <span class="delta-tag color-muted">On Shift</span>
                         </div>
-                        <p class="metric-label-title">Active Staff</p>
-                        <h4 class="metric-numerical-display">312</h4>
+                        <p class="metric-label-title">
+    Today's Appointments
+</p>
+                        <h4
+    class="metric-numerical-display"
+    id="todayAppointments">
+    0
+</h4>
                     </div>
 
                     <!-- Insight Box Component Card -->
@@ -177,8 +214,14 @@
                             </div>
                             <span class="delta-tag color-error font-bold-tag">92% Capacity</span>
                         </div>
-                        <p class="metric-label-title">Bed Occupancy</p>
-                        <h4 class="metric-numerical-display">442<span class="fractional-denominator">/480</span></h4>
+                        <p class="metric-label-title">
+    Revenue
+</p>
+                        <h4
+    class="metric-numerical-display"
+    id="totalRevenue">
+    ₹0
+</h4>
                     </div>
 
                 </section>
@@ -198,6 +241,7 @@
                                 <button class="more-options-btn"><span class="material-symbols-outlined">more_vert</span></button>
                             </div>
                         </div>
+
 
                         <!-- Data Chart Visualization Canvas Graph Block Container Layout -->
                         <div class="chart-viewport-wrapper">
@@ -237,6 +281,53 @@
                         </div>
                     </div>
 
+<div class="bento-block-item item-col-span-6">
+
+    <div class="panel-header-action-row">
+        <h5 class="panel-section-title">Recent Patients</h5>
+    </div>
+<div class="table-wrapper">
+    <table class="dashboard-table">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Last Visit</th>
+            </tr>
+        </thead>
+
+        <tbody id="recentPatients"></tbody>
+
+    </table>
+</div>
+
+</div>
+
+<div class="bento-block-item item-col-span-6">
+
+    <div class="panel-header-action-row">
+        <h5 class="panel-section-title">Recent Visits</h5>
+    </div>
+
+    <table class="dashboard-table">
+
+        <thead>
+            <tr>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody id="recentVisits"></tbody>
+
+    </table>
+
+</div>
+
                     <!-- Right Column Operational Stream Realtime Log Feed Interface -->
                     <div class="bento-block-item item-col-span-4 flex-column-layout">
                         <div class="panel-header-action-row margin-bottom-lg">
@@ -245,78 +336,9 @@
                         </div>
 
                         <!-- Activity Vertical Pipeline Items Layout -->
-                        <div class="activity-scroll-viewport custom-scrollbar">
-                            
-                            <!-- Log Element Block 1 -->
-                            <div class="activity-timeline-item">
-                                <div class="timeline-nodes-indicator-rail">
-                                    <div class="node-icon-avatar bg-node-error color-error">
-                                        <span class="material-symbols-outlined size-sm-icon">emergency</span>
-                                    </div>
-                                    <div class="rail-line-connector"></div>
-                                </div>
-                                <div class="activity-content-block">
-                                    <div class="activity-title-timestamp-row">
-                                        <h6>ER Alert: High Traffic</h6>
-                                        <span class="activity-timestamp">2m ago</span>
-                                    </div>
-                                    <p class="activity-description-para">Level 3 triage surge detected in East Wing Emergency Reception.</p>
-                                    <button class="alert-cta-action-link color-error">
-                                        <span>Acknowledge</span>
-                                        <span class="material-symbols-outlined size-xs-icon">chevron_right</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Log Element Block 2 -->
-                            <div class="activity-timeline-item">
-                                <div class="timeline-nodes-indicator-rail">
-                                    <div class="node-icon-avatar bg-node-teal color-teal">
-                                        <span class="material-symbols-outlined size-sm-icon">person_add</span>
-                                    </div>
-                                    <div class="rail-line-connector"></div>
-                                </div>
-                                <div class="activity-content-block">
-                                    <div class="activity-title-timestamp-row">
-                                        <h6>Patient Admission</h6>
-                                        <span class="activity-timestamp">15m ago</span>
-                                    </div>
-                                    <p class="activity-description-para">Johnathan Miller (ID: #8821) admitted to Ward 4-B, Bed 12.</p>
-                                </div>
-                            </div>
-
-                            <!-- Log Element Block 3 -->
-                            <div class="activity-timeline-item">
-                                <div class="timeline-nodes-indicator-rail">
-                                    <div class="node-icon-avatar bg-node-gray color-muted">
-                                        <span class="material-symbols-outlined size-sm-icon">update</span>
-                                    </div>
-                                    <div class="rail-line-connector"></div>
-                                </div>
-                                <div class="activity-content-block">
-                                    <div class="activity-title-timestamp-row">
-                                        <h6>Staff Shift Update</h6>
-                                        <span class="activity-timestamp">45m ago</span>
-                                    </div>
-                                    <p class="activity-description-para">Night shift hand-over complete for Surgical Department.</p>
-                                </div>
-                            </div>
-
-                            <!-- Log Element Block 4 -->
-                            <div class="activity-timeline-item">
-                                <div class="timeline-nodes-indicator-rail">
-                                    <div class="node-icon-avatar bg-node-teal color-teal">
-                                        <span class="material-symbols-outlined size-sm-icon">lab_research</span>
-                                    </div>
-                                </div>
-                                <div class="activity-content-block">
-                                    <div class="activity-title-timestamp-row">
-                                        <h6>Lab Results Released</h6>
-                                        <span class="activity-timestamp">1h ago</span>
-                                    </div>
-                                    <p class="activity-description-para">Pathology report finalized for Patient Sarah Connor.</p>
-                                </div>
-                            </div>
+                        <div
+                            id="recentActivities"
+                            class="activity-scroll-viewport custom-scrollbar">                           
 
                         </div>
                     </div>

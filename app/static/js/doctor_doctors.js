@@ -87,12 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
             }
 
-            const doctors =
-                await response.json();
+            const result =
+    await response.json();
 
-            allDoctors = doctors;
+allDoctors = result.data || [];
 
-            renderDoctors();
+renderDoctors();
 
         }
         catch(error) {
@@ -267,10 +267,9 @@ document.addEventListener('DOMContentLoaded', () => {
             () => {
 
                 const totalPages =
-                    Math.ceil(
-                        allDoctors.length /
-                        recordsPerPage
-                    );
+    Math.ceil(
+        allDoctors.length / recordsPerPage
+    );
 
                 if (
                     currentPage <

@@ -136,16 +136,17 @@
 
             <div class="search-box">
 
-                <span class="material-symbols-outlined">
-                    search
-                </span>
+    <span class="material-symbols-outlined">
+        search
+    </span>
 
-                <input
-                        type="text"
-                        placeholder="Search clinic locations or doctors..."
-                >
+    <input
+        id="appointmentSearch"
+        type="text"
+        placeholder="Search appointments, doctors, speciality..."
+    >
 
-            </div>
+</div>
 
 
             <div class="header-right">
@@ -189,10 +190,7 @@
 
                     </div>
 
-                    <img
-                            src="https://i.pravatar.cc/100?img=48"
-                            alt="Profile"
-                    >
+                     <img alt="Sarah Jenkins" class="profile-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXo0MwfCOENMKGKgQ9z4tcGe3bpsOmnlWrpPjnQikodR7xQRv1q7y5eHNd8WbO5O4WgR3tyLRYbphkjywJ4laQB9FddmBPOWpsbaybSFmNAIx_CpuUuQO8uNy23W4cT7dMJh03EYuiPRS0eQiWqMv9ghYZVlmHDOAS6OPoqbqVkLv8roTglLpSkiaHiDL5JiygcE8QkTgj9MYgXTt-VY4W-dZfl6g-1bJVEDJ6DSb_bvl9Roe00uvvGv7KpKrk1Fz7NbcfqzHLFI0b"/>
 
                 </div>
 
@@ -253,14 +251,14 @@
         <div class="appointment-count">
 
             <span class="upcoming">
-                <span class="dot green"></span>
-                Upcoming (2)
-            </span>
+    <span class="dot green"></span>
+    Upcoming (<span id="upcomingCount">0</span>)
+</span>
 
-            <span class="past">
-                <span class="dot gray"></span>
-                Past (14)
-            </span>
+<span class="past">
+    <span class="dot gray"></span>
+    Past (<span id="pastCount">0</span>)
+</span>
 
         </div>
 
@@ -300,39 +298,33 @@
     </div>
 
 
-    <div class="pagination">
+    
 
-        <p>
-
-            Showing 1 to 4 of 16 appointments
-
-        </p>
+        <p id="paginationInfo">
+    Showing 0 appointments
+</p>
 
         <div class="page-buttons">
 
-            <button>
+            <div class="page-buttons">
 
-                <span class="material-symbols-outlined">
+    <button id="prevPage">
+        <span class="material-symbols-outlined">
+            chevron_left
+        </span>
+    </button>
 
-                    chevron_left
+    <button id="nextPage">
+        <span class="material-symbols-outlined">
+            chevron_right
+        </span>
+    </button>
 
-                </span>
-
-            </button>
-
-            <button>
-
-                <span class="material-symbols-outlined">
-
-                    chevron_right
-
-                </span>
-
-            </button>
+</div>
 
         </div>
 
-    </div>
+    
 
 </div>
 
@@ -347,30 +339,26 @@
 
     <div class="clinic-header">
 
-        <h3>Clinic Locations</h3>
+        <h3>Hospital Location</h3>
 
-        <button>
+        <button id="openMapBtn">
 
-            Full Map
+            Open Google Maps
 
             <span class="material-symbols-outlined">
-
                 open_in_new
-
             </span>
 
         </button>
 
     </div>
 
-
     <div class="map-container">
 
         <img
-            src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200"
-            alt="Clinic Map">
-
-        <div class="map-overlay"></div>
+            src="/static/images/india-map.png"
+            alt="Hospital Location"
+            class="india-map">
 
         <div class="location-marker">
 
@@ -380,15 +368,21 @@
 
             </span>
 
-            <div class="marker-popup">
-
-                <h4>Central Medical Center</h4>
-
-                <p>122 Health Way, Suite 400</p>
-
-            </div>
-
         </div>
+
+    </div>
+
+    <div class="hospital-details">
+
+        <h4>MedCore Hospital</h4>
+
+        <p>Hyderabad, Telangana</p>
+
+        <small>
+
+            Main Branch • Open 24 × 7
+
+        </small>
 
     </div>
 
@@ -423,11 +417,9 @@
 
         </small>
 
-        <h3>
-
-            Annual Cardiovascular Screening
-
-        </h3>
+        <h3 id="nextSessionTitle">
+    Loading...
+</h3>
 
 
         <div class="session-details">
@@ -436,7 +428,9 @@
 
                 <span>Date</span>
 
-                <strong>Oct 24, 2023</strong>
+                <strong id="nextSessionDate">
+    --
+</strong>
 
             </div>
 
@@ -444,8 +438,9 @@
 
                 <span>Time</span>
 
-                <strong>09:30 AM</strong>
-
+                <strong id="nextSessionTime">
+    --
+</strong>
             </div>
 
         </div>
@@ -468,42 +463,35 @@
 
     <!-- Preparation Card -->
 
-    <div class="preparation-card">
+    <!-- Patient Instructions Card -->
 
-        <div class="prep-icon">
+<div class="preparation-card">
 
-            <span class="material-symbols-outlined">
+    <div class="prep-icon">
 
-                priority_high
-
-            </span>
-
-        </div>
-
-        <div class="prep-content">
-
-            <h4>
-
-                Preparation Required
-
-            </h4>
-
-            <p>
-
-                Please ensure you fast for 8 hours before your
-                09:30 AM screening. Water is permitted.
-
-            </p>
-
-            <a href="#">
-
-                View Instructions
-
-            </a>
-
-        </div>
+        <span class="material-symbols-outlined">
+            assignment
+        </span>
 
     </div>
+
+    <div class="prep-content">
+
+        <h4 id="instructionTitle">
+            Patient Instructions
+        </h4>
+
+        <p id="instructionText">
+            Loading instructions...
+        </p>
+
+        <small id="instructionNote">
+            Please follow these instructions before your appointment.
+        </small>
+
+    </div>
+
+</div>
 
 </div>
 

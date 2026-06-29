@@ -107,13 +107,27 @@ Settings
 
 <div class="doctor-card">
 
-<img src="https://i.pravatar.cc/100?img=68">
+ <img alt="Sarah Jenkins" class="profile-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXo0MwfCOENMKGKgQ9z4tcGe3bpsOmnlWrpPjnQikodR7xQRv1q7y5eHNd8WbO5O4WgR3tyLRYbphkjywJ4laQB9FddmBPOWpsbaybSFmNAIx_CpuUuQO8uNy23W4cT7dMJh03EYuiPRS0eQiWqMv9ghYZVlmHDOAS6OPoqbqVkLv8roTglLpSkiaHiDL5JiygcE8QkTgj9MYgXTt-VY4W-dZfl6g-1bJVEDJ6DSb_bvl9Roe00uvvGv7KpKrk1Fz7NbcfqzHLFI0b"/>
 
 <div>
 
-<h4>Dr. Aris Thorne</h4>
+<h4 id="patientName">
 
-<p>Attending Physician</p>
+Loading...
+
+</h4>
+
+<p>
+
+Patient ID :
+
+<span id="patientId">
+
+Loading...
+
+</span>
+
+</p>
 
 </div>
 
@@ -134,8 +148,9 @@ search
 </span>
 
 <input
-type="text"
-placeholder="Search test results or physicians...">
+    id="labSearch"
+    type="text"
+    placeholder="Search test results or physicians...">
 
 </div>
 
@@ -165,15 +180,17 @@ help
 
 <div class="profile">
 
-<span>
+<span id="headerPatientName">
 
-John Doe
+Loading...
 
 </span>
 
-<div class="avatar">
+<div
+    id="patientInitial"
+    class="avatar">
 
-JD
+--
 
 </div>
 
@@ -217,19 +234,21 @@ View and track your clinical diagnostics from the last 12 months.
 
 <div class="page-actions">
 
-<button class="btn-outline">
+<select id="statusFilter" class="filter-select">
 
-<span class="material-symbols-outlined">
+    <option value="">All Status</option>
 
-filter_list
+    <option value="Completed">Completed</option>
 
-</span>
+    <option value="Pending">Pending</option>
 
-Filter
+    <option value="Processing">Processing</option>
 
-</button>
+</select>
 
-<button class="btn-dark">
+<button
+    id="downloadAllBtn"
+    class="btn-dark">
 
 <span class="material-symbols-outlined">
 
@@ -264,78 +283,24 @@ Download All
 
         </h3>
 
-        <span class="trend-period">
+        <span
+    id="trendPeriod"
+    class="trend-period">
 
-            Past 6 Months
+    Past 6 Months
 
-        </span>
+</span>
 
     </div>
 
 
     <!-- Fake Chart -->
 
-    <div class="chart">
+    <div
+    id="trendChart"
+    class="chart">
 
-        <div class="bar-group">
-
-            <div class="bar h70"></div>
-
-            <span>Jan</span>
-
-        </div>
-
-        <div class="bar-group">
-
-            <div class="bar h60"></div>
-
-            <span>Feb</span>
-
-        </div>
-
-        <div class="bar-group">
-
-            <div class="bar h80"></div>
-
-            <span>Mar</span>
-
-        </div>
-
-        <div class="bar-group">
-
-            <div class="bar h65"></div>
-
-            <span>Apr</span>
-
-        </div>
-
-        <div class="bar-group">
-
-            <div class="bar h75"></div>
-
-            <span>May</span>
-
-        </div>
-
-        <div class="bar-group active">
-
-            <div class="value-tag">
-
-                5.6%
-
-            </div>
-
-            <div class="bar h120"></div>
-
-            <span>
-
-                JUN
-
-            </span>
-
-        </div>
-
-    </div>
+</div>
 
 </div>
 
@@ -358,29 +323,21 @@ Download All
 
             </small>
 
-            <h2>
+            <h2 id="cholesterolValue">
 
-                180
+--
 
-                <span>
+<span>mg/dL</span>
 
-                    mg/dL
+</h2>
 
-                </span>
+            <p
+    id="cholesterolStatus"
+    class="success">
 
-            </h2>
+--
 
-            <p class="success">
-
-                <span class="material-symbols-outlined">
-
-                    check_circle
-
-                </span>
-
-                Optimal Range
-
-            </p>
+</p>
 
         </div>
 
@@ -410,29 +367,21 @@ Download All
 
             </small>
 
-            <h2>
+            <h2 id="hba1cValue">
 
-                5.6
+--
 
-                <span>
+<span>%</span>
 
-                    %
+</h2>
 
-                </span>
+            <p
+    id="hba1cStatus"
+    class="success">
 
-            </h2>
+--
 
-            <p class="success">
-
-                <span class="material-symbols-outlined">
-
-                    check_circle
-
-                </span>
-
-                Normal
-
-            </p>
+</p>
 
         </div>
 
@@ -466,15 +415,15 @@ Download All
 
         </h3>
 
-        <span>
+        <span id="resultsCounter">
 
-            Showing 5 of 24 Results
+Showing 0-0 of 0 Results
 
-        </span>
+</span>
 
     </div>
 
-    <table>
+    <table id="labResultsTable">
 
         <thead>
 
@@ -500,21 +449,34 @@ Download All
 
 </table>
 
+<div
+    id="emptyState"
+    class="empty-state"
+    style="display:none;">
 
+    <span class="material-symbols-outlined">
 
-<div class="load-more">
+        science
 
-    <button>
+    </span>
 
-        Load More Records
+    <h3>
 
-        <span class="material-symbols-outlined">
+        No Laboratory Results Found
 
-            expand_more
+    </h3>
 
-        </span>
+    <p>
 
-    </button>
+        Your laboratory investigations will appear here after your doctor orders tests.
+
+    </p>
+
+</div>
+
+<div
+    id="paginationContainer"
+    class="pagination">
 
 </div>
 
@@ -549,6 +511,41 @@ and treatment decisions.
 </section>
 
 </main>
+
+</div>
+<!-- ==========================================
+        Lab Report Modal
+========================================== -->
+
+<div
+    id="labModal"
+    class="modal hidden">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+
+                Laboratory Report
+
+            </h2>
+
+            <button id="closeModal">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div
+    id="modalBody"
+    class="modal-body">
+
+</div>
+
+    </div>
 
 </div>
 

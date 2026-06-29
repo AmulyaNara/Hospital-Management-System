@@ -3,25 +3,33 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>Patient Care Portal | Billing</title>
+    <title>Patient Care Portal | Billing</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Google Fonts -->
 
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap"
-rel="stylesheet">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap"
+          rel="stylesheet">
 
-<link rel="stylesheet"
-      href="{{ url_for('static', path='css/patient_billings.css') }}">
+    <!-- Material Icons -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+          rel="stylesheet">
+
+    <!-- Billing CSS -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='css/patient_billings.css') }}">
 
 </head>
 
@@ -29,11 +37,11 @@ rel="stylesheet">
 
 <div class="dashboard">
 
-<!-- ======================================
-SIDEBAR
-====================================== -->
+    <!-- =====================================
+                    SIDEBAR
+    ====================================== -->
 
- <aside class="sidebar">
+    <aside class="sidebar">
 
         <div class="logo">
 
@@ -43,10 +51,10 @@ SIDEBAR
 
         </div>
 
-
         <nav class="sidebar-nav">
 
-            <a href="/patient-dashboard" class="nav-item">
+            <a href="/patient-dashboard"
+               class="nav-item">
 
                 <span class="material-symbols-outlined">
                     dashboard
@@ -56,7 +64,8 @@ SIDEBAR
 
             </a>
 
-            <a href="/patient-appointments" class="nav-item">
+            <a href="/patient-appointments"
+               class="nav-item">
 
                 <span class="material-symbols-outlined">
                     calendar_today
@@ -66,7 +75,8 @@ SIDEBAR
 
             </a>
 
-            <a href="/patient-reports" class="nav-item">
+            <a href="/patient-reports"
+               class="nav-item">
 
                 <span class="material-symbols-outlined">
                     description
@@ -76,7 +86,8 @@ SIDEBAR
 
             </a>
 
-            <a href="/patient-lab" class="nav-item">
+            <a href="/patient-lab"
+               class="nav-item">
 
                 <span class="material-symbols-outlined">
                     biotech
@@ -86,7 +97,8 @@ SIDEBAR
 
             </a>
 
-            <a href="/patient-billings" class="nav-item active">
+            <a href="/patient-billings"
+               class="nav-item active">
 
                 <span class="material-symbols-outlined">
                     payments
@@ -96,7 +108,8 @@ SIDEBAR
 
             </a>
 
-            <a href="/patient-settings" class="nav-item">
+            <a href="/patient-settings"
+               class="nav-item">
 
                 <span class="material-symbols-outlined">
                     settings
@@ -108,10 +121,10 @@ SIDEBAR
 
         </nav>
 
-
         <div class="sidebar-footer">
 
-            <a href="/patient-support" class="nav-item">
+            <a href="/patient-support"
+               class="nav-item">
 
                 <span class="material-symbols-outlined">
                     contact_support
@@ -121,7 +134,8 @@ SIDEBAR
 
             </a>
 
-            <a href="/logout" class="nav-item logout">
+            <a href="/logout"
+               class="nav-item logout">
 
                 <span class="material-symbols-outlined">
                     logout
@@ -135,248 +149,281 @@ SIDEBAR
 
     </aside>
 
-<!-- ======================================
-MAIN
-====================================== -->
+    <!-- =====================================
+                MAIN CONTENT
+    ====================================== -->
 
-<main class="main-content">
+    <main class="main-content">
+        <!-- =====================================
+                TOP BAR
+====================================== -->
 
 <header class="topbar">
 
-<div class="portal-name">
+    <div class="portal-name">
 
-Patient Care Portal
-
-</div>
-
-<div class="top-actions">
-
-<a href="#">Support</a>
-
-<a href="#">FAQ</a>
-
-<button>
-
-<span class="material-symbols-outlined">
-
-notifications
-
-</span>
-
-</button>
-
-<button>
-
-<span class="material-symbols-outlined">
-
-help
-
-</span>
-
-</button>
-
-<button>
-
-<span class="material-symbols-outlined">
-
-settings
-
-</span>
-
-</button>
-
-<div class="profile">
-
-    <div class="profile-info">
-
-        <h4 id="patientName"></h4>
-
-        <p>
-            Patient ID :
-            <span id="patientId"></span>
-        </p>
+        Patient Care Portal
 
     </div>
 
-    <img
-        src="https://i.pravatar.cc/80?img=15"
-        alt="Profile">
+    <div class="top-actions">
 
-</div>
+        <a href="/patient-support">
 
+            Support
 
-</div>
+        </a>
+
+        <a href="/patient-faq">
+
+            FAQ
+
+        </a>
+
+        <button class="icon-btn">
+
+            <span class="material-symbols-outlined">
+
+                notifications
+
+            </span>
+
+        </button>
+
+        <button class="icon-btn">
+
+            <span class="material-symbols-outlined">
+
+                help
+
+            </span>
+
+        </button>
+
+        <button class="icon-btn">
+
+            <span class="material-symbols-outlined">
+
+                settings
+
+            </span>
+
+        </button>
+
+        <div class="profile">
+
+            <div class="profile-info">
+
+                <h4 id="patientName">
+
+                    Loading...
+
+                </h4>
+
+                <p>
+
+                    Patient ID :
+
+                    <span id="patientId">
+
+                        ----
+
+                    </span>
+
+                </p>
+
+            </div>
+
+            <div
+                id="patientInitial"
+                class="avatar">
+
+                P
+
+            </div>
+
+        </div>
+
+    </div>
 
 </header>
 
+<!-- =====================================
+                PAGE CONTENT
+====================================== -->
+
 <section class="content">
 
-<div class="page-title">
+    <div class="page-title">
 
-<h1>
+        <div>
 
-Billing & Invoices
+            <h1>
 
-</h1>
+                Billing & Invoices
 
-<p>
+            </h1>
 
-View and manage your clinical service fees and insurance claims.
+            <p>
 
-</p>
+                View invoices, payments, outstanding balances,
+                insurance claims and downloadable receipts.
 
-</div>
+            </p>
 
-<!-- PART 2 STARTS HERE -->
+        </div>
+
+    </div>
+    <!-- =====================================
+            SUMMARY CARDS
+====================================== -->
 
 <div class="summary-grid">
-    <!-- ======================================
-OUTSTANDING BALANCE
-====================================== -->
 
-<div class="summary-card secondary">
+    <!-- Outstanding Balance -->
 
-    <div class="card-top">
+    <div class="summary-card secondary">
 
-        <span>
+        <div class="card-top">
 
-            Outstanding Balance
+            <span>
 
-        </span>
+                Outstanding Balance
 
-        <span class="material-symbols-outlined">
+            </span>
 
-            account_balance_wallet
+            <span class="material-symbols-outlined">
 
-        </span>
+                account_balance_wallet
+
+            </span>
+
+        </div>
+
+        <h2 id="outstandingBalance">
+
+            ₹0.00
+
+        </h2>
+
+        <div
+            id="outstandingFooter"
+            class="card-footer">
+
+            <span class="material-symbols-outlined">
+
+                info
+
+            </span>
+
+            Loading...
+
+        </div>
 
     </div>
 
-    <h2>
+    <!-- Total Paid -->
 
-        ₹4,250.00
+    <div class="summary-card primary">
 
-    </h2>
+        <div class="card-top">
 
-    <div class="card-footer">
+            <span>
 
-        <span class="material-symbols-outlined">
+                Total Paid (YTD)
 
-            info
+            </span>
 
-        </span>
+            <span class="material-symbols-outlined">
 
-        Due in 12 days
+                payments
+
+            </span>
+
+        </div>
+
+        <h2 id="totalPaid">
+
+            ₹0.00
+
+        </h2>
+
+        <div
+            id="totalPaidFooter"
+            class="card-footer success">
+
+            <span class="material-symbols-outlined">
+
+                check_circle
+
+            </span>
+
+            Loading...
+
+        </div>
+
+    </div>
+
+    <!-- Recent Credits -->
+
+    <div class="summary-card tertiary">
+
+        <div class="card-top">
+
+            <span>
+
+                Recent Credits
+
+            </span>
+
+            <span class="material-symbols-outlined">
+
+                redeem
+
+            </span>
+
+        </div>
+
+        <h2 id="recentCredits">
+
+            ₹0.00
+
+        </h2>
+
+        <div
+            id="recentCreditsFooter"
+            class="card-footer">
+
+            <span class="material-symbols-outlined">
+
+                history
+
+            </span>
+
+            Loading...
+
+        </div>
 
     </div>
 
 </div>
-
-
-
-<!-- ======================================
-TOTAL PAID
-====================================== -->
-
-<div class="summary-card primary">
-
-    <div class="card-top">
-
-        <span>
-
-            Total Paid (YTD)
-
-        </span>
-
-        <span class="material-symbols-outlined">
-
-            payments
-
-        </span>
-
-    </div>
-
-    <h2>
-
-        ₹1,02,400.00
-
-    </h2>
-
-    <div class="card-footer success">
-
-        <span class="material-symbols-outlined">
-
-            check_circle
-
-        </span>
-
-        Updated Oct 24
-
-    </div>
-
-</div>
-
-
-
-<!-- ======================================
-RECENT CREDITS
-====================================== -->
-
-<div class="summary-card tertiary">
-
-    <div class="card-top">
-
-        <span>
-
-            Recent Credits
-
-        </span>
-
-        <span class="material-symbols-outlined">
-
-            redeem
-
-        </span>
-
-    </div>
-
-    <h2>
-
-        ₹3,750.00
-
-    </h2>
-
-    <div class="card-footer">
-
-        <span class="material-symbols-outlined">
-
-            history
-
-        </span>
-
-        From Insurance Refund
-
-    </div>
-
-</div>
-
-</div>
-
-
-
-<!-- ======================================
-TABS
+<!-- =====================================
+            BILLING TABS
 ====================================== -->
 
 <div class="tabs">
 
-    <button class="tab active">
+    <button
+        id="invoiceTab"
+        class="tab active">
 
         Invoices
 
     </button>
 
-    <button class="tab">
+    <button
+        id="paymentHistoryTab"
+        class="tab">
 
         Payment History
 
@@ -384,129 +431,179 @@ TABS
 
 </div>
 
-
-
-<!-- ======================================
-TABLE CARD
+<!-- =====================================
+            BILLING TABLE
 ====================================== -->
 
 <div class="invoice-card">
 
-<table>
+    <table id="billingTableContainer">
 
-<thead>
+        <thead>
 
-<tr>
+            <tr>
 
-<th>
+                <th>
 
-Invoice ID
+                    Invoice ID
 
-</th>
+                </th>
 
-<th>
+                <th>
 
-Date & Service
+                    Date & Service
 
-</th>
+                </th>
 
-<th>
+                <th>
 
-Patient Responsibility
+                    Patient Responsibility
 
-</th>
+                </th>
 
-<th>
+                <th>
 
-Status
+                    Status
 
-</th>
+                </th>
 
-<th>
+                <th>
 
-View
+                    Action
 
-</th>
+                </th>
 
-</tr>
+            </tr>
 
-</thead>
+        </thead>
 
-<tbody id="billingTable">
+        <tbody id="billingTable">
 
-</tbody>
+        </tbody>
 
-</table>
+    </table>
 
+    <!-- ===========================
+            EMPTY STATE
+    ============================ -->
 
+    <div
+        id="emptyState"
+        class="empty-state"
+        style="display:none;">
 
-<!-- ============================
-Security Footer
-============================= -->
+        <span class="material-symbols-outlined">
 
-<div class="invoice-footer">
+            receipt_long
 
-<div class="security">
+        </span>
 
-<span class="material-symbols-outlined">
+        <h3>
 
-lock
+            No Billing Records Found
 
-</span>
+        </h3>
 
-Secure View-Only Protocol Enabled.
-Actions are restricted to administrative verified portals only.
+        <p>
+
+            Your invoices or payment history will appear here.
+
+        </p>
+
+    </div>
+
+    <!-- ===========================
+            PAGINATION
+    ============================ -->
+
+    <div class="table-pagination">
+
+        <div id="billingResults">
+
+            Showing 0–0 of 0 Results
+
+        </div>
+
+        <div
+            id="paginationContainer"
+            class="pagination">
+
+        </div>
+
+    </div>
+
+    <!-- ===========================
+            FOOTER
+    ============================ -->
+
+    <div class="invoice-footer">
+
+        <div class="security">
+
+            <span class="material-symbols-outlined">
+
+                lock
+
+            </span>
+
+            Secure View-Only Protocol Enabled.
+            Billing information is protected and encrypted.
+
+        </div>
+
+        <div class="updated">
+
+            Last Updated :
+
+            <span id="lastUpdated">
+
+                --
+
+            </span>
+
+        </div>
+
+    </div>
 
 </div>
-
-<div class="updated">
-
-Last Updated: Oct 26, 2023 • 10:42 AM IST
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- ============================
-Support Card
-============================= -->
+<!-- =====================================
+            BILLING SUPPORT
+====================================== -->
 
 <div class="support-card">
 
-<div class="support-icon">
+    <div class="support-icon">
 
-<span class="material-symbols-outlined">
+        <span class="material-symbols-outlined">
 
-info
+            support_agent
 
-</span>
+        </span>
 
-</div>
+    </div>
 
-<div>
+    <div class="support-content">
 
-<h3>
+        <h3>
 
-Billing Support
+            Billing Support
 
-</h3>
+        </h3>
 
-<p>
+        <p>
 
-If you have questions regarding an invoice or your insurance
-coverage, please reach out to our billing coordination team.
+            If you have questions regarding an invoice,
+            payment, insurance claim or refund,
+            please contact our Billing Department.
 
-For security reasons, this portal does not support direct
-payments. Please use the official hospital kiosk or the
-verified bank link sent to your registered mobile number.
+            Online payments are disabled for security.
+            Payments can be completed at the hospital
+            billing counter or through the official
+            payment link provided by MedCore.
 
-</p>
+        </p>
 
-</div>
+    </div>
 
 </div>
 
@@ -516,8 +613,74 @@ verified bank link sent to your registered mobile number.
 
 </div>
 
-<script src="{{ url_for('static', path='js/patient_billings.js') }}"></script>
+<!-- =====================================
+            INVOICE MODAL
+====================================== -->
 
+<div
+    id="invoiceModal"
+    class="modal hidden">
+
+    <div class="modal-content">
+
+        <!-- Header -->
+
+        <div class="modal-header">
+
+            <h2>
+
+                Invoice Details
+
+            </h2>
+
+            <button
+                id="closeModal"
+                class="close-btn">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <!-- Dynamic Content -->
+
+        <div
+            id="modalBody"
+            class="modal-body">
+
+        </div>
+
+        <!-- Footer -->
+
+        <div class="modal-footer">
+
+            <button
+                id="downloadInvoiceBtn"
+                class="download-btn"
+                data-id="">
+
+                <span class="material-symbols-outlined">
+
+                    download
+
+                </span>
+
+                Download Invoice
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =====================================
+            JAVASCRIPT
+====================================== -->
+
+<script src="{{ url_for('static', path='js/patient_billings.js') }}"></script>
 
 </body>
 

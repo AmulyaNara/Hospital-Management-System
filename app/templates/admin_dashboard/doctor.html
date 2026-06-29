@@ -44,47 +44,50 @@
     <span class="material-symbols-outlined">medical_services</span>
     <span>Doctors</span>
 </a>
-            <a href="#" class="menu-item">
+            <a href="/admin-patients" class="menu-item">
                 <span class="material-symbols-outlined">person</span>
                 <span>Patients</span>
             </a>
-            <a href="#" class="menu-item">
+            <a href="/admin-diagnosis" class="menu-item">
                 <span class="material-symbols-outlined">analytics</span>
                 <span>Diagnosis</span>
             </a>
-            <a href="#" class="menu-item">
+            <a href="/admin-prescriptions" class="menu-item">
                 <span class="material-symbols-outlined">description</span>
                 <span>Prescriptions</span>
             </a>
-            <a href="#" class="menu-item">
+            <a href="/admin-receptionists" class="menu-item">
                 <span class="material-symbols-outlined">badge</span>
                 <span>Receptionists</span>
             </a>
-            <a href="#" class="menu-item">
-                <span class="material-symbols-outlined">history</span>
-                <span>System Logs</span>
-            </a>
+            
             <div class="menu-divider"></div>
-            <a href="#" class="menu-item">
+            <a href="/admin-settings" class="menu-item">
                 <span class="material-symbols-outlined">settings</span>
                 <span>Settings</span>
             </a>
               
         </nav>
 
+        <a class="nav-anchor" href="/logout">
+        <span class="material-symbols-outlined">logout</span>
+        <span>logout</span>
+    </a>
+
         <div class="sidebar-profile">
             <div class="profile-avatar">JW</div>
+            <img alt="Dr. Aris Thorne Avatar" class="profile-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7FMDkBKJ4wqfWvGXWsWqU4bz0YCWdmZRpT28wdSh8fHqSvaMN_MoSYa8pMPwS5aihzGsbWs9nkyHbnB4xPI56VYPfTuicGBsVMiE4uhGQgzS8fwgTpg3ZRZOKmi8qR0Y-roW0PeJGuEaMiINptOthSSRirE1VitAYn6SCwvZRb_SrwDzEbPn5gvM7k5tEgDJdl9prguYM0zdwycq1gTodQ3VFFih1RJLzQzT9g_9-C72r-h6pwU-v7OrH1p0m-pU9qKE2JD5ZE8m1"/>
             <div class="profile-info">
-                <p class="profile-name">Dr. James Wilson</p>
+                <p class="profile-name">Dr. Aris</p>
                 <p class="profile-role">Chief Administrator</p>
             </div>
         </div>
     </aside>
 
         <div class="sidebar-profile">
-            <div class="profile-avatar">JW</div>
+            
             <div class="profile-info">
-                <p class="profile-name">Dr. James Wilson</p>
+                <p class="profile-name">Dr. Aris</p>
                 <p class="profile-role">Chief Administrator</p>
             </div>
         </div>
@@ -96,7 +99,11 @@
         <header class="top-bar">
             <div class="search-wrapper">
                 <span class="material-symbols-outlined">search</span>
-                <input type="text" placeholder="Search patients, doctors, or records...">
+                <input
+    type="text"
+    id="searchDoctor"
+    placeholder="Search Doctor..."
+>
             </div>
             <div class="header-actions">
                 <button class="icon-btn">
@@ -122,7 +129,7 @@
                         <span class="pill pill-green">+12%</span>
                     </div>
                     <p class="metric-label">Total Doctors</p>
-                    <h3 class="metric-value">142</h3>
+                    <h3 id="totalDoctors">0</h3>
                 </div>
                 
                 <div class="metric-card">
@@ -131,7 +138,7 @@
                         <span class="pill pill-green">+5.2%</span>
                     </div>
                     <p class="metric-label">Total Patients</p>
-                    <h3 class="metric-value">1,284</h3>
+                    <h3 id="totalPatients">0</h3>
                 </div>
 
                 <div class="metric-card">
@@ -140,7 +147,7 @@
                         <span class="pill pill-gray">Stable</span>
                     </div>
                     <p class="metric-label">Active Staff</p>
-                    <h3 class="metric-value">312</h3>
+                    <h3 id="activeStaff">0</h3>
                 </div>
 
                 <div class="metric-card border-red">
@@ -149,7 +156,7 @@
                         <span class="pill pill-red">92%</span>
                     </div>
                     <p class="metric-label">Bed Occupancy</p>
-                    <h3 class="metric-value">442 / 480</h3>
+                    <h3 id="bedOccupancy">0</h3>
                 </div>
             </section>
 
@@ -162,13 +169,22 @@
                     </div>
                     <div class="registry-actions">
                         <button class="btn btn-secondary-action">
-                            <span class="material-symbols-outlined">filter_list</span>
-                            <span>Filter</span>
-                        </button>
-                        <button class="btn btn-primary-action">
-                            <span class="material-symbols-outlined">add</span>
-                            <span>Add New Doctor</span>
-                        </button>
+
+    <span class="material-symbols-outlined">
+        filter_list
+    </span>
+
+    <span>Filter</span>
+
+</button>
+                        <button
+    class="btn btn-primary-action"
+    id="addDoctorBtn">
+
+    <span class="material-symbols-outlined">add</span>
+    <span>Add New Doctor</span>
+
+</button>
                     </div>
                 </div>
 
@@ -177,102 +193,17 @@
                     <table class="doctors-table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Specialty</th>
-                                <th>Status</th>
-                                <th>Contact</th>
-                                <th class="text-right">Actions</th>
-                            </tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Specialization</th>
+    <th>Phone</th>
+    <th>Email</th>
+    <th>Status</th>
+    <th>Actions</th>
+</tr>
                         </thead>
-                        <tbody>
-                            <!-- Row 1 -->
-                            <tr>
-                                <td>
-                                    <div class="user-profile-cell">
-                                        <div class="avatar bg-teal-light">SC</div>
-                                        <div>
-                                            <p class="user-name">Dr. Sarah Chen</p>
-                                            <p class="user-id">ID: DOC-9284</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="text-body-sm">Cardiology</span></td>
-                                <td><span class="status-badge badge-active">Active</span></td>
-                                <td><p class="text-body-sm">s.chen@hospital.com</p></td>
-                                <td class="text-right">
-                                    <div class="action-buttons">
-                                        <button class="action-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
-                                        <button class="action-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
-                                        <button class="action-btn text-danger" title="Delete"><span class="material-symbols-outlined">delete</span></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- Row 2 -->
-                            <tr>
-                                <td>
-                                    <div class="user-profile-cell">
-                                        <div class="avatar bg-blue-light">MR</div>
-                                        <div>
-                                            <p class="user-name">Dr. Michael Ross</p>
-                                            <p class="user-id">ID: DOC-4102</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="text-body-sm">Neurology</span></td>
-                                <td><span class="status-badge badge-leave">On Leave</span></td>
-                                <td><p class="text-body-sm">m.ross@hospital.com</p></td>
-                                <td class="text-right">
-                                    <div class="action-buttons">
-                                        <button class="action-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
-                                        <button class="action-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
-                                        <button class="action-btn text-danger" title="Delete"><span class="material-symbols-outlined">delete</span></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- Row 3 -->
-                            <tr>
-                                <td>
-                                    <div class="user-profile-cell">
-                                        <div class="avatar bg-purple-light">ER</div>
-                                        <div>
-                                            <p class="user-name">Dr. Elena Rodriguez</p>
-                                            <p class="user-id">ID: DOC-7721</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="text-body-sm">Pediatrics</span></td>
-                                <td><span class="status-badge badge-active">Active</span></td>
-                                <td><p class="text-body-sm">e.rodriguez@hospital.com</p></td>
-                                <td class="text-right">
-                                    <div class="action-buttons">
-                                        <button class="action-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
-                                        <button class="action-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
-                                        <button class="action-btn text-danger" title="Delete"><span class="material-symbols-outlined">delete</span></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- Row 4 -->
-                            <tr>
-                                <td>
-                                    <div class="user-profile-cell">
-                                        <div class="avatar bg-gray-light">AW</div>
-                                        <div>
-                                            <p class="user-name">Dr. Alan Wright</p>
-                                            <p class="user-id">ID: DOC-3315</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="text-body-sm">General Surgery</span></td>
-                                <td><span class="status-badge badge-active">Active</span></td>
-                                <td><p class="text-body-sm">a.wright@hospital.com</p></td>
-                                <td class="text-right">
-                                    <div class="action-buttons">
-                                        <button class="action-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
-                                        <button class="action-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
-                                        <button class="action-btn text-danger" title="Delete"><span class="material-symbols-outlined">delete</span></button>
-                                    </div>
-                                </td>
-                            </tr>
+                        <tbody id="doctorsTable">
+
                         </tbody>
                     </table>
                 </div>
@@ -390,7 +321,85 @@
     <button class="fab-button" title="Emergency Action">
         <span class="material-symbols-outlined">emergency</span>
     </button>
+    <div id="doctorModal" class="doctor-modal">
 
+<div class="doctor-modal-content">
+
+<h2>Add / Edit Doctor</h2>
+
+<form id="doctorForm">
+
+<input
+name="doctor_name"
+type="text"
+placeholder="Doctor Name"
+required>
+
+<input
+name="specialization"
+type="text"
+placeholder="Specialization"
+required>
+
+<input
+name="phone"
+type="text"
+placeholder="Phone"
+required>
+
+<input
+name="email"
+type="email"
+placeholder="Email"
+required>
+
+<input
+name="password"
+type="password"
+placeholder="Password">
+
+<input
+name="experience_years"
+type="number"
+placeholder="Experience"
+required>
+
+<select
+name="clinical_status">
+
+<option value="Active">Active</option>
+
+<option value="Inactive">Inactive</option>
+
+<option value="On Leave">On Leave</option>
+
+</select>
+
+<div class="modal-actions">
+
+<button type="submit">
+
+Save Doctor
+
+</button>
+
+<button
+type="button"
+id="closeDoctorModal">
+
+Cancel
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
     <script src="{{ url_for('static', path='js/doctor.js') }}"></script>
 </body>
 </html>
